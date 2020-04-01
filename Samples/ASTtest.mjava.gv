@@ -1,0 +1,84 @@
+digraph program {
+graph [nodesep=0.5];
+node [fontname="Helvetica", color="Lavender", style="filled"];node0 [label="root"];
+node0x55eeaa11fca0 [label="program"];
+node0 -> node0x55eeaa11fca0
+node0x55eeaa11fbf0 [label="{class} Factorial"];
+node0x55eeaa11fca0 -> node0x55eeaa11fbf0
+node0x55eeaa11fb70 [label="{method decl} main"];
+node0x55eeaa11fbf0 -> node0x55eeaa11fb70
+node0x55eeaa11fb20 [label="{type} void"];
+node0x55eeaa11fb70 -> node0x55eeaa11fb20
+node0x55eeaa11fae0 [label="scope"];
+node0x55eeaa11fb70 -> node0x55eeaa11fae0
+node0x55eeaa11fa90 [label="print"];
+node0x55eeaa11fae0 -> node0x55eeaa11fa90
+node0x55eeaa11fa00 [label="{method invocation} ComputeFac"];
+node0x55eeaa11fa90 -> node0x55eeaa11fa00
+node0x55eeaa11f930 [label="new ()"];
+node0x55eeaa11fa00 -> node0x55eeaa11f930
+node0x55eeaa11f960 [label="{type} Fac"];
+node0x55eeaa11f930 -> node0x55eeaa11f960
+node0x55eeaa11f9b0 [label="{number} 10"];
+node0x55eeaa11fa00 -> node0x55eeaa11f9b0
+node0x55eeaa120680 [label="{class} Fac"];
+node0x55eeaa11fca0 -> node0x55eeaa120680
+node0x55eeaa120600 [label="{method decl} ComputeFac"];
+node0x55eeaa120680 -> node0x55eeaa120600
+node0x55eeaa11fce0 [label="{type} int"];
+node0x55eeaa120600 -> node0x55eeaa11fce0
+node0x55eeaa11fd80 [label="{formal} num"];
+node0x55eeaa120600 -> node0x55eeaa11fd80
+node0x55eeaa11fd30 [label="{type} int"];
+node0x55eeaa11fd80 -> node0x55eeaa11fd30
+node0x55eeaa120450 [label="scope"];
+node0x55eeaa120600 -> node0x55eeaa120450
+node0x55eeaa11fea0 [label="assert"];
+node0x55eeaa120450 -> node0x55eeaa11fea0
+node0x55eeaa11fe60 [label=">"];
+node0x55eeaa11fea0 -> node0x55eeaa11fe60
+node0x55eeaa11fdf0 [label="{id} num"];
+node0x55eeaa11fe60 -> node0x55eeaa11fdf0
+node0x55eeaa11fe30 [label="{number} -1"];
+node0x55eeaa11fe60 -> node0x55eeaa11fe30
+node0x55eeaa11ff60 [label="{var decl} num_aux"];
+node0x55eeaa120450 -> node0x55eeaa11ff60
+node0x55eeaa11ff10 [label="{type} int"];
+node0x55eeaa11ff60 -> node0x55eeaa11ff10
+node0x55eeaa1203b0 [label="if"];
+node0x55eeaa120450 -> node0x55eeaa1203b0
+node0x55eeaa120060 [label="=="];
+node0x55eeaa1203b0 -> node0x55eeaa120060
+node0x55eeaa120020 [label="{id} num"];
+node0x55eeaa120060 -> node0x55eeaa120020
+node0x55eeaa11ffc0 [label="{number} 0"];
+node0x55eeaa120060 -> node0x55eeaa11ffc0
+node0x55eeaa120120 [label="="];
+node0x55eeaa1203b0 -> node0x55eeaa120120
+node0x55eeaa1200a0 [label="{lvalue} num_aux"];
+node0x55eeaa120120 -> node0x55eeaa1200a0
+node0x55eeaa1200f0 [label="{number} 1"];
+node0x55eeaa120120 -> node0x55eeaa1200f0
+node0x55eeaa120370 [label="="];
+node0x55eeaa1203b0 -> node0x55eeaa120370
+node0x55eeaa120160 [label="{lvalue} num_aux"];
+node0x55eeaa120370 -> node0x55eeaa120160
+node0x55eeaa120330 [label="*"];
+node0x55eeaa120370 -> node0x55eeaa120330
+node0x55eeaa1201b0 [label="{id} num"];
+node0x55eeaa120330 -> node0x55eeaa1201b0
+node0x55eeaa1202a0 [label="{method invocation} ComputeFac"];
+node0x55eeaa120330 -> node0x55eeaa1202a0
+node0x55eeaa11fef0 [label="this"];
+node0x55eeaa1202a0 -> node0x55eeaa11fef0
+node0x55eeaa120260 [label="-"];
+node0x55eeaa1202a0 -> node0x55eeaa120260
+node0x55eeaa1201f0 [label="{id} num"];
+node0x55eeaa120260 -> node0x55eeaa1201f0
+node0x55eeaa120230 [label="{number} 1"];
+node0x55eeaa120260 -> node0x55eeaa120230
+node0x55eeaa120490 [label="{var decl} num_aux"];
+node0x55eeaa120450 -> node0x55eeaa120490
+node0x55eeaa120400 [label="{type} return"];
+node0x55eeaa120490 -> node0x55eeaa120400
+}

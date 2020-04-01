@@ -1,0 +1,18 @@
+class Factorial {
+  public static void main () {
+    /* simple */
+    // factorial example
+    int num;
+    num = 10;
+    assert (num > -1);
+    int res;
+    res = 1;
+    int i;
+    i = 0;
+    while (i < num) {
+      res = res * (i + 1);
+      i = i + 1;
+    }
+    System.out.println(res);
+  }
+}

@@ -1,0 +1,90 @@
+digraph program {
+graph [nodesep=0.5];
+node [fontname="Helvetica", color="Lavender", style="filled"];node0 [label="root"];
+node0x55cb85550ab0 [label="program"];
+node0 -> node0x55cb85550ab0
+node0x55cb8554fdf0 [label="{class} Factorial"];
+node0x55cb85550ab0 -> node0x55cb8554fdf0
+node0x55cb85550180 [label="{method decl} main"];
+node0x55cb8554fdf0 -> node0x55cb85550180
+node0x55cb85550a60 [label="{type} void"];
+node0x55cb85550180 -> node0x55cb85550a60
+node0x55cb85550980 [label="scope"];
+node0x55cb85550180 -> node0x55cb85550980
+node0x55cb8554f980 [label="{var decl} num"];
+node0x55cb85550980 -> node0x55cb8554f980
+node0x55cb8554f930 [label="{type} int"];
+node0x55cb8554f980 -> node0x55cb8554f930
+node0x55cb8554faa0 [label="="];
+node0x55cb85550980 -> node0x55cb8554faa0
+node0x55cb8554fa20 [label="{lvalue} num"];
+node0x55cb8554faa0 -> node0x55cb8554fa20
+node0x55cb8554fa70 [label="{number} 10"];
+node0x55cb8554faa0 -> node0x55cb8554fa70
+node0x55cb8554fbc0 [label="assert"];
+node0x55cb85550980 -> node0x55cb8554fbc0
+node0x55cb8554fb80 [label=">"];
+node0x55cb8554fbc0 -> node0x55cb8554fb80
+node0x55cb8554fb40 [label="{id} num"];
+node0x55cb8554fb80 -> node0x55cb8554fb40
+node0x55cb8554fae0 [label="{number} -1"];
+node0x55cb8554fb80 -> node0x55cb8554fae0
+node0x55cb8554fc80 [label="{var decl} res"];
+node0x55cb85550980 -> node0x55cb8554fc80
+node0x55cb8554fbf0 [label="{type} int"];
+node0x55cb8554fc80 -> node0x55cb8554fbf0
+node0x55cb8554fc40 [label="="];
+node0x55cb85550980 -> node0x55cb8554fc40
+node0x55cb8554fda0 [label="{lvalue} res"];
+node0x55cb8554fc40 -> node0x55cb8554fda0
+node0x55cb8554fb10 [label="{number} 1"];
+node0x55cb8554fc40 -> node0x55cb8554fb10
+node0x55cb8554fee0 [label="{var decl} i"];
+node0x55cb85550980 -> node0x55cb8554fee0
+node0x55cb8554fd50 [label="{type} int"];
+node0x55cb8554fee0 -> node0x55cb8554fd50
+node0x55cb85550070 [label="="];
+node0x55cb85550980 -> node0x55cb85550070
+node0x55cb8554fff0 [label="{lvalue} i"];
+node0x55cb85550070 -> node0x55cb8554fff0
+node0x55cb85550040 [label="{number} 0"];
+node0x55cb85550070 -> node0x55cb85550040
+node0x55cb85550660 [label="while"];
+node0x55cb85550980 -> node0x55cb85550660
+node0x55cb85550280 [label="<"];
+node0x55cb85550660 -> node0x55cb85550280
+node0x55cb85550200 [label="{id} i"];
+node0x55cb85550280 -> node0x55cb85550200
+node0x55cb85550240 [label="{id} num"];
+node0x55cb85550280 -> node0x55cb85550240
+node0x55cb85550620 [label="scope"];
+node0x55cb85550660 -> node0x55cb85550620
+node0x55cb85550440 [label="="];
+node0x55cb85550620 -> node0x55cb85550440
+node0x55cb855502c0 [label="{lvalue} res"];
+node0x55cb85550440 -> node0x55cb855502c0
+node0x55cb85550400 [label="*"];
+node0x55cb85550440 -> node0x55cb85550400
+node0x55cb85550310 [label="{id} res"];
+node0x55cb85550400 -> node0x55cb85550310
+node0x55cb855503c0 [label="+"];
+node0x55cb85550400 -> node0x55cb855503c0
+node0x55cb85550350 [label="{id} i"];
+node0x55cb855503c0 -> node0x55cb85550350
+node0x55cb85550390 [label="{number} 1"];
+node0x55cb855503c0 -> node0x55cb85550390
+node0x55cb85550580 [label="="];
+node0x55cb85550620 -> node0x55cb85550580
+node0x55cb85550480 [label="{lvalue} i"];
+node0x55cb85550580 -> node0x55cb85550480
+node0x55cb85550540 [label="+"];
+node0x55cb85550580 -> node0x55cb85550540
+node0x55cb855504d0 [label="{id} i"];
+node0x55cb85550540 -> node0x55cb855504d0
+node0x55cb85550510 [label="{number} 1"];
+node0x55cb85550540 -> node0x55cb85550510
+node0x55cb855505f0 [label="print"];
+node0x55cb85550980 -> node0x55cb855505f0
+node0x55cb85550790 [label="{id} res"];
+node0x55cb855505f0 -> node0x55cb85550790
+}
