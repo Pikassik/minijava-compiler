@@ -1,0 +1,11 @@
+class Main {
+  public static void main () {
+    int[] array;
+    array = new int[1000];
+    array[150] = 1000000;
+    array[150] = array[150] / array.length;
+    System.out.println(-10 * array[150]);
+  }
+}
+
+
