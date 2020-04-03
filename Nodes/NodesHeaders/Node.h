@@ -7,7 +7,7 @@
 
 namespace node {
 
-struct Node {
+struct Node : std::enable_shared_from_this<Node> {
   virtual void Accept(Visitor& visitor) = 0;
 };
 

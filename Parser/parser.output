@@ -1,4 +1,4 @@
-Состояние 63 конфликты: 1 сдвига/вывода, 1 вывода/вывода
+Состояние 64 конфликты: 1 сдвига/вывода, 1 вывода/вывода
 
 
 Грамматика
@@ -15,15 +15,15 @@
 
     6 ClassMembers: %empty
     7             | ClassMembers MethodDeclaration
-    8             | ClassMembers VarDeclaration
+    8             | ClassMembers VarDeclarationStmt
 
     9 MethodDeclaration: "public" Type "identifier" "(" Formals ")" Scope
 
-   10 VarDeclaration: Type "identifier" ";"
+   10 VarDeclaration: Type "identifier"
 
    11 Formals: %empty
-   12        | Type "identifier"
-   13        | Formals "," Type "identifier"
+   12        | VarDeclaration
+   13        | Formals "," VarDeclaration
 
    14 Type: SimpleType
    15     | ArrayType
@@ -43,7 +43,7 @@
    24 Scope: "{" Statements "}"
 
    25 Statement: "assert" "(" Expression ")" ";"
-   26          | LocalVarDeclaration
+   26          | VarDeclarationStmt
    27          | Scope
    28          | "if" "(" Expression ")" Statement
    29          | "if" "(" Expression ")" Statement "else" Statement
@@ -53,7 +53,7 @@
    33          | "return" Expression ";"
    34          | MethodInvocation ";"
 
-   35 LocalVarDeclaration: VarDeclaration
+   35 VarDeclarationStmt: VarDeclaration ";"
 
    36 MethodInvocation: Expression "." "identifier" "(" MethodArgs ")"
 
@@ -98,47 +98,47 @@
     "end of file" (0) 0
     error (256)
     "new" (258) 56 57
-    "class" (259) 3 4 5
-    "public" (260) 3 9
-    "static" (261) 3
-    "void" (262) 3 18
-    "main" (263) 3
-    "extends" (264) 5
-    "else" (265) 29
-    "if" (266) 28 29
-    "while" (267) 30
-    "this" (268) 42
-    "{" (269) 3 4 5 24
-    "}" (270) 3 4 5 24
-    ";" (271) 10 25 31 32 33 34
-    "length" (272) 55
-    "System.out.println" (273) 31
-    "assert" (274) 25
-    "int" (275) 16
-    "boolean" (276) 17
-    "[" (277) 20 41 54 56
-    "]" (278) 20 41 54 56
-    "," (279) 13 39
-    "=" (280) 32
-    "!" (281) 58
-    "&&" (282) 44
-    "||" (283) 45
-    "<" (284) 46
-    ">" (285) 47
-    "==" (286) 48
-    "-" (287) 50 66
-    "+" (288) 49
-    "*" (289) 51
-    "/" (290) 52
-    "%" (291) 53
-    "." (292) 36 55
-    "(" (293) 3 9 25 28 29 30 31 36 57 59
-    ")" (294) 3 9 25 28 29 30 31 36 57 59
-    "true" (295) 63
-    "false" (296) 64
-    "identifier" <string> (297) 3 4 5 9 10 12 13 21 36 40 41 60
-    "number" <int> (298) 65 66
-    "return" (299) 33
+    "return" (259) 33
+    "class" (260) 3 4 5
+    "public" (261) 3 9
+    "static" (262) 3
+    "void" (263) 3 18
+    "main" (264) 3
+    "extends" (265) 5
+    "else" (266) 29
+    "if" (267) 28 29
+    "while" (268) 30
+    "this" (269) 42
+    "{" (270) 3 4 5 24
+    "}" (271) 3 4 5 24
+    ";" (272) 25 31 32 33 34 35
+    "length" (273) 55
+    "System.out.println" (274) 31
+    "assert" (275) 25
+    "int" (276) 16
+    "boolean" (277) 17
+    "[" (278) 20 41 54 56
+    "]" (279) 20 41 54 56
+    "," (280) 13 39
+    "=" (281) 32
+    "!" (282) 58
+    "&&" (283) 44
+    "||" (284) 45
+    "<" (285) 46
+    ">" (286) 47
+    "==" (287) 48
+    "-" (288) 50 66
+    "+" (289) 49
+    "*" (290) 51
+    "/" (291) 52
+    "%" (292) 53
+    "." (293) 36 55
+    "(" (294) 3 9 25 28 29 30 31 36 57 59
+    ")" (295) 3 9 25 28 29 30 31 36 57 59
+    "true" (296) 63
+    "false" (297) 64
+    "identifier" <string> (298) 3 4 5 9 10 21 36 40 41 60
+    "number" <int> (299) 65 66
 
 
 Нетерминальные символы с правилами, в которых они появляются
@@ -162,34 +162,34 @@
         on right: 7
     VarDeclaration <ptr<VarDeclaration>> (51)
         on left: 10
-        on right: 8 35
-    Formals <vector<ptr<Formal>>> (52)
+        on right: 12 13 35
+    VarDeclarationStmt <ptr<VarDeclaration>> (52)
+        on left: 35
+        on right: 8 26
+    Formals <vector<ptr<VarDeclaration>>> (53)
         on left: 11 12 13
         on right: 9 13
-    Type <ptr<Type>> (53)
+    Type <ptr<Type>> (54)
         on left: 14 15
-        on right: 9 10 12 13
-    SimpleType <ptr<Type>> (54)
+        on right: 9 10
+    SimpleType <ptr<Type>> (55)
         on left: 16 17 18 19
         on right: 14 20 56
-    ArrayType <ptr<Type>> (55)
+    ArrayType <ptr<Type>> (56)
         on left: 20
         on right: 15
-    TypeId <string> (56)
+    TypeId <string> (57)
         on left: 21
         on right: 19 57
-    Statements <vector<ptr<Statement>>> (57)
+    Statements <vector<ptr<Statement>>> (58)
         on left: 22 23
         on right: 23 24
-    Scope <ptr<Scope>> (58)
+    Scope <ptr<Scope>> (59)
         on left: 24
         on right: 3 9 27
-    Statement <ptr<Statement>> (59)
+    Statement <ptr<Statement>> (60)
         on left: 25 26 27 28 29 30 31 32 33 34
         on right: 23 28 29 30
-    LocalVarDeclaration <ptr<VarDeclaration>> (60)
-        on left: 35
-        on right: 26
     MethodInvocation <ptr<MethodInvocation>> (61)
         on left: 36
         on right: 34 43
@@ -314,7 +314,7 @@
     4 ClassDeclaration: "class" "identifier" "{" . ClassMembers "}"
     6 ClassMembers: . %empty
     7             | . ClassMembers MethodDeclaration
-    8             | . ClassMembers VarDeclaration
+    8             | . ClassMembers VarDeclarationStmt
 
     $default  вывод с использованием правила 6 (ClassMembers)
 
@@ -339,9 +339,9 @@
 
     4 ClassDeclaration: "class" "identifier" "{" ClassMembers . "}"
     7 ClassMembers: ClassMembers . MethodDeclaration
-    8             | ClassMembers . VarDeclaration
+    8             | ClassMembers . VarDeclarationStmt
     9 MethodDeclaration: . "public" Type "identifier" "(" Formals ")" Scope
-   10 VarDeclaration: . Type "identifier" ";"
+   10 VarDeclaration: . Type "identifier"
    14 Type: . SimpleType
    15     | . ArrayType
    16 SimpleType: . "int"
@@ -350,6 +350,7 @@
    19           | . TypeId
    20 ArrayType: . SimpleType "[" "]"
    21 TypeId: . "identifier"
+   35 VarDeclarationStmt: . VarDeclaration ";"
 
     "public"      сдвиг, и переход в состояние 18
     "void"        сдвиг, и переход в состояние 19
@@ -358,19 +359,20 @@
     "boolean"     сдвиг, и переход в состояние 22
     "identifier"  сдвиг, и переход в состояние 23
 
-    MethodDeclaration  переход в состояние 24
-    VarDeclaration     переход в состояние 25
-    Type               переход в состояние 26
-    SimpleType         переход в состояние 27
-    ArrayType          переход в состояние 28
-    TypeId             переход в состояние 29
+    MethodDeclaration   переход в состояние 24
+    VarDeclaration      переход в состояние 25
+    VarDeclarationStmt  переход в состояние 26
+    Type                переход в состояние 27
+    SimpleType          переход в состояние 28
+    ArrayType           переход в состояние 29
+    TypeId              переход в состояние 30
 
 
 Состояние 16
 
     3 MainClassDeclaration: "class" "identifier" "{" "public" "static" "void" . "main" "(" ")" Scope "}"
 
-    "main"  сдвиг, и переход в состояние 30
+    "main"  сдвиг, и переход в состояние 31
 
 
 Состояние 17
@@ -378,11 +380,11 @@
     5 ClassDeclaration: "class" "identifier" "extends" "identifier" "{" . ClassMembers "}"
     6 ClassMembers: . %empty
     7             | . ClassMembers MethodDeclaration
-    8             | . ClassMembers VarDeclaration
+    8             | . ClassMembers VarDeclarationStmt
 
     $default  вывод с использованием правила 6 (ClassMembers)
 
-    ClassMembers  переход в состояние 31
+    ClassMembers  переход в состояние 32
 
 
 Состояние 18
@@ -402,10 +404,10 @@
     "boolean"     сдвиг, и переход в состояние 22
     "identifier"  сдвиг, и переход в состояние 23
 
-    Type        переход в состояние 32
-    SimpleType  переход в состояние 27
-    ArrayType   переход в состояние 28
-    TypeId      переход в состояние 29
+    Type        переход в состояние 33
+    SimpleType  переход в состояние 28
+    ArrayType   переход в состояние 29
+    TypeId      переход в состояние 30
 
 
 Состояние 19
@@ -452,56 +454,63 @@
 
 Состояние 25
 
-    8 ClassMembers: ClassMembers VarDeclaration .
+   35 VarDeclarationStmt: VarDeclaration . ";"
 
-    $default  вывод с использованием правила 8 (ClassMembers)
+    ";"  сдвиг, и переход в состояние 34
 
 
 Состояние 26
 
-   10 VarDeclaration: Type . "identifier" ";"
+    8 ClassMembers: ClassMembers VarDeclarationStmt .
 
-    "identifier"  сдвиг, и переход в состояние 33
+    $default  вывод с использованием правила 8 (ClassMembers)
 
 
 Состояние 27
 
+   10 VarDeclaration: Type . "identifier"
+
+    "identifier"  сдвиг, и переход в состояние 35
+
+
+Состояние 28
+
    14 Type: SimpleType .  ["identifier"]
    20 ArrayType: SimpleType . "[" "]"
 
-    "["  сдвиг, и переход в состояние 34
+    "["  сдвиг, и переход в состояние 36
 
     $default  вывод с использованием правила 14 (Type)
 
 
-Состояние 28
+Состояние 29
 
    15 Type: ArrayType .
 
     $default  вывод с использованием правила 15 (Type)
 
 
-Состояние 29
+Состояние 30
 
    19 SimpleType: TypeId .
 
     $default  вывод с использованием правила 19 (SimpleType)
 
 
-Состояние 30
+Состояние 31
 
     3 MainClassDeclaration: "class" "identifier" "{" "public" "static" "void" "main" . "(" ")" Scope "}"
 
-    "("  сдвиг, и переход в состояние 35
+    "("  сдвиг, и переход в состояние 37
 
 
-Состояние 31
+Состояние 32
 
     5 ClassDeclaration: "class" "identifier" "extends" "identifier" "{" ClassMembers . "}"
     7 ClassMembers: ClassMembers . MethodDeclaration
-    8             | ClassMembers . VarDeclaration
+    8             | ClassMembers . VarDeclarationStmt
     9 MethodDeclaration: . "public" Type "identifier" "(" Formals ")" Scope
-   10 VarDeclaration: . Type "identifier" ";"
+   10 VarDeclaration: . Type "identifier"
    14 Type: . SimpleType
    15     | . ArrayType
    16 SimpleType: . "int"
@@ -510,94 +519,97 @@
    19           | . TypeId
    20 ArrayType: . SimpleType "[" "]"
    21 TypeId: . "identifier"
+   35 VarDeclarationStmt: . VarDeclaration ";"
 
     "public"      сдвиг, и переход в состояние 18
     "void"        сдвиг, и переход в состояние 19
-    "}"           сдвиг, и переход в состояние 36
+    "}"           сдвиг, и переход в состояние 38
     "int"         сдвиг, и переход в состояние 21
     "boolean"     сдвиг, и переход в состояние 22
     "identifier"  сдвиг, и переход в состояние 23
 
-    MethodDeclaration  переход в состояние 24
-    VarDeclaration     переход в состояние 25
-    Type               переход в состояние 26
-    SimpleType         переход в состояние 27
-    ArrayType          переход в состояние 28
-    TypeId             переход в состояние 29
-
-
-Состояние 32
-
-    9 MethodDeclaration: "public" Type . "identifier" "(" Formals ")" Scope
-
-    "identifier"  сдвиг, и переход в состояние 37
+    MethodDeclaration   переход в состояние 24
+    VarDeclaration      переход в состояние 25
+    VarDeclarationStmt  переход в состояние 26
+    Type                переход в состояние 27
+    SimpleType          переход в состояние 28
+    ArrayType           переход в состояние 29
+    TypeId              переход в состояние 30
 
 
 Состояние 33
 
-   10 VarDeclaration: Type "identifier" . ";"
+    9 MethodDeclaration: "public" Type . "identifier" "(" Formals ")" Scope
 
-    ";"  сдвиг, и переход в состояние 38
+    "identifier"  сдвиг, и переход в состояние 39
 
 
 Состояние 34
 
-   20 ArrayType: SimpleType "[" . "]"
+   35 VarDeclarationStmt: VarDeclaration ";" .
 
-    "]"  сдвиг, и переход в состояние 39
+    $default  вывод с использованием правила 35 (VarDeclarationStmt)
 
 
 Состояние 35
 
-    3 MainClassDeclaration: "class" "identifier" "{" "public" "static" "void" "main" "(" . ")" Scope "}"
+   10 VarDeclaration: Type "identifier" .
 
-    ")"  сдвиг, и переход в состояние 40
+    $default  вывод с использованием правила 10 (VarDeclaration)
 
 
 Состояние 36
+
+   20 ArrayType: SimpleType "[" . "]"
+
+    "]"  сдвиг, и переход в состояние 40
+
+
+Состояние 37
+
+    3 MainClassDeclaration: "class" "identifier" "{" "public" "static" "void" "main" "(" . ")" Scope "}"
+
+    ")"  сдвиг, и переход в состояние 41
+
+
+Состояние 38
 
     5 ClassDeclaration: "class" "identifier" "extends" "identifier" "{" ClassMembers "}" .
 
     $default  вывод с использованием правила 5 (ClassDeclaration)
 
 
-Состояние 37
+Состояние 39
 
     9 MethodDeclaration: "public" Type "identifier" . "(" Formals ")" Scope
 
-    "("  сдвиг, и переход в состояние 41
+    "("  сдвиг, и переход в состояние 42
 
 
-Состояние 38
-
-   10 VarDeclaration: Type "identifier" ";" .
-
-    $default  вывод с использованием правила 10 (VarDeclaration)
-
-
-Состояние 39
+Состояние 40
 
    20 ArrayType: SimpleType "[" "]" .
 
     $default  вывод с использованием правила 20 (ArrayType)
 
 
-Состояние 40
+Состояние 41
 
     3 MainClassDeclaration: "class" "identifier" "{" "public" "static" "void" "main" "(" ")" . Scope "}"
    24 Scope: . "{" Statements "}"
 
-    "{"  сдвиг, и переход в состояние 42
+    "{"  сдвиг, и переход в состояние 43
 
-    Scope  переход в состояние 43
+    Scope  переход в состояние 44
 
 
-Состояние 41
+Состояние 42
 
     9 MethodDeclaration: "public" Type "identifier" "(" . Formals ")" Scope
+   10 VarDeclaration: . Type "identifier"
    11 Formals: . %empty  [",", ")"]
-   12        | . Type "identifier"
-   13        | . Formals "," Type "identifier"
+   12        | . VarDeclaration
+   13        | . Formals "," VarDeclaration
    14 Type: . SimpleType
    15     | . ArrayType
    16 SimpleType: . "int"
@@ -614,14 +626,15 @@
 
     $default  вывод с использованием правила 11 (Formals)
 
-    Formals     переход в состояние 44
-    Type        переход в состояние 45
-    SimpleType  переход в состояние 27
-    ArrayType   переход в состояние 28
-    TypeId      переход в состояние 29
+    VarDeclaration  переход в состояние 45
+    Formals         переход в состояние 46
+    Type            переход в состояние 27
+    SimpleType      переход в состояние 28
+    ArrayType       переход в состояние 29
+    TypeId          переход в состояние 30
 
 
-Состояние 42
+Состояние 43
 
    22 Statements: . %empty
    23           | . Statements Statement
@@ -629,35 +642,35 @@
 
     $default  вывод с использованием правила 22 (Statements)
 
-    Statements  переход в состояние 46
-
-
-Состояние 43
-
-    3 MainClassDeclaration: "class" "identifier" "{" "public" "static" "void" "main" "(" ")" Scope . "}"
-
-    "}"  сдвиг, и переход в состояние 47
+    Statements  переход в состояние 47
 
 
 Состояние 44
 
-    9 MethodDeclaration: "public" Type "identifier" "(" Formals . ")" Scope
-   13 Formals: Formals . "," Type "identifier"
+    3 MainClassDeclaration: "class" "identifier" "{" "public" "static" "void" "main" "(" ")" Scope . "}"
 
-    ","  сдвиг, и переход в состояние 48
-    ")"  сдвиг, и переход в состояние 49
+    "}"  сдвиг, и переход в состояние 48
 
 
 Состояние 45
 
-   12 Formals: Type . "identifier"
+   12 Formals: VarDeclaration .
 
-    "identifier"  сдвиг, и переход в состояние 50
+    $default  вывод с использованием правила 12 (Formals)
 
 
 Состояние 46
 
-   10 VarDeclaration: . Type "identifier" ";"
+    9 MethodDeclaration: "public" Type "identifier" "(" Formals . ")" Scope
+   13 Formals: Formals . "," VarDeclaration
+
+    ","  сдвиг, и переход в состояние 49
+    ")"  сдвиг, и переход в состояние 50
+
+
+Состояние 47
+
+   10 VarDeclaration: . Type "identifier"
    14 Type: . SimpleType
    15     | . ArrayType
    16 SimpleType: . "int"
@@ -670,7 +683,7 @@
    24 Scope: . "{" Statements "}"
    24      | "{" Statements . "}"
    25 Statement: . "assert" "(" Expression ")" ";"
-   26          | . LocalVarDeclaration
+   26          | . VarDeclarationStmt
    27          | . Scope
    28          | . "if" "(" Expression ")" Statement
    29          | . "if" "(" Expression ")" Statement "else" Statement
@@ -679,7 +692,7 @@
    32          | . Lvalue "=" Expression ";"
    33          | . "return" Expression ";"
    34          | . MethodInvocation ";"
-   35 LocalVarDeclaration: . VarDeclaration
+   35 VarDeclarationStmt: . VarDeclaration ";"
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    40 Lvalue: . "identifier"
    41       | . "identifier" "[" Expression "]"
@@ -710,50 +723,51 @@
    66             | . "-" "number"
 
     "new"                 сдвиг, и переход в состояние 51
+    "return"              сдвиг, и переход в состояние 52
     "void"                сдвиг, и переход в состояние 19
-    "if"                  сдвиг, и переход в состояние 52
-    "while"               сдвиг, и переход в состояние 53
-    "this"                сдвиг, и переход в состояние 54
-    "{"                   сдвиг, и переход в состояние 42
-    "}"                   сдвиг, и переход в состояние 55
-    "System.out.println"  сдвиг, и переход в состояние 56
-    "assert"              сдвиг, и переход в состояние 57
+    "if"                  сдвиг, и переход в состояние 53
+    "while"               сдвиг, и переход в состояние 54
+    "this"                сдвиг, и переход в состояние 55
+    "{"                   сдвиг, и переход в состояние 43
+    "}"                   сдвиг, и переход в состояние 56
+    "System.out.println"  сдвиг, и переход в состояние 57
+    "assert"              сдвиг, и переход в состояние 58
     "int"                 сдвиг, и переход в состояние 21
     "boolean"             сдвиг, и переход в состояние 22
-    "!"                   сдвиг, и переход в состояние 58
-    "-"                   сдвиг, и переход в состояние 59
-    "("                   сдвиг, и переход в состояние 60
-    "true"                сдвиг, и переход в состояние 61
-    "false"               сдвиг, и переход в состояние 62
-    "identifier"          сдвиг, и переход в состояние 63
-    "number"              сдвиг, и переход в состояние 64
-    "return"              сдвиг, и переход в состояние 65
+    "!"                   сдвиг, и переход в состояние 59
+    "-"                   сдвиг, и переход в состояние 60
+    "("                   сдвиг, и переход в состояние 61
+    "true"                сдвиг, и переход в состояние 62
+    "false"               сдвиг, и переход в состояние 63
+    "identifier"          сдвиг, и переход в состояние 64
+    "number"              сдвиг, и переход в состояние 65
 
-    VarDeclaration       переход в состояние 66
-    Type                 переход в состояние 26
-    SimpleType           переход в состояние 27
-    ArrayType            переход в состояние 28
-    TypeId               переход в состояние 29
-    Scope                переход в состояние 67
-    Statement            переход в состояние 68
-    LocalVarDeclaration  переход в состояние 69
-    MethodInvocation     переход в состояние 70
-    Lvalue               переход в состояние 71
-    Expression           переход в состояние 72
-    BooleanLiteral       переход в состояние 73
-    SignedNumber         переход в состояние 74
+    VarDeclaration      переход в состояние 25
+    VarDeclarationStmt  переход в состояние 66
+    Type                переход в состояние 27
+    SimpleType          переход в состояние 28
+    ArrayType           переход в состояние 29
+    TypeId              переход в состояние 30
+    Scope               переход в состояние 67
+    Statement           переход в состояние 68
+    MethodInvocation    переход в состояние 69
+    Lvalue              переход в состояние 70
+    Expression          переход в состояние 71
+    BooleanLiteral      переход в состояние 72
+    SignedNumber        переход в состояние 73
 
 
-Состояние 47
+Состояние 48
 
     3 MainClassDeclaration: "class" "identifier" "{" "public" "static" "void" "main" "(" ")" Scope "}" .
 
     $default  вывод с использованием правила 3 (MainClassDeclaration)
 
 
-Состояние 48
+Состояние 49
 
-   13 Formals: Formals "," . Type "identifier"
+   10 VarDeclaration: . Type "identifier"
+   13 Formals: Formals "," . VarDeclaration
    14 Type: . SimpleType
    15     | . ArrayType
    16 SimpleType: . "int"
@@ -768,27 +782,21 @@
     "boolean"     сдвиг, и переход в состояние 22
     "identifier"  сдвиг, и переход в состояние 23
 
-    Type        переход в состояние 75
-    SimpleType  переход в состояние 27
-    ArrayType   переход в состояние 28
-    TypeId      переход в состояние 29
-
-
-Состояние 49
-
-    9 MethodDeclaration: "public" Type "identifier" "(" Formals ")" . Scope
-   24 Scope: . "{" Statements "}"
-
-    "{"  сдвиг, и переход в состояние 42
-
-    Scope  переход в состояние 76
+    VarDeclaration  переход в состояние 74
+    Type            переход в состояние 27
+    SimpleType      переход в состояние 28
+    ArrayType       переход в состояние 29
+    TypeId          переход в состояние 30
 
 
 Состояние 50
 
-   12 Formals: Type "identifier" .
+    9 MethodDeclaration: "public" Type "identifier" "(" Formals ")" . Scope
+   24 Scope: . "{" Statements "}"
 
-    $default  вывод с использованием правила 12 (Formals)
+    "{"  сдвиг, и переход в состояние 43
+
+    Scope  переход в состояние 75
 
 
 Состояние 51
@@ -806,190 +814,11 @@
     "boolean"     сдвиг, и переход в состояние 22
     "identifier"  сдвиг, и переход в состояние 23
 
-    SimpleType  переход в состояние 77
-    TypeId      переход в состояние 78
+    SimpleType  переход в состояние 76
+    TypeId      переход в состояние 77
 
 
 Состояние 52
-
-   28 Statement: "if" . "(" Expression ")" Statement
-   29          | "if" . "(" Expression ")" Statement "else" Statement
-
-    "("  сдвиг, и переход в состояние 79
-
-
-Состояние 53
-
-   30 Statement: "while" . "(" Expression ")" Statement
-
-    "("  сдвиг, и переход в состояние 80
-
-
-Состояние 54
-
-   42 Expression: "this" .
-
-    $default  вывод с использованием правила 42 (Expression)
-
-
-Состояние 55
-
-   24 Scope: "{" Statements "}" .
-
-    $default  вывод с использованием правила 24 (Scope)
-
-
-Состояние 56
-
-   31 Statement: "System.out.println" . "(" Expression ")" ";"
-
-    "("  сдвиг, и переход в состояние 81
-
-
-Состояние 57
-
-   25 Statement: "assert" . "(" Expression ")" ";"
-
-    "("  сдвиг, и переход в состояние 82
-
-
-Состояние 58
-
-   36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
-   42 Expression: . "this"
-   43           | . MethodInvocation
-   44           | . Expression "&&" Expression
-   45           | . Expression "||" Expression
-   46           | . Expression "<" Expression
-   47           | . Expression ">" Expression
-   48           | . Expression "==" Expression
-   49           | . Expression "+" Expression
-   50           | . Expression "-" Expression
-   51           | . Expression "*" Expression
-   52           | . Expression "/" Expression
-   53           | . Expression "%" Expression
-   54           | . Expression "[" Expression "]"
-   55           | . Expression "." "length"
-   56           | . "new" SimpleType "[" Expression "]"
-   57           | . "new" TypeId "(" ")"
-   58           | . "!" Expression
-   58           | "!" . Expression
-   59           | . "(" Expression ")"
-   60           | . "identifier"
-   61           | . SignedNumber
-   62           | . BooleanLiteral
-   63 BooleanLiteral: . "true"
-   64               | . "false"
-   65 SignedNumber: . "number"
-   66             | . "-" "number"
-
-    "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
-
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 85
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
-
-
-Состояние 59
-
-   66 SignedNumber: "-" . "number"
-
-    "number"  сдвиг, и переход в состояние 86
-
-
-Состояние 60
-
-   36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
-   42 Expression: . "this"
-   43           | . MethodInvocation
-   44           | . Expression "&&" Expression
-   45           | . Expression "||" Expression
-   46           | . Expression "<" Expression
-   47           | . Expression ">" Expression
-   48           | . Expression "==" Expression
-   49           | . Expression "+" Expression
-   50           | . Expression "-" Expression
-   51           | . Expression "*" Expression
-   52           | . Expression "/" Expression
-   53           | . Expression "%" Expression
-   54           | . Expression "[" Expression "]"
-   55           | . Expression "." "length"
-   56           | . "new" SimpleType "[" Expression "]"
-   57           | . "new" TypeId "(" ")"
-   58           | . "!" Expression
-   59           | . "(" Expression ")"
-   59           | "(" . Expression ")"
-   60           | . "identifier"
-   61           | . SignedNumber
-   62           | . BooleanLiteral
-   63 BooleanLiteral: . "true"
-   64               | . "false"
-   65 SignedNumber: . "number"
-   66             | . "-" "number"
-
-    "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
-
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 87
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
-
-
-Состояние 61
-
-   63 BooleanLiteral: "true" .
-
-    $default  вывод с использованием правила 63 (BooleanLiteral)
-
-
-Состояние 62
-
-   64 BooleanLiteral: "false" .
-
-    $default  вывод с использованием правила 64 (BooleanLiteral)
-
-
-Состояние 63
-
-   21 TypeId: "identifier" .  ["[", "identifier"]
-   40 Lvalue: "identifier" .  ["="]
-   41       | "identifier" . "[" Expression "]"
-   60 Expression: "identifier" .  ["[", "&&", "||", "<", ">", "==", "-", "+", "*", "/", "%", "."]
-
-    "["  сдвиг, и переход в состояние 88
-
-    "["           [вывод с использованием правила 21 (TypeId)]
-    "["           [вывод с использованием правила 60 (Expression)]
-    "="           вывод с использованием правила 40 (Lvalue)
-    "identifier"  вывод с использованием правила 21 (TypeId)
-    $default      вывод с использованием правила 60 (Expression)
-
-
-Состояние 64
-
-   65 SignedNumber: "number" .
-
-    $default  вывод с использованием правила 65 (SignedNumber)
-
-
-Состояние 65
 
    33 Statement: "return" . Expression ";"
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
@@ -1020,26 +849,205 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 89
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 80
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
+
+
+Состояние 53
+
+   28 Statement: "if" . "(" Expression ")" Statement
+   29          | "if" . "(" Expression ")" Statement "else" Statement
+
+    "("  сдвиг, и переход в состояние 81
+
+
+Состояние 54
+
+   30 Statement: "while" . "(" Expression ")" Statement
+
+    "("  сдвиг, и переход в состояние 82
+
+
+Состояние 55
+
+   42 Expression: "this" .
+
+    $default  вывод с использованием правила 42 (Expression)
+
+
+Состояние 56
+
+   24 Scope: "{" Statements "}" .
+
+    $default  вывод с использованием правила 24 (Scope)
+
+
+Состояние 57
+
+   31 Statement: "System.out.println" . "(" Expression ")" ";"
+
+    "("  сдвиг, и переход в состояние 83
+
+
+Состояние 58
+
+   25 Statement: "assert" . "(" Expression ")" ";"
+
+    "("  сдвиг, и переход в состояние 84
+
+
+Состояние 59
+
+   36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
+   42 Expression: . "this"
+   43           | . MethodInvocation
+   44           | . Expression "&&" Expression
+   45           | . Expression "||" Expression
+   46           | . Expression "<" Expression
+   47           | . Expression ">" Expression
+   48           | . Expression "==" Expression
+   49           | . Expression "+" Expression
+   50           | . Expression "-" Expression
+   51           | . Expression "*" Expression
+   52           | . Expression "/" Expression
+   53           | . Expression "%" Expression
+   54           | . Expression "[" Expression "]"
+   55           | . Expression "." "length"
+   56           | . "new" SimpleType "[" Expression "]"
+   57           | . "new" TypeId "(" ")"
+   58           | . "!" Expression
+   58           | "!" . Expression
+   59           | . "(" Expression ")"
+   60           | . "identifier"
+   61           | . SignedNumber
+   62           | . BooleanLiteral
+   63 BooleanLiteral: . "true"
+   64               | . "false"
+   65 SignedNumber: . "number"
+   66             | . "-" "number"
+
+    "new"         сдвиг, и переход в состояние 51
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
+
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 85
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
+
+
+Состояние 60
+
+   66 SignedNumber: "-" . "number"
+
+    "number"  сдвиг, и переход в состояние 86
+
+
+Состояние 61
+
+   36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
+   42 Expression: . "this"
+   43           | . MethodInvocation
+   44           | . Expression "&&" Expression
+   45           | . Expression "||" Expression
+   46           | . Expression "<" Expression
+   47           | . Expression ">" Expression
+   48           | . Expression "==" Expression
+   49           | . Expression "+" Expression
+   50           | . Expression "-" Expression
+   51           | . Expression "*" Expression
+   52           | . Expression "/" Expression
+   53           | . Expression "%" Expression
+   54           | . Expression "[" Expression "]"
+   55           | . Expression "." "length"
+   56           | . "new" SimpleType "[" Expression "]"
+   57           | . "new" TypeId "(" ")"
+   58           | . "!" Expression
+   59           | . "(" Expression ")"
+   59           | "(" . Expression ")"
+   60           | . "identifier"
+   61           | . SignedNumber
+   62           | . BooleanLiteral
+   63 BooleanLiteral: . "true"
+   64               | . "false"
+   65 SignedNumber: . "number"
+   66             | . "-" "number"
+
+    "new"         сдвиг, и переход в состояние 51
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
+
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 87
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
+
+
+Состояние 62
+
+   63 BooleanLiteral: "true" .
+
+    $default  вывод с использованием правила 63 (BooleanLiteral)
+
+
+Состояние 63
+
+   64 BooleanLiteral: "false" .
+
+    $default  вывод с использованием правила 64 (BooleanLiteral)
+
+
+Состояние 64
+
+   21 TypeId: "identifier" .  ["[", "identifier"]
+   40 Lvalue: "identifier" .  ["="]
+   41       | "identifier" . "[" Expression "]"
+   60 Expression: "identifier" .  ["[", "&&", "||", "<", ">", "==", "-", "+", "*", "/", "%", "."]
+
+    "["  сдвиг, и переход в состояние 88
+
+    "["           [вывод с использованием правила 21 (TypeId)]
+    "["           [вывод с использованием правила 60 (Expression)]
+    "="           вывод с использованием правила 40 (Lvalue)
+    "identifier"  вывод с использованием правила 21 (TypeId)
+    $default      вывод с использованием правила 60 (Expression)
+
+
+Состояние 65
+
+   65 SignedNumber: "number" .
+
+    $default  вывод с использованием правила 65 (SignedNumber)
 
 
 Состояние 66
 
-   35 LocalVarDeclaration: VarDeclaration .
+   26 Statement: VarDeclarationStmt .
 
-    $default  вывод с использованием правила 35 (LocalVarDeclaration)
+    $default  вывод с использованием правила 26 (Statement)
 
 
 Состояние 67
@@ -1058,29 +1066,22 @@
 
 Состояние 69
 
-   26 Statement: LocalVarDeclaration .
-
-    $default  вывод с использованием правила 26 (Statement)
-
-
-Состояние 70
-
    34 Statement: MethodInvocation . ";"
    43 Expression: MethodInvocation .  ["[", "&&", "||", "<", ">", "==", "-", "+", "*", "/", "%", "."]
 
-    ";"  сдвиг, и переход в состояние 90
+    ";"  сдвиг, и переход в состояние 89
 
     $default  вывод с использованием правила 43 (Expression)
 
 
-Состояние 71
+Состояние 70
 
    32 Statement: Lvalue . "=" Expression ";"
 
-    "="  сдвиг, и переход в состояние 91
+    "="  сдвиг, и переход в состояние 90
 
 
-Состояние 72
+Состояние 71
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -1096,66 +1097,112 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "["   сдвиг, и переход в состояние 92
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
+    "["   сдвиг, и переход в состояние 91
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
 
 
-Состояние 73
+Состояние 72
 
    62 Expression: BooleanLiteral .
 
     $default  вывод с использованием правила 62 (Expression)
 
 
-Состояние 74
+Состояние 73
 
    61 Expression: SignedNumber .
 
     $default  вывод с использованием правила 61 (Expression)
 
 
+Состояние 74
+
+   13 Formals: Formals "," VarDeclaration .
+
+    $default  вывод с использованием правила 13 (Formals)
+
+
 Состояние 75
-
-   13 Formals: Formals "," Type . "identifier"
-
-    "identifier"  сдвиг, и переход в состояние 104
-
-
-Состояние 76
 
     9 MethodDeclaration: "public" Type "identifier" "(" Formals ")" Scope .
 
     $default  вывод с использованием правила 9 (MethodDeclaration)
 
 
-Состояние 77
+Состояние 76
 
    56 Expression: "new" SimpleType . "[" Expression "]"
 
-    "["  сдвиг, и переход в состояние 105
+    "["  сдвиг, и переход в состояние 103
 
 
-Состояние 78
+Состояние 77
 
    19 SimpleType: TypeId .  ["["]
    57 Expression: "new" TypeId . "(" ")"
 
-    "("  сдвиг, и переход в состояние 106
+    "("  сдвиг, и переход в состояние 104
 
     $default  вывод с использованием правила 19 (SimpleType)
 
 
+Состояние 78
+
+   60 Expression: "identifier" .
+
+    $default  вывод с использованием правила 60 (Expression)
+
+
 Состояние 79
+
+   43 Expression: MethodInvocation .
+
+    $default  вывод с использованием правила 43 (Expression)
+
+
+Состояние 80
+
+   33 Statement: "return" Expression . ";"
+   36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
+   44 Expression: Expression . "&&" Expression
+   45           | Expression . "||" Expression
+   46           | Expression . "<" Expression
+   47           | Expression . ">" Expression
+   48           | Expression . "==" Expression
+   49           | Expression . "+" Expression
+   50           | Expression . "-" Expression
+   51           | Expression . "*" Expression
+   52           | Expression . "/" Expression
+   53           | Expression . "%" Expression
+   54           | Expression . "[" Expression "]"
+   55           | Expression . "." "length"
+
+    ";"   сдвиг, и переход в состояние 105
+    "["   сдвиг, и переход в состояние 91
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
+
+
+Состояние 81
 
    28 Statement: "if" "(" . Expression ")" Statement
    29          | "if" "(" . Expression ")" Statement "else" Statement
@@ -1187,22 +1234,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 107
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 106
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 80
+Состояние 82
 
    30 Statement: "while" "(" . Expression ")" Statement
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
@@ -1233,22 +1280,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 108
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 107
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 81
+Состояние 83
 
    31 Statement: "System.out.println" "(" . Expression ")" ";"
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
@@ -1279,22 +1326,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 109
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 108
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 82
+Состояние 84
 
    25 Statement: "assert" "(" . Expression ")" ";"
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
@@ -1325,33 +1372,19 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 110
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
-
-
-Состояние 83
-
-   60 Expression: "identifier" .
-
-    $default  вывод с использованием правила 60 (Expression)
-
-
-Состояние 84
-
-   43 Expression: MethodInvocation .
-
-    $default  вывод с использованием правила 43 (Expression)
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 109
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
 Состояние 85
@@ -1371,7 +1404,7 @@
    55           | Expression . "." "length"
    58           | "!" Expression .  [";", "[", "]", ",", "&&", "||", "<", ">", "==", "-", "+", "*", "/", "%", ")"]
 
-    "."  сдвиг, и переход в состояние 103
+    "."  сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 58 (Expression)
 
@@ -1413,19 +1446,19 @@
    55           | Expression . "." "length"
    59           | "(" Expression . ")"
 
-    "["   сдвиг, и переход в состояние 92
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
-    ")"   сдвиг, и переход в состояние 111
+    "["   сдвиг, и переход в состояние 91
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
+    ")"   сдвиг, и переход в состояние 110
 
 
 Состояние 88
@@ -1459,61 +1492,29 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 112
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 111
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
 Состояние 89
-
-   33 Statement: "return" Expression . ";"
-   36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
-   44 Expression: Expression . "&&" Expression
-   45           | Expression . "||" Expression
-   46           | Expression . "<" Expression
-   47           | Expression . ">" Expression
-   48           | Expression . "==" Expression
-   49           | Expression . "+" Expression
-   50           | Expression . "-" Expression
-   51           | Expression . "*" Expression
-   52           | Expression . "/" Expression
-   53           | Expression . "%" Expression
-   54           | Expression . "[" Expression "]"
-   55           | Expression . "." "length"
-
-    ";"   сдвиг, и переход в состояние 113
-    "["   сдвиг, и переход в состояние 92
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
-
-
-Состояние 90
 
    34 Statement: MethodInvocation ";" .
 
     $default  вывод с использованием правила 34 (Statement)
 
 
-Состояние 91
+Состояние 90
 
    32 Statement: Lvalue "=" . Expression ";"
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
@@ -1544,22 +1545,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 114
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 112
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 92
+Состояние 91
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -1590,22 +1591,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 115
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 113
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 93
+Состояние 92
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -1636,22 +1637,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 116
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 114
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 94
+Состояние 93
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -1682,22 +1683,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 117
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 115
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 95
+Состояние 94
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -1728,22 +1729,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 118
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 116
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 96
+Состояние 95
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -1774,22 +1775,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 119
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 117
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 97
+Состояние 96
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -1820,22 +1821,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 120
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 118
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 98
+Состояние 97
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -1866,22 +1867,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 121
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 119
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 99
+Состояние 98
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -1912,22 +1913,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 122
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 120
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 100
+Состояние 99
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -1958,22 +1959,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 123
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 121
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 101
+Состояние 100
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -2004,22 +2005,22 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 124
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 122
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 102
+Состояние 101
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -2050,38 +2051,31 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 125
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 123
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 103
+Состояние 102
 
    36 MethodInvocation: Expression "." . "identifier" "(" MethodArgs ")"
    55 Expression: Expression "." . "length"
 
-    "length"      сдвиг, и переход в состояние 126
-    "identifier"  сдвиг, и переход в состояние 127
+    "length"      сдвиг, и переход в состояние 124
+    "identifier"  сдвиг, и переход в состояние 125
 
 
-Состояние 104
-
-   13 Formals: Formals "," Type "identifier" .
-
-    $default  вывод с использованием правила 13 (Formals)
-
-
-Состояние 105
+Состояние 103
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    42 Expression: . "this"
@@ -2112,29 +2106,36 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 128
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 126
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 106
+Состояние 104
 
    57 Expression: "new" TypeId "(" . ")"
 
-    ")"  сдвиг, и переход в состояние 129
+    ")"  сдвиг, и переход в состояние 127
 
 
-Состояние 107
+Состояние 105
+
+   33 Statement: "return" Expression ";" .
+
+    $default  вывод с использованием правила 33 (Statement)
+
+
+Состояние 106
 
    28 Statement: "if" "(" Expression . ")" Statement
    29          | "if" "(" Expression . ")" Statement "else" Statement
@@ -2152,22 +2153,22 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "["   сдвиг, и переход в состояние 92
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
-    ")"   сдвиг, и переход в состояние 130
+    "["   сдвиг, и переход в состояние 91
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
+    ")"   сдвиг, и переход в состояние 128
 
 
-Состояние 108
+Состояние 107
 
    30 Statement: "while" "(" Expression . ")" Statement
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
@@ -2184,22 +2185,22 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "["   сдвиг, и переход в состояние 92
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
-    ")"   сдвиг, и переход в состояние 131
+    "["   сдвиг, и переход в состояние 91
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
+    ")"   сдвиг, и переход в состояние 129
 
 
-Состояние 109
+Состояние 108
 
    31 Statement: "System.out.println" "(" Expression . ")" ";"
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
@@ -2216,22 +2217,22 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "["   сдвиг, и переход в состояние 92
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
-    ")"   сдвиг, и переход в состояние 132
+    "["   сдвиг, и переход в состояние 91
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
+    ")"   сдвиг, и переход в состояние 130
 
 
-Состояние 110
+Состояние 109
 
    25 Statement: "assert" "(" Expression . ")" ";"
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
@@ -2248,29 +2249,29 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "["   сдвиг, и переход в состояние 92
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
-    ")"   сдвиг, и переход в состояние 133
+    "["   сдвиг, и переход в состояние 91
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
+    ")"   сдвиг, и переход в состояние 131
 
 
-Состояние 111
+Состояние 110
 
    59 Expression: "(" Expression ")" .
 
     $default  вывод с использованием правила 59 (Expression)
 
 
-Состояние 112
+Состояние 111
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    41 Lvalue: "identifier" "[" Expression . "]"
@@ -2287,29 +2288,22 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "["   сдвиг, и переход в состояние 92
-    "]"   сдвиг, и переход в состояние 134
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
+    "["   сдвиг, и переход в состояние 91
+    "]"   сдвиг, и переход в состояние 132
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
 
 
-Состояние 113
-
-   33 Statement: "return" Expression ";" .
-
-    $default  вывод с использованием правила 33 (Statement)
-
-
-Состояние 114
+Состояние 112
 
    32 Statement: Lvalue "=" Expression . ";"
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
@@ -2326,22 +2320,22 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    ";"   сдвиг, и переход в состояние 135
-    "["   сдвиг, и переход в состояние 92
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
+    ";"   сдвиг, и переход в состояние 133
+    "["   сдвиг, и переход в состояние 91
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
 
 
-Состояние 115
+Состояние 113
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2358,22 +2352,22 @@
    54           | Expression "[" Expression . "]"
    55           | Expression . "." "length"
 
-    "["   сдвиг, и переход в состояние 92
-    "]"   сдвиг, и переход в состояние 136
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
+    "["   сдвиг, и переход в состояние 91
+    "]"   сдвиг, и переход в состояние 134
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
 
 
-Состояние 116
+Состояние 114
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2390,12 +2384,12 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "-"  сдвиг, и переход в состояние 98
-    "+"  сдвиг, и переход в состояние 99
-    "*"  сдвиг, и переход в состояние 100
-    "/"  сдвиг, и переход в состояние 101
-    "%"  сдвиг, и переход в состояние 102
-    "."  сдвиг, и переход в состояние 103
+    "-"  сдвиг, и переход в состояние 97
+    "+"  сдвиг, и переход в состояние 98
+    "*"  сдвиг, и переход в состояние 99
+    "/"  сдвиг, и переход в состояние 100
+    "%"  сдвиг, и переход в состояние 101
+    "."  сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 44 (Expression)
 
@@ -2413,7 +2407,7 @@
     Conflict between rule 44 and token "." resolved as shift ("&&" < ".").
 
 
-Состояние 117
+Состояние 115
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2430,12 +2424,12 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "-"  сдвиг, и переход в состояние 98
-    "+"  сдвиг, и переход в состояние 99
-    "*"  сдвиг, и переход в состояние 100
-    "/"  сдвиг, и переход в состояние 101
-    "%"  сдвиг, и переход в состояние 102
-    "."  сдвиг, и переход в состояние 103
+    "-"  сдвиг, и переход в состояние 97
+    "+"  сдвиг, и переход в состояние 98
+    "*"  сдвиг, и переход в состояние 99
+    "/"  сдвиг, и переход в состояние 100
+    "%"  сдвиг, и переход в состояние 101
+    "."  сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 45 (Expression)
 
@@ -2453,7 +2447,7 @@
     Conflict between rule 45 and token "." resolved as shift ("||" < ".").
 
 
-Состояние 118
+Состояние 116
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2470,12 +2464,12 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "-"  сдвиг, и переход в состояние 98
-    "+"  сдвиг, и переход в состояние 99
-    "*"  сдвиг, и переход в состояние 100
-    "/"  сдвиг, и переход в состояние 101
-    "%"  сдвиг, и переход в состояние 102
-    "."  сдвиг, и переход в состояние 103
+    "-"  сдвиг, и переход в состояние 97
+    "+"  сдвиг, и переход в состояние 98
+    "*"  сдвиг, и переход в состояние 99
+    "/"  сдвиг, и переход в состояние 100
+    "%"  сдвиг, и переход в состояние 101
+    "."  сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 46 (Expression)
 
@@ -2493,7 +2487,7 @@
     Conflict between rule 46 and token "." resolved as shift ("<" < ".").
 
 
-Состояние 119
+Состояние 117
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2510,12 +2504,12 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "-"  сдвиг, и переход в состояние 98
-    "+"  сдвиг, и переход в состояние 99
-    "*"  сдвиг, и переход в состояние 100
-    "/"  сдвиг, и переход в состояние 101
-    "%"  сдвиг, и переход в состояние 102
-    "."  сдвиг, и переход в состояние 103
+    "-"  сдвиг, и переход в состояние 97
+    "+"  сдвиг, и переход в состояние 98
+    "*"  сдвиг, и переход в состояние 99
+    "/"  сдвиг, и переход в состояние 100
+    "%"  сдвиг, и переход в состояние 101
+    "."  сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 47 (Expression)
 
@@ -2533,7 +2527,7 @@
     Conflict between rule 47 and token "." resolved as shift (">" < ".").
 
 
-Состояние 120
+Состояние 118
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2550,12 +2544,12 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "-"  сдвиг, и переход в состояние 98
-    "+"  сдвиг, и переход в состояние 99
-    "*"  сдвиг, и переход в состояние 100
-    "/"  сдвиг, и переход в состояние 101
-    "%"  сдвиг, и переход в состояние 102
-    "."  сдвиг, и переход в состояние 103
+    "-"  сдвиг, и переход в состояние 97
+    "+"  сдвиг, и переход в состояние 98
+    "*"  сдвиг, и переход в состояние 99
+    "/"  сдвиг, и переход в состояние 100
+    "%"  сдвиг, и переход в состояние 101
+    "."  сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 48 (Expression)
 
@@ -2573,7 +2567,7 @@
     Conflict between rule 48 and token "." resolved as shift ("==" < ".").
 
 
-Состояние 121
+Состояние 119
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2590,10 +2584,10 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "*"  сдвиг, и переход в состояние 100
-    "/"  сдвиг, и переход в состояние 101
-    "%"  сдвиг, и переход в состояние 102
-    "."  сдвиг, и переход в состояние 103
+    "*"  сдвиг, и переход в состояние 99
+    "/"  сдвиг, и переход в состояние 100
+    "%"  сдвиг, и переход в состояние 101
+    "."  сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 50 (Expression)
 
@@ -2611,7 +2605,7 @@
     Conflict between rule 50 and token "." resolved as shift ("-" < ".").
 
 
-Состояние 122
+Состояние 120
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2628,10 +2622,10 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "*"  сдвиг, и переход в состояние 100
-    "/"  сдвиг, и переход в состояние 101
-    "%"  сдвиг, и переход в состояние 102
-    "."  сдвиг, и переход в состояние 103
+    "*"  сдвиг, и переход в состояние 99
+    "/"  сдвиг, и переход в состояние 100
+    "%"  сдвиг, и переход в состояние 101
+    "."  сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 49 (Expression)
 
@@ -2649,7 +2643,7 @@
     Conflict between rule 49 and token "." resolved as shift ("+" < ".").
 
 
-Состояние 123
+Состояние 121
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2666,7 +2660,7 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "."  сдвиг, и переход в состояние 103
+    "."  сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 51 (Expression)
 
@@ -2684,7 +2678,7 @@
     Conflict between rule 51 and token "." resolved as shift ("*" < ".").
 
 
-Состояние 124
+Состояние 122
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2701,7 +2695,7 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "."  сдвиг, и переход в состояние 103
+    "."  сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 52 (Expression)
 
@@ -2719,7 +2713,7 @@
     Conflict between rule 52 and token "." resolved as shift ("/" < ".").
 
 
-Состояние 125
+Состояние 123
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2736,7 +2730,7 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "."  сдвиг, и переход в состояние 103
+    "."  сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 53 (Expression)
 
@@ -2754,21 +2748,21 @@
     Conflict between rule 53 and token "." resolved as shift ("%" < ".").
 
 
-Состояние 126
+Состояние 124
 
    55 Expression: Expression "." "length" .
 
     $default  вывод с использованием правила 55 (Expression)
 
 
-Состояние 127
+Состояние 125
 
    36 MethodInvocation: Expression "." "identifier" . "(" MethodArgs ")"
 
-    "("  сдвиг, и переход в состояние 137
+    "("  сдвиг, и переход в состояние 135
 
 
-Состояние 128
+Состояние 126
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    44 Expression: Expression . "&&" Expression
@@ -2785,31 +2779,31 @@
    55           | Expression . "." "length"
    56           | "new" SimpleType "[" Expression . "]"
 
-    "["   сдвиг, и переход в состояние 92
-    "]"   сдвиг, и переход в состояние 138
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
+    "["   сдвиг, и переход в состояние 91
+    "]"   сдвиг, и переход в состояние 136
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
 
 
-Состояние 129
+Состояние 127
 
    57 Expression: "new" TypeId "(" ")" .
 
     $default  вывод с использованием правила 57 (Expression)
 
 
-Состояние 130
+Состояние 128
 
-   10 VarDeclaration: . Type "identifier" ";"
+   10 VarDeclaration: . Type "identifier"
    14 Type: . SimpleType
    15     | . ArrayType
    16 SimpleType: . "int"
@@ -2820,7 +2814,7 @@
    21 TypeId: . "identifier"
    24 Scope: . "{" Statements "}"
    25 Statement: . "assert" "(" Expression ")" ";"
-   26          | . LocalVarDeclaration
+   26          | . VarDeclarationStmt
    27          | . Scope
    28          | . "if" "(" Expression ")" Statement
    28          | "if" "(" Expression ")" . Statement
@@ -2831,7 +2825,7 @@
    32          | . Lvalue "=" Expression ";"
    33          | . "return" Expression ";"
    34          | . MethodInvocation ";"
-   35 LocalVarDeclaration: . VarDeclaration
+   35 VarDeclarationStmt: . VarDeclaration ";"
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    40 Lvalue: . "identifier"
    41       | . "identifier" "[" Expression "]"
@@ -2862,42 +2856,42 @@
    66             | . "-" "number"
 
     "new"                 сдвиг, и переход в состояние 51
+    "return"              сдвиг, и переход в состояние 52
     "void"                сдвиг, и переход в состояние 19
-    "if"                  сдвиг, и переход в состояние 52
-    "while"               сдвиг, и переход в состояние 53
-    "this"                сдвиг, и переход в состояние 54
-    "{"                   сдвиг, и переход в состояние 42
-    "System.out.println"  сдвиг, и переход в состояние 56
-    "assert"              сдвиг, и переход в состояние 57
+    "if"                  сдвиг, и переход в состояние 53
+    "while"               сдвиг, и переход в состояние 54
+    "this"                сдвиг, и переход в состояние 55
+    "{"                   сдвиг, и переход в состояние 43
+    "System.out.println"  сдвиг, и переход в состояние 57
+    "assert"              сдвиг, и переход в состояние 58
     "int"                 сдвиг, и переход в состояние 21
     "boolean"             сдвиг, и переход в состояние 22
-    "!"                   сдвиг, и переход в состояние 58
-    "-"                   сдвиг, и переход в состояние 59
-    "("                   сдвиг, и переход в состояние 60
-    "true"                сдвиг, и переход в состояние 61
-    "false"               сдвиг, и переход в состояние 62
-    "identifier"          сдвиг, и переход в состояние 63
-    "number"              сдвиг, и переход в состояние 64
-    "return"              сдвиг, и переход в состояние 65
+    "!"                   сдвиг, и переход в состояние 59
+    "-"                   сдвиг, и переход в состояние 60
+    "("                   сдвиг, и переход в состояние 61
+    "true"                сдвиг, и переход в состояние 62
+    "false"               сдвиг, и переход в состояние 63
+    "identifier"          сдвиг, и переход в состояние 64
+    "number"              сдвиг, и переход в состояние 65
 
-    VarDeclaration       переход в состояние 66
-    Type                 переход в состояние 26
-    SimpleType           переход в состояние 27
-    ArrayType            переход в состояние 28
-    TypeId               переход в состояние 29
-    Scope                переход в состояние 67
-    Statement            переход в состояние 139
-    LocalVarDeclaration  переход в состояние 69
-    MethodInvocation     переход в состояние 70
-    Lvalue               переход в состояние 71
-    Expression           переход в состояние 72
-    BooleanLiteral       переход в состояние 73
-    SignedNumber         переход в состояние 74
+    VarDeclaration      переход в состояние 25
+    VarDeclarationStmt  переход в состояние 66
+    Type                переход в состояние 27
+    SimpleType          переход в состояние 28
+    ArrayType           переход в состояние 29
+    TypeId              переход в состояние 30
+    Scope               переход в состояние 67
+    Statement           переход в состояние 137
+    MethodInvocation    переход в состояние 69
+    Lvalue              переход в состояние 70
+    Expression          переход в состояние 71
+    BooleanLiteral      переход в состояние 72
+    SignedNumber        переход в состояние 73
 
 
-Состояние 131
+Состояние 129
 
-   10 VarDeclaration: . Type "identifier" ";"
+   10 VarDeclaration: . Type "identifier"
    14 Type: . SimpleType
    15     | . ArrayType
    16 SimpleType: . "int"
@@ -2908,7 +2902,7 @@
    21 TypeId: . "identifier"
    24 Scope: . "{" Statements "}"
    25 Statement: . "assert" "(" Expression ")" ";"
-   26          | . LocalVarDeclaration
+   26          | . VarDeclarationStmt
    27          | . Scope
    28          | . "if" "(" Expression ")" Statement
    29          | . "if" "(" Expression ")" Statement "else" Statement
@@ -2918,7 +2912,7 @@
    32          | . Lvalue "=" Expression ";"
    33          | . "return" Expression ";"
    34          | . MethodInvocation ";"
-   35 LocalVarDeclaration: . VarDeclaration
+   35 VarDeclarationStmt: . VarDeclaration ";"
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    40 Lvalue: . "identifier"
    41       | . "identifier" "[" Expression "]"
@@ -2949,75 +2943,75 @@
    66             | . "-" "number"
 
     "new"                 сдвиг, и переход в состояние 51
+    "return"              сдвиг, и переход в состояние 52
     "void"                сдвиг, и переход в состояние 19
-    "if"                  сдвиг, и переход в состояние 52
-    "while"               сдвиг, и переход в состояние 53
-    "this"                сдвиг, и переход в состояние 54
-    "{"                   сдвиг, и переход в состояние 42
-    "System.out.println"  сдвиг, и переход в состояние 56
-    "assert"              сдвиг, и переход в состояние 57
+    "if"                  сдвиг, и переход в состояние 53
+    "while"               сдвиг, и переход в состояние 54
+    "this"                сдвиг, и переход в состояние 55
+    "{"                   сдвиг, и переход в состояние 43
+    "System.out.println"  сдвиг, и переход в состояние 57
+    "assert"              сдвиг, и переход в состояние 58
     "int"                 сдвиг, и переход в состояние 21
     "boolean"             сдвиг, и переход в состояние 22
-    "!"                   сдвиг, и переход в состояние 58
-    "-"                   сдвиг, и переход в состояние 59
-    "("                   сдвиг, и переход в состояние 60
-    "true"                сдвиг, и переход в состояние 61
-    "false"               сдвиг, и переход в состояние 62
-    "identifier"          сдвиг, и переход в состояние 63
-    "number"              сдвиг, и переход в состояние 64
-    "return"              сдвиг, и переход в состояние 65
+    "!"                   сдвиг, и переход в состояние 59
+    "-"                   сдвиг, и переход в состояние 60
+    "("                   сдвиг, и переход в состояние 61
+    "true"                сдвиг, и переход в состояние 62
+    "false"               сдвиг, и переход в состояние 63
+    "identifier"          сдвиг, и переход в состояние 64
+    "number"              сдвиг, и переход в состояние 65
 
-    VarDeclaration       переход в состояние 66
-    Type                 переход в состояние 26
-    SimpleType           переход в состояние 27
-    ArrayType            переход в состояние 28
-    TypeId               переход в состояние 29
-    Scope                переход в состояние 67
-    Statement            переход в состояние 140
-    LocalVarDeclaration  переход в состояние 69
-    MethodInvocation     переход в состояние 70
-    Lvalue               переход в состояние 71
-    Expression           переход в состояние 72
-    BooleanLiteral       переход в состояние 73
-    SignedNumber         переход в состояние 74
+    VarDeclaration      переход в состояние 25
+    VarDeclarationStmt  переход в состояние 66
+    Type                переход в состояние 27
+    SimpleType          переход в состояние 28
+    ArrayType           переход в состояние 29
+    TypeId              переход в состояние 30
+    Scope               переход в состояние 67
+    Statement           переход в состояние 138
+    MethodInvocation    переход в состояние 69
+    Lvalue              переход в состояние 70
+    Expression          переход в состояние 71
+    BooleanLiteral      переход в состояние 72
+    SignedNumber        переход в состояние 73
 
 
-Состояние 132
+Состояние 130
 
    31 Statement: "System.out.println" "(" Expression ")" . ";"
 
-    ";"  сдвиг, и переход в состояние 141
+    ";"  сдвиг, и переход в состояние 139
 
 
-Состояние 133
+Состояние 131
 
    25 Statement: "assert" "(" Expression ")" . ";"
 
-    ";"  сдвиг, и переход в состояние 142
+    ";"  сдвиг, и переход в состояние 140
 
 
-Состояние 134
+Состояние 132
 
    41 Lvalue: "identifier" "[" Expression "]" .
 
     $default  вывод с использованием правила 41 (Lvalue)
 
 
-Состояние 135
+Состояние 133
 
    32 Statement: Lvalue "=" Expression ";" .
 
     $default  вывод с использованием правила 32 (Statement)
 
 
-Состояние 136
+Состояние 134
 
    54 Expression: Expression "[" Expression "]" .
 
     $default  вывод с использованием правила 54 (Expression)
 
 
-Состояние 137
+Состояние 135
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    36                 | Expression "." "identifier" "(" . MethodArgs ")"
@@ -3051,74 +3045,74 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
     $default  вывод с использованием правила 37 (MethodArgs)
 
-    MethodInvocation  переход в состояние 84
-    MethodArgs        переход в состояние 143
-    Expression        переход в состояние 144
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    MethodArgs        переход в состояние 141
+    Expression        переход в состояние 142
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 138
+Состояние 136
 
    56 Expression: "new" SimpleType "[" Expression "]" .
 
     $default  вывод с использованием правила 56 (Expression)
 
 
-Состояние 139
+Состояние 137
 
-   28 Statement: "if" "(" Expression ")" Statement .  ["new", "void", "if", "while", "this", "{", "}", "System.out.println", "assert", "int", "boolean", "!", "-", "(", "true", "false", "identifier", "number", "return"]
+   28 Statement: "if" "(" Expression ")" Statement .  ["new", "return", "void", "if", "while", "this", "{", "}", "System.out.println", "assert", "int", "boolean", "!", "-", "(", "true", "false", "identifier", "number"]
    29          | "if" "(" Expression ")" Statement . "else" Statement
 
-    "else"  сдвиг, и переход в состояние 145
+    "else"  сдвиг, и переход в состояние 143
 
     $default  вывод с использованием правила 28 (Statement)
 
     Conflict between rule 28 and token "else" resolved as shift (")" < "else").
 
 
-Состояние 140
+Состояние 138
 
    30 Statement: "while" "(" Expression ")" Statement .
 
     $default  вывод с использованием правила 30 (Statement)
 
 
-Состояние 141
+Состояние 139
 
    31 Statement: "System.out.println" "(" Expression ")" ";" .
 
     $default  вывод с использованием правила 31 (Statement)
 
 
-Состояние 142
+Состояние 140
 
    25 Statement: "assert" "(" Expression ")" ";" .
 
     $default  вывод с использованием правила 25 (Statement)
 
 
-Состояние 143
+Состояние 141
 
    36 MethodInvocation: Expression "." "identifier" "(" MethodArgs . ")"
    39 MethodArgs: MethodArgs . "," Expression
 
-    ","  сдвиг, и переход в состояние 146
-    ")"  сдвиг, и переход в состояние 147
+    ","  сдвиг, и переход в состояние 144
+    ")"  сдвиг, и переход в состояние 145
 
 
-Состояние 144
+Состояние 142
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    38 MethodArgs: Expression .  [",", ")"]
@@ -3135,25 +3129,25 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "["   сдвиг, и переход в состояние 92
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
+    "["   сдвиг, и переход в состояние 91
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 38 (MethodArgs)
 
 
-Состояние 145
+Состояние 143
 
-   10 VarDeclaration: . Type "identifier" ";"
+   10 VarDeclaration: . Type "identifier"
    14 Type: . SimpleType
    15     | . ArrayType
    16 SimpleType: . "int"
@@ -3164,7 +3158,7 @@
    21 TypeId: . "identifier"
    24 Scope: . "{" Statements "}"
    25 Statement: . "assert" "(" Expression ")" ";"
-   26          | . LocalVarDeclaration
+   26          | . VarDeclarationStmt
    27          | . Scope
    28          | . "if" "(" Expression ")" Statement
    29          | . "if" "(" Expression ")" Statement "else" Statement
@@ -3174,7 +3168,7 @@
    32          | . Lvalue "=" Expression ";"
    33          | . "return" Expression ";"
    34          | . MethodInvocation ";"
-   35 LocalVarDeclaration: . VarDeclaration
+   35 VarDeclarationStmt: . VarDeclaration ";"
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    40 Lvalue: . "identifier"
    41       | . "identifier" "[" Expression "]"
@@ -3205,40 +3199,40 @@
    66             | . "-" "number"
 
     "new"                 сдвиг, и переход в состояние 51
+    "return"              сдвиг, и переход в состояние 52
     "void"                сдвиг, и переход в состояние 19
-    "if"                  сдвиг, и переход в состояние 52
-    "while"               сдвиг, и переход в состояние 53
-    "this"                сдвиг, и переход в состояние 54
-    "{"                   сдвиг, и переход в состояние 42
-    "System.out.println"  сдвиг, и переход в состояние 56
-    "assert"              сдвиг, и переход в состояние 57
+    "if"                  сдвиг, и переход в состояние 53
+    "while"               сдвиг, и переход в состояние 54
+    "this"                сдвиг, и переход в состояние 55
+    "{"                   сдвиг, и переход в состояние 43
+    "System.out.println"  сдвиг, и переход в состояние 57
+    "assert"              сдвиг, и переход в состояние 58
     "int"                 сдвиг, и переход в состояние 21
     "boolean"             сдвиг, и переход в состояние 22
-    "!"                   сдвиг, и переход в состояние 58
-    "-"                   сдвиг, и переход в состояние 59
-    "("                   сдвиг, и переход в состояние 60
-    "true"                сдвиг, и переход в состояние 61
-    "false"               сдвиг, и переход в состояние 62
-    "identifier"          сдвиг, и переход в состояние 63
-    "number"              сдвиг, и переход в состояние 64
-    "return"              сдвиг, и переход в состояние 65
+    "!"                   сдвиг, и переход в состояние 59
+    "-"                   сдвиг, и переход в состояние 60
+    "("                   сдвиг, и переход в состояние 61
+    "true"                сдвиг, и переход в состояние 62
+    "false"               сдвиг, и переход в состояние 63
+    "identifier"          сдвиг, и переход в состояние 64
+    "number"              сдвиг, и переход в состояние 65
 
-    VarDeclaration       переход в состояние 66
-    Type                 переход в состояние 26
-    SimpleType           переход в состояние 27
-    ArrayType            переход в состояние 28
-    TypeId               переход в состояние 29
-    Scope                переход в состояние 67
-    Statement            переход в состояние 148
-    LocalVarDeclaration  переход в состояние 69
-    MethodInvocation     переход в состояние 70
-    Lvalue               переход в состояние 71
-    Expression           переход в состояние 72
-    BooleanLiteral       переход в состояние 73
-    SignedNumber         переход в состояние 74
+    VarDeclaration      переход в состояние 25
+    VarDeclarationStmt  переход в состояние 66
+    Type                переход в состояние 27
+    SimpleType          переход в состояние 28
+    ArrayType           переход в состояние 29
+    TypeId              переход в состояние 30
+    Scope               переход в состояние 67
+    Statement           переход в состояние 146
+    MethodInvocation    переход в состояние 69
+    Lvalue              переход в состояние 70
+    Expression          переход в состояние 71
+    BooleanLiteral      переход в состояние 72
+    SignedNumber        переход в состояние 73
 
 
-Состояние 146
+Состояние 144
 
    36 MethodInvocation: . Expression "." "identifier" "(" MethodArgs ")"
    39 MethodArgs: MethodArgs "," . Expression
@@ -3269,36 +3263,36 @@
    66             | . "-" "number"
 
     "new"         сдвиг, и переход в состояние 51
-    "this"        сдвиг, и переход в состояние 54
-    "!"           сдвиг, и переход в состояние 58
-    "-"           сдвиг, и переход в состояние 59
-    "("           сдвиг, и переход в состояние 60
-    "true"        сдвиг, и переход в состояние 61
-    "false"       сдвиг, и переход в состояние 62
-    "identifier"  сдвиг, и переход в состояние 83
-    "number"      сдвиг, и переход в состояние 64
+    "this"        сдвиг, и переход в состояние 55
+    "!"           сдвиг, и переход в состояние 59
+    "-"           сдвиг, и переход в состояние 60
+    "("           сдвиг, и переход в состояние 61
+    "true"        сдвиг, и переход в состояние 62
+    "false"       сдвиг, и переход в состояние 63
+    "identifier"  сдвиг, и переход в состояние 78
+    "number"      сдвиг, и переход в состояние 65
 
-    MethodInvocation  переход в состояние 84
-    Expression        переход в состояние 149
-    BooleanLiteral    переход в состояние 73
-    SignedNumber      переход в состояние 74
+    MethodInvocation  переход в состояние 79
+    Expression        переход в состояние 147
+    BooleanLiteral    переход в состояние 72
+    SignedNumber      переход в состояние 73
 
 
-Состояние 147
+Состояние 145
 
    36 MethodInvocation: Expression "." "identifier" "(" MethodArgs ")" .
 
     $default  вывод с использованием правила 36 (MethodInvocation)
 
 
-Состояние 148
+Состояние 146
 
    29 Statement: "if" "(" Expression ")" Statement "else" Statement .
 
     $default  вывод с использованием правила 29 (Statement)
 
 
-Состояние 149
+Состояние 147
 
    36 MethodInvocation: Expression . "." "identifier" "(" MethodArgs ")"
    39 MethodArgs: MethodArgs "," Expression .  [",", ")"]
@@ -3315,17 +3309,17 @@
    54           | Expression . "[" Expression "]"
    55           | Expression . "." "length"
 
-    "["   сдвиг, и переход в состояние 92
-    "&&"  сдвиг, и переход в состояние 93
-    "||"  сдвиг, и переход в состояние 94
-    "<"   сдвиг, и переход в состояние 95
-    ">"   сдвиг, и переход в состояние 96
-    "=="  сдвиг, и переход в состояние 97
-    "-"   сдвиг, и переход в состояние 98
-    "+"   сдвиг, и переход в состояние 99
-    "*"   сдвиг, и переход в состояние 100
-    "/"   сдвиг, и переход в состояние 101
-    "%"   сдвиг, и переход в состояние 102
-    "."   сдвиг, и переход в состояние 103
+    "["   сдвиг, и переход в состояние 91
+    "&&"  сдвиг, и переход в состояние 92
+    "||"  сдвиг, и переход в состояние 93
+    "<"   сдвиг, и переход в состояние 94
+    ">"   сдвиг, и переход в состояние 95
+    "=="  сдвиг, и переход в состояние 96
+    "-"   сдвиг, и переход в состояние 97
+    "+"   сдвиг, и переход в состояние 98
+    "*"   сдвиг, и переход в состояние 99
+    "/"   сдвиг, и переход в состояние 100
+    "%"   сдвиг, и переход в состояние 101
+    "."   сдвиг, и переход в состояние 102
 
     $default  вывод с использованием правила 39 (MethodArgs)

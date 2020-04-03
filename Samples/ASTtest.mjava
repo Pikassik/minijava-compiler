@@ -7,7 +7,9 @@ class Factorial {
 class Fac {
   public int ComputeFac (int num) {
     assert (num > -1);
+    num_aux = 5;
     int num_aux;
+
     if (num == 0)
       num_aux = 1;
     else 

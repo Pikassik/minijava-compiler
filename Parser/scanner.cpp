@@ -1,6 +1,6 @@
-#line 2 "/home/user/cxx-minijava-compiler/Parser/scanner.cpp"
+#line 2 "/home/user/minijava-compiler/Parser/scanner.cpp"
 
-#line 4 "/home/user/cxx-minijava-compiler/Parser/scanner.cpp"
+#line 4 "/home/user/minijava-compiler/Parser/scanner.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -412,8 +412,8 @@ int yyFlexLexer::yylex()
 /* %% [3.0] code to copy yytext_ptr to yytext[] goes here, if %array \ */\
 	(yy_c_buf_p) = yy_cp;
 /* %% [4.0] data tables for the DFA and the user's section 1 definitions go here */
-#define YY_NUM_RULES 47
-#define YY_END_OF_BUFFER 48
+#define YY_NUM_RULES 48
+#define YY_END_OF_BUFFER 49
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -421,24 +421,24 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[142] =
+static const flex_int16_t yy_accept[148] =
     {   0,
-        0,    0,   48,   46,    3,    4,   29,   39,   46,   40,
-       41,   37,   36,   27,   35,   26,   38,   44,   21,   32,
-       28,   33,   45,   45,   24,   25,   45,   45,   45,   45,
-       45,   45,   45,   45,   45,   45,   45,   45,   45,   45,
-       19,   46,   20,    3,    4,   30,    0,    2,   44,   34,
-       45,   45,   45,   45,   45,   45,   45,   45,   16,   45,
-       45,   45,   45,   45,   45,   45,   45,   45,   45,   31,
-        0,    0,    0,    2,   45,   45,   45,   45,   45,   45,
-       45,   13,   45,   45,    7,   45,   45,   45,   45,   45,
-       45,    0,    0,    1,   45,   45,   45,   45,   15,   45,
+        0,    0,   49,   47,    3,    4,   30,   40,   47,   41,
+       42,   38,   37,   28,   36,   27,   39,   45,   22,   33,
+       29,   34,   46,   46,   25,   26,   46,   46,   46,   46,
+       46,   46,   46,   46,   46,   46,   46,   46,   46,   46,
+       46,   20,   47,   21,    3,    4,   31,    0,    2,   45,
+       35,   46,   46,   46,   46,   46,   46,   46,   46,   17,
+       46,   46,   46,   46,   46,   46,   46,   46,   46,   46,
+       46,   32,    0,    0,    0,    2,   46,   46,   46,   46,
+       46,   46,   46,   14,   46,   46,    7,   46,   46,   46,
+       46,   46,   46,   46,    0,    0,    1,   46,   46,   46,
 
-       45,   45,   11,   45,   45,   18,   42,   12,   45,   45,
-       45,   45,    5,   45,   43,   45,   45,   45,   17,   45,
-       23,   45,   45,    6,    9,   10,    0,   14,    8,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,   22,
-        0
+       46,   16,   46,   46,   46,   12,   46,   46,   46,   19,
+       43,   13,   46,   46,   46,   46,    5,   46,   44,   46,
+       46,   46,   46,   18,   46,   24,   46,   46,    6,   10,
+        8,   11,    0,   15,    9,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,    0,   23,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -482,118 +482,120 @@ static const YY_CHAR yy_meta[51] =
         3,    3,    3,    3,    3,    3,    3,    1,    1,    1
     } ;
 
-static const flex_int16_t yy_base[146] =
+static const flex_int16_t yy_base[152] =
     {   0,
-        0,    0,  173,  174,   49,  169,  174,  174,  164,  174,
-      174,  174,  174,  174,  174,  174,   42,  154,  174,  174,
-      150,  174,    0,  121,  174,  174,  126,  128,  130,   19,
-      138,   24,  133,  136,  131,  117,  117,   23,  120,  124,
-      174,  107,  174,   56,  152,  174,   63,    0,  138,  174,
-        0,  112,  111,  113,  124,  108,  106,  112,    0,  104,
-      108,  110,   98,  115,  115,  106,   96,  104,  103,  174,
-       65,   67,   75,    0,   94,  105,   99,   92,  102,  101,
-       89,    0,   97,   91,    0,   92,   84,   84,   94,   94,
-       87,   77,   79,  174,   91,   80,   89,   77,    0,   80,
+        0,    0,  178,  179,   49,  174,  179,  179,  169,  179,
+      179,  179,  179,  179,  179,  179,   42,  159,  179,  179,
+      155,  179,    0,  126,  179,  179,  131,  133,  135,   19,
+      143,   24,  138,  141,  136,  122,  134,  121,   23,  124,
+      128,  179,  111,  179,   56,  156,  179,   63,    0,  142,
+      179,    0,  116,  115,  117,  128,  112,  110,  116,    0,
+      108,  112,  114,  102,  119,  103,  118,  109,   99,  107,
+      106,  179,   65,   67,   75,    0,   97,  108,  102,   95,
+      105,  104,   92,    0,  100,   94,    0,   95,   86,   86,
+       86,   96,   96,   89,   77,   79,  179,   93,   82,   91,
 
-       86,   73,    0,   80,   79,    0,    0,    0,   82,   75,
-       68,   83,    0,   79,    0,   74,   78,   77,    0,   90,
-        0,   66,   61,    0,    0,    0,   63,    0,    0,   57,
-       53,   74,   47,   44,   42,   37,   30,   29,   25,  174,
-      174,   56,   90,   93,   96
+       79,    0,   82,   88,   75,    0,   82,   75,   80,    0,
+        0,    0,   83,   76,   69,   84,    0,   80,    0,   75,
+       79,   69,   77,    0,   90,    0,   66,   61,    0,    0,
+        0,    0,   63,    0,    0,   57,   53,   74,   47,   44,
+       42,   37,   30,   29,   25,  179,  179,   56,   90,   93,
+       96
     } ;
 
-static const flex_int16_t yy_def[146] =
+static const flex_int16_t yy_def[152] =
     {   0,
-      141,    1,  141,  141,  141,  141,  141,  141,  141,  141,
-      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
-      141,  141,  142,  142,  141,  141,  142,  142,  142,  142,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  142,
-      141,  141,  141,  141,  141,  141,  143,  144,  141,  141,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  142,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  141,
-      143,  143,  145,  144,  142,  142,  142,  142,  142,  142,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  142,
-      142,  143,  143,  141,  142,  142,  142,  142,  142,  142,
+      147,    1,  147,  147,  147,  147,  147,  147,  147,  147,
+      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
+      147,  147,  148,  148,  147,  147,  148,  148,  148,  148,
+      148,  148,  148,  148,  148,  148,  148,  148,  148,  148,
+      148,  147,  147,  147,  147,  147,  147,  149,  150,  147,
+      147,  148,  148,  148,  148,  148,  148,  148,  148,  148,
+      148,  148,  148,  148,  148,  148,  148,  148,  148,  148,
+      148,  147,  149,  149,  151,  150,  148,  148,  148,  148,
+      148,  148,  148,  148,  148,  148,  148,  148,  148,  148,
+      148,  148,  148,  148,  149,  149,  147,  148,  148,  148,
 
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  142,
-      142,  142,  142,  142,  142,  142,  142,  142,  142,  142,
-      142,  142,  142,  142,  142,  142,  141,  142,  142,  141,
-      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
-        0,  141,  141,  141,  141
+      148,  148,  148,  148,  148,  148,  148,  148,  148,  148,
+      148,  148,  148,  148,  148,  148,  148,  148,  148,  148,
+      148,  148,  148,  148,  148,  148,  148,  148,  148,  148,
+      148,  148,  147,  148,  148,  147,  147,  147,  147,  147,
+      147,  147,  147,  147,  147,  147,    0,  147,  147,  147,
+      147
     } ;
 
-static const flex_int16_t yy_nxt[225] =
+static const flex_int16_t yy_nxt[230] =
     {   0,
         4,    5,    6,    5,    7,    8,    9,   10,   11,   12,
        13,   14,   15,   16,   17,   18,   19,   20,   21,   22,
        23,   24,   25,   26,    4,   27,   28,   29,   23,   30,
-       31,   23,   23,   32,   33,   34,   35,   23,   36,   23,
-       37,   38,   23,   39,   40,   23,   23,   41,   42,   43,
-       44,   47,   44,   56,   59,   66,   48,   44,   51,   44,
-       60,  140,   67,  139,   57,   72,   72,   72,   72,   72,
-       72,  138,   73,  137,   73,  136,   73,   93,   93,   72,
-       72,   72,   72,  135,   73,  134,   73,  133,   73,   94,
-       71,   71,   71,   74,  132,   74,   92,   92,   92,  131,
+       31,   23,   23,   32,   33,   34,   35,   23,   36,   37,
+       38,   39,   23,   40,   41,   23,   23,   42,   43,   44,
+       45,   48,   45,   57,   60,   68,   49,   45,   52,   45,
+       61,  146,   69,  145,   58,   74,   74,   74,   74,   74,
+       74,  144,   75,  143,   75,  142,   75,   96,   96,   74,
+       74,   74,   74,  141,   75,  140,   75,  139,   75,   97,
+       73,   73,   73,   76,  138,   76,   95,   95,   95,  137,
 
-      130,  129,  128,  127,  126,  125,  124,  123,  122,  121,
-      120,  119,  118,  117,  116,  115,  114,  113,  112,  111,
-      110,  109,  108,  107,  106,  105,  104,  103,  102,  101,
-      100,   99,   98,   97,   96,   95,   91,   90,   89,   88,
-       87,   86,   85,   84,   83,   82,   81,   80,   79,   78,
-       77,   76,   75,   49,   45,   70,   69,   68,   65,   64,
-       63,   62,   61,   58,   55,   54,   53,   52,   50,   49,
-       46,   45,  141,    3,  141,  141,  141,  141,  141,  141,
-      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
-      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
+      136,  135,  134,  133,  132,  131,  130,  129,  128,  127,
+      126,  125,  124,  123,  122,  121,  120,  119,  118,  117,
+      116,  115,  114,  113,  112,  111,  110,  109,  108,  107,
+      106,  105,  104,  103,  102,  101,  100,   99,   98,   94,
+       93,   92,   91,   90,   89,   88,   87,   86,   85,   84,
+       83,   82,   81,   80,   79,   78,   77,   50,   46,   72,
+       71,   70,   67,   66,   65,   64,   63,   62,   59,   56,
+       55,   54,   53,   51,   50,   47,   46,  147,    3,  147,
+      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
+      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
 
-      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
-      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
-      141,  141,  141,  141
+      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
+      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
+      147,  147,  147,  147,  147,  147,  147,  147,  147
     } ;
 
-static const flex_int16_t yy_chk[225] =
+static const flex_int16_t yy_chk[230] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        5,   17,    5,   30,   32,   38,   17,   44,  142,   44,
-       32,  139,   38,  138,   30,   47,   47,   71,   71,   72,
-       72,  137,   47,  136,   71,  135,   72,   73,   73,   92,
-       92,   93,   93,  134,   73,  133,   92,  132,   93,   73,
-      143,  143,  143,  144,  131,  144,  145,  145,  145,  130,
+        5,   17,    5,   30,   32,   39,   17,   45,  148,   45,
+       32,  145,   39,  144,   30,   48,   48,   73,   73,   74,
+       74,  143,   48,  142,   73,  141,   74,   75,   75,   95,
+       95,   96,   96,  140,   75,  139,   95,  138,   96,   75,
+      149,  149,  149,  150,  137,  150,  151,  151,  151,  136,
 
-      127,  123,  122,  120,  118,  117,  116,  114,  112,  111,
-      110,  109,  105,  104,  102,  101,  100,   98,   97,   96,
-       95,   91,   90,   89,   88,   87,   86,   84,   83,   81,
-       80,   79,   78,   77,   76,   75,   69,   68,   67,   66,
-       65,   64,   63,   62,   61,   60,   58,   57,   56,   55,
-       54,   53,   52,   49,   45,   42,   40,   39,   37,   36,
-       35,   34,   33,   31,   29,   28,   27,   24,   21,   18,
-        9,    6,    3,  141,  141,  141,  141,  141,  141,  141,
-      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
-      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
+      133,  128,  127,  125,  123,  122,  121,  120,  118,  116,
+      115,  114,  113,  109,  108,  107,  105,  104,  103,  101,
+      100,   99,   98,   94,   93,   92,   91,   90,   89,   88,
+       86,   85,   83,   82,   81,   80,   79,   78,   77,   71,
+       70,   69,   68,   67,   66,   65,   64,   63,   62,   61,
+       59,   58,   57,   56,   55,   54,   53,   50,   46,   43,
+       41,   40,   38,   37,   36,   35,   34,   33,   31,   29,
+       28,   27,   24,   21,   18,    9,    6,    3,  147,  147,
+      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
+      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
 
-      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
-      141,  141,  141,  141,  141,  141,  141,  141,  141,  141,
-      141,  141,  141,  141
+      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
+      147,  147,  147,  147,  147,  147,  147,  147,  147,  147,
+      147,  147,  147,  147,  147,  147,  147,  147,  147
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[48] =
+static const flex_int32_t yy_rule_can_match_eol[49] =
     {   0,
 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0,     };
+    0, 0, 0, 0, 0, 0, 0, 0, 0,     };
 
-static const flex_int16_t yy_rule_linenum[47] =
+static const flex_int16_t yy_rule_linenum[48] =
     {   0,
        51,   52,   54,   55,   57,   58,   59,   60,   61,   62,
        63,   64,   65,   66,   67,   68,   69,   70,   71,   72,
        73,   74,   75,   76,   77,   78,   79,   80,   81,   82,
        83,   84,   85,   86,   87,   88,   89,   90,   91,   92,
-       93,   94,   95,   97,   98,   99
+       93,   94,   95,   96,   98,   99,  100
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -603,8 +605,8 @@ static const flex_int16_t yy_rule_linenum[47] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-#line 2 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 1 "/home/user/minijava-compiler/Parser/scanner.l"
+#line 2 "/home/user/minijava-compiler/Parser/scanner.l"
     #include <cerrno>
     #include <climits>
     #include <cstdlib>
@@ -613,22 +615,22 @@ static const flex_int16_t yy_rule_linenum[47] =
     #include <iostream>
     #include <Driver/driver.hh>
     #include "parser.hh"
-#line 617 "/home/user/cxx-minijava-compiler/Parser/scanner.cpp"
+#line 619 "/home/user/minijava-compiler/Parser/scanner.cpp"
 #define YY_NO_INPUT 1
-#line 19 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 19 "/home/user/minijava-compiler/Parser/scanner.l"
   // A number symbol corresponding to the value in S.
   yy::parser::symbol_type make_NUMBER(
     const std::string &s,
     const yy::parser::location_type& loc
   );
-#line 625 "/home/user/cxx-minijava-compiler/Parser/scanner.cpp"
-#line 33 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 627 "/home/user/minijava-compiler/Parser/scanner.cpp"
+#line 33 "/home/user/minijava-compiler/Parser/scanner.l"
   // Code run each time a pattern is matched.
   # define YY_USER_ACTION  {loc.columns (yyleng);\
                             prev_current_yylineno = current_yylineno;\
                             current_yylineno = yylineno; };
-#line 631 "/home/user/cxx-minijava-compiler/Parser/scanner.cpp"
-#line 632 "/home/user/cxx-minijava-compiler/Parser/scanner.cpp"
+#line 633 "/home/user/minijava-compiler/Parser/scanner.cpp"
+#line 634 "/home/user/minijava-compiler/Parser/scanner.cpp"
 
 #define INITIAL 0
 
@@ -820,10 +822,10 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 38 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 38 "/home/user/minijava-compiler/Parser/scanner.l"
 
 
-#line 41 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 41 "/home/user/minijava-compiler/Parser/scanner.l"
   // A handy shortcut to the location held by the driver.
   yy::location& loc = driver.location;
   // Code run each time yylex is called.
@@ -834,7 +836,7 @@ YY_DECL
 
 
 
-#line 838 "/home/user/cxx-minijava-compiler/Parser/scanner.cpp"
+#line 840 "/home/user/minijava-compiler/Parser/scanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -863,13 +865,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 142 )
+				if ( yy_current_state >= 148 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_current_state != 141 );
+		while ( yy_current_state != 147 );
 		yy_cp = (yy_last_accepting_cpos);
 		yy_current_state = (yy_last_accepting_state);
 
@@ -898,12 +900,12 @@ do_action:	/* This label is used only to access EOF actions. */
 			{
 			if ( yy_act == 0 )
 				std::cerr << "--scanner backing up\n";
-			else if ( yy_act < 47 )
+			else if ( yy_act < 48 )
 				std::cerr << "--accepting rule at line " << yy_rule_linenum[yy_act] <<
 				         "(\"" << yytext << "\")\n";
-			else if ( yy_act == 47 )
-				std::cerr << "--accepting default rule (\"" << yytext << "\")\n";
 			else if ( yy_act == 48 )
+				std::cerr << "--accepting default rule (\"" << yytext << "\")\n";
+			else if ( yy_act == 49 )
 				std::cerr << "--(end of buffer or a NUL)\n";
 			else
 				std::cerr << "--EOF (start condition " << YY_START << ")\n";
@@ -922,247 +924,252 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 51 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 51 "/home/user/minijava-compiler/Parser/scanner.l"
 {loc.lines(yylineno - prev_current_yylineno); loc.step ();}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 52 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 52 "/home/user/minijava-compiler/Parser/scanner.l"
 loc.lines(1); loc.step ();
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 54 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 54 "/home/user/minijava-compiler/Parser/scanner.l"
 loc.step ();
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 55 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 55 "/home/user/minijava-compiler/Parser/scanner.l"
 loc.lines (yyleng); loc.step ();
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 57 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 57 "/home/user/minijava-compiler/Parser/scanner.l"
 return yy::parser::make_CLASS      (loc);
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 58 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 58 "/home/user/minijava-compiler/Parser/scanner.l"
 return yy::parser::make_LENGTH     (loc);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 59 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 59 "/home/user/minijava-compiler/Parser/scanner.l"
 return yy::parser::make_NEW        (loc);
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 60 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_EXTENDS    (loc);
+#line 60 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_RETURN     (loc);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 61 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_PUBLIC     (loc);
+#line 61 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_EXTENDS    (loc);
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 62 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_STATIC     (loc);
+#line 62 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_PUBLIC     (loc);
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 63 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_MAIN       (loc);
+#line 63 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_STATIC     (loc);
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 64 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_VOID       (loc);
+#line 64 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_MAIN       (loc);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 65 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_INT        (loc);
+#line 65 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_VOID       (loc);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 66 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_BOOLEAN    (loc);
+#line 66 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_INT        (loc);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 67 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_ELSE       (loc);
+#line 67 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_BOOLEAN    (loc);
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 68 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_IF         (loc);
+#line 68 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_ELSE       (loc);
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 69 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_WHILE      (loc);
+#line 69 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_IF         (loc);
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 70 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_THIS       (loc);
+#line 70 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_WHILE      (loc);
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 71 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_LCURLPAREN (loc);
+#line 71 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_THIS       (loc);
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 72 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_RCURLPAREN (loc);
+#line 72 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_LCURLPAREN (loc);
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 73 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_SEMICOLON  (loc);
+#line 73 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_RCURLPAREN (loc);
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 74 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_PRINT      (loc);
+#line 74 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_SEMICOLON  (loc);
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 75 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_ASSERT     (loc);
+#line 75 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_PRINT      (loc);
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 76 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_LSQPAREN   (loc);
+#line 76 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_ASSERT     (loc);
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 77 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_RSQPAREN   (loc);
+#line 77 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_LSQPAREN   (loc);
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 78 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_DOT        (loc);
+#line 78 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_RSQPAREN   (loc);
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 79 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_COMMA      (loc);
+#line 79 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_DOT        (loc);
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 80 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_ASSIGN     (loc);
+#line 80 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_COMMA      (loc);
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 81 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_EXCL       (loc);
+#line 81 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_ASSIGN     (loc);
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 82 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_AND        (loc);
+#line 82 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_EXCL       (loc);
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 83 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_OR         (loc);
+#line 83 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_AND        (loc);
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 84 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_LESS       (loc);
+#line 84 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_OR         (loc);
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 85 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_MORE       (loc);
+#line 85 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_LESS       (loc);
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 86 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_EQUAL      (loc);
+#line 86 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_MORE       (loc);
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 87 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_MINUS      (loc);
+#line 87 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_EQUAL      (loc);
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 88 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_PLUS       (loc);
+#line 88 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_MINUS      (loc);
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 89 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_STAR       (loc);
+#line 89 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_PLUS       (loc);
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 90 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_SLASH      (loc);
+#line 90 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_STAR       (loc);
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 91 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_PERC       (loc);
+#line 91 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_SLASH      (loc);
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 92 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_LPAREN     (loc);
+#line 92 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_PERC       (loc);
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 93 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_RPAREN     (loc);
+#line 93 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_LPAREN     (loc);
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 94 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_TRUE       (loc);
+#line 94 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_RPAREN     (loc);
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 95 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_FALSE      (loc);
+#line 95 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_TRUE       (loc);
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 97 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return make_NUMBER(yytext, loc);
+#line 96 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_FALSE      (loc);
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 98 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
-return yy::parser::make_IDENTIFIER(yytext, loc);
+#line 98 "/home/user/minijava-compiler/Parser/scanner.l"
+return make_NUMBER(yytext, loc);
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 99 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 99 "/home/user/minijava-compiler/Parser/scanner.l"
+return yy::parser::make_IDENTIFIER(yytext, loc);
+	YY_BREAK
+case 47:
+YY_RULE_SETUP
+#line 100 "/home/user/minijava-compiler/Parser/scanner.l"
 {
                 throw yy::parser::syntax_error(loc, "invalid character: " + std::string(yytext));
            }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 102 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 103 "/home/user/minijava-compiler/Parser/scanner.l"
 return yy::parser::make_END (loc);
 	YY_BREAK
-case 47:
+case 48:
 YY_RULE_SETUP
-#line 103 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 104 "/home/user/minijava-compiler/Parser/scanner.l"
 ECHO;
 	YY_BREAK
-#line 1166 "/home/user/cxx-minijava-compiler/Parser/scanner.cpp"
+#line 1173 "/home/user/minijava-compiler/Parser/scanner.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1600,7 +1607,7 @@ int yyFlexLexer::yy_get_next_buffer()
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 142 )
+			if ( yy_current_state >= 148 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1633,11 +1640,11 @@ int yyFlexLexer::yy_get_next_buffer()
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 142 )
+		if ( yy_current_state >= 148 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 141);
+	yy_is_jam = (yy_current_state == 147);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2287,7 +2294,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 103 "/home/user/cxx-minijava-compiler/Parser/scanner.l"
+#line 104 "/home/user/minijava-compiler/Parser/scanner.l"
 
 
 yy::parser::symbol_type make_NUMBER(

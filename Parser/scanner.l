@@ -56,6 +56,7 @@ linecomment \/\/.*
 "class"               return yy::parser::make_CLASS      (loc);
 "length"              return yy::parser::make_LENGTH     (loc);
 "new"                 return yy::parser::make_NEW        (loc);
+"return"              return yy::parser::make_RETURN     (loc);
 "extends"             return yy::parser::make_EXTENDS    (loc);
 "public"              return yy::parser::make_PUBLIC     (loc);
 "static"              return yy::parser::make_STATIC     (loc);

@@ -1,13 +1,12 @@
 #include "driver.hh"
-#include "Parser/parser.hh"
+#include <Parser/parser.hh>
 #include <Visitors/Dumper.h>
 #include <Visitors/Interpreter.h>
+#include <Visitors/SymbolTables/SymbolTableBuilder.h>
 
 #include <sys/types.h>
 #include <wait.h>
 #include <unistd.h>
-
-#include <chrono>
 
 Driver::Driver() :
     trace_parsing(false),
@@ -36,7 +35,8 @@ int Driver::parse(const std::string& f) {
         wait(NULL);
       }
 
-      Interpret(*program);
+      auto table = MakeProgramTable(*program);
+      //Interpret(*program);
     }
 
     return res;

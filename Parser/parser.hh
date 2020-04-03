@@ -32,7 +32,7 @@
 
 
 /**
- ** \file /home/user/cxx-minijava-compiler/Parser/parser.hh
+ ** \file /home/user/minijava-compiler/Parser/parser.hh
  ** Define the yy::parser class.
  */
 
@@ -41,10 +41,10 @@
 // Undocumented macros, especially those whose name start with YY_,
 // are private implementation details.  Do not rely on them.
 
-#ifndef YY_YY_HOME_USER_CXX_MINIJAVA_COMPILER_PARSER_PARSER_HH_INCLUDED
-# define YY_YY_HOME_USER_CXX_MINIJAVA_COMPILER_PARSER_PARSER_HH_INCLUDED
+#ifndef YY_YY_HOME_USER_MINIJAVA_COMPILER_PARSER_PARSER_HH_INCLUDED
+# define YY_YY_HOME_USER_MINIJAVA_COMPILER_PARSER_PARSER_HH_INCLUDED
 // "%code requires" blocks.
-#line 9 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 9 "/home/user/minijava-compiler/Parser/parser.y"
 
     #include <string>
     #include <Nodes/Nodes.h>
@@ -57,7 +57,7 @@
     template <typename T>
     using ptr = shared_ptr<T>;
 
-#line 61 "/home/user/cxx-minijava-compiler/Parser/parser.hh"
+#line 61 "/home/user/minijava-compiler/Parser/parser.hh"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -191,7 +191,7 @@
 #endif
 
 namespace yy {
-#line 195 "/home/user/cxx-minijava-compiler/Parser/parser.hh"
+#line 195 "/home/user/minijava-compiler/Parser/parser.hh"
 
 
 
@@ -438,7 +438,7 @@ namespace yy {
       char dummy13[sizeof (ptr<Type>)];
 
       // VarDeclaration
-      // LocalVarDeclaration
+      // VarDeclarationStmt
       char dummy14[sizeof (ptr<VarDeclaration>)];
 
       // "identifier"
@@ -448,11 +448,11 @@ namespace yy {
       // MethodArgs
       char dummy16[sizeof (vector<ptr<Expression>>)];
 
-      // Formals
-      char dummy17[sizeof (vector<ptr<Formal>>)];
-
       // Statements
-      char dummy18[sizeof (vector<ptr<Statement>>)];
+      char dummy17[sizeof (vector<ptr<Statement>>)];
+
+      // Formals
+      char dummy18[sizeof (vector<ptr<VarDeclaration>>)];
     };
 
     /// The size of the largest semantic type.
@@ -502,46 +502,47 @@ namespace yy {
       {
         TOK_END = 0,
         TOK_NEW = 258,
-        TOK_CLASS = 259,
-        TOK_PUBLIC = 260,
-        TOK_STATIC = 261,
-        TOK_VOID = 262,
-        TOK_MAIN = 263,
-        TOK_EXTENDS = 264,
-        TOK_ELSE = 265,
-        TOK_IF = 266,
-        TOK_WHILE = 267,
-        TOK_THIS = 268,
-        TOK_LCURLPAREN = 269,
-        TOK_RCURLPAREN = 270,
-        TOK_SEMICOLON = 271,
-        TOK_LENGTH = 272,
-        TOK_PRINT = 273,
-        TOK_ASSERT = 274,
-        TOK_INT = 275,
-        TOK_BOOLEAN = 276,
-        TOK_LSQPAREN = 277,
-        TOK_RSQPAREN = 278,
-        TOK_COMMA = 279,
-        TOK_ASSIGN = 280,
-        TOK_EXCL = 281,
-        TOK_AND = 282,
-        TOK_OR = 283,
-        TOK_LESS = 284,
-        TOK_MORE = 285,
-        TOK_EQUAL = 286,
-        TOK_MINUS = 287,
-        TOK_PLUS = 288,
-        TOK_STAR = 289,
-        TOK_SLASH = 290,
-        TOK_PERC = 291,
-        TOK_DOT = 292,
-        TOK_LPAREN = 293,
-        TOK_RPAREN = 294,
-        TOK_TRUE = 295,
-        TOK_FALSE = 296,
-        TOK_IDENTIFIER = 297,
-        TOK_NUMBER = 298
+        TOK_RETURN = 259,
+        TOK_CLASS = 260,
+        TOK_PUBLIC = 261,
+        TOK_STATIC = 262,
+        TOK_VOID = 263,
+        TOK_MAIN = 264,
+        TOK_EXTENDS = 265,
+        TOK_ELSE = 266,
+        TOK_IF = 267,
+        TOK_WHILE = 268,
+        TOK_THIS = 269,
+        TOK_LCURLPAREN = 270,
+        TOK_RCURLPAREN = 271,
+        TOK_SEMICOLON = 272,
+        TOK_LENGTH = 273,
+        TOK_PRINT = 274,
+        TOK_ASSERT = 275,
+        TOK_INT = 276,
+        TOK_BOOLEAN = 277,
+        TOK_LSQPAREN = 278,
+        TOK_RSQPAREN = 279,
+        TOK_COMMA = 280,
+        TOK_ASSIGN = 281,
+        TOK_EXCL = 282,
+        TOK_AND = 283,
+        TOK_OR = 284,
+        TOK_LESS = 285,
+        TOK_MORE = 286,
+        TOK_EQUAL = 287,
+        TOK_MINUS = 288,
+        TOK_PLUS = 289,
+        TOK_STAR = 290,
+        TOK_SLASH = 291,
+        TOK_PERC = 292,
+        TOK_DOT = 293,
+        TOK_LPAREN = 294,
+        TOK_RPAREN = 295,
+        TOK_TRUE = 296,
+        TOK_FALSE = 297,
+        TOK_IDENTIFIER = 298,
+        TOK_NUMBER = 299
       };
     };
 
@@ -804,19 +805,6 @@ namespace yy {
       {}
 #endif
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, vector<ptr<Formal>>&& v, location_type&& l)
-        : Base (t)
-        , value (std::move (v))
-        , location (std::move (l))
-      {}
-#else
-      basic_symbol (typename Base::kind_type t, const vector<ptr<Formal>>& v, const location_type& l)
-        : Base (t)
-        , value (v)
-        , location (l)
-      {}
-#endif
-#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, vector<ptr<Statement>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -824,6 +812,19 @@ namespace yy {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const vector<ptr<Statement>>& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, vector<ptr<VarDeclaration>>&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const vector<ptr<VarDeclaration>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -852,7 +853,7 @@ namespace yy {
         // Type destructor.
 switch (yytype)
     {
-      case 43: // "number"
+      case 44: // "number"
         value.template destroy< int > ();
         break;
 
@@ -893,27 +894,27 @@ switch (yytype)
         value.template destroy< ptr<Program> > ();
         break;
 
-      case 58: // Scope
+      case 59: // Scope
         value.template destroy< ptr<Scope> > ();
         break;
 
-      case 59: // Statement
+      case 60: // Statement
         value.template destroy< ptr<Statement> > ();
         break;
 
-      case 53: // Type
-      case 54: // SimpleType
-      case 55: // ArrayType
+      case 54: // Type
+      case 55: // SimpleType
+      case 56: // ArrayType
         value.template destroy< ptr<Type> > ();
         break;
 
       case 51: // VarDeclaration
-      case 60: // LocalVarDeclaration
+      case 52: // VarDeclarationStmt
         value.template destroy< ptr<VarDeclaration> > ();
         break;
 
-      case 42: // "identifier"
-      case 56: // TypeId
+      case 43: // "identifier"
+      case 57: // TypeId
         value.template destroy< string > ();
         break;
 
@@ -921,12 +922,12 @@ switch (yytype)
         value.template destroy< vector<ptr<Expression>> > ();
         break;
 
-      case 52: // Formals
-        value.template destroy< vector<ptr<Formal>> > ();
+      case 58: // Statements
+        value.template destroy< vector<ptr<Statement>> > ();
         break;
 
-      case 57: // Statements
-        value.template destroy< vector<ptr<Statement>> > ();
+      case 53: // Formals
+        value.template destroy< vector<ptr<VarDeclaration>> > ();
         break;
 
       default:
@@ -1005,13 +1006,13 @@ switch (yytype)
       symbol_type (int tok, location_type l)
         : super_type(token_type (tok), std::move (l))
       {
-        YY_ASSERT (tok == token::TOK_END || tok == token::TOK_NEW || tok == token::TOK_CLASS || tok == token::TOK_PUBLIC || tok == token::TOK_STATIC || tok == token::TOK_VOID || tok == token::TOK_MAIN || tok == token::TOK_EXTENDS || tok == token::TOK_ELSE || tok == token::TOK_IF || tok == token::TOK_WHILE || tok == token::TOK_THIS || tok == token::TOK_LCURLPAREN || tok == token::TOK_RCURLPAREN || tok == token::TOK_SEMICOLON || tok == token::TOK_LENGTH || tok == token::TOK_PRINT || tok == token::TOK_ASSERT || tok == token::TOK_INT || tok == token::TOK_BOOLEAN || tok == token::TOK_LSQPAREN || tok == token::TOK_RSQPAREN || tok == token::TOK_COMMA || tok == token::TOK_ASSIGN || tok == token::TOK_EXCL || tok == token::TOK_AND || tok == token::TOK_OR || tok == token::TOK_LESS || tok == token::TOK_MORE || tok == token::TOK_EQUAL || tok == token::TOK_MINUS || tok == token::TOK_PLUS || tok == token::TOK_STAR || tok == token::TOK_SLASH || tok == token::TOK_PERC || tok == token::TOK_DOT || tok == token::TOK_LPAREN || tok == token::TOK_RPAREN || tok == token::TOK_TRUE || tok == token::TOK_FALSE || tok == 299);
+        YY_ASSERT (tok == token::TOK_END || tok == token::TOK_NEW || tok == token::TOK_RETURN || tok == token::TOK_CLASS || tok == token::TOK_PUBLIC || tok == token::TOK_STATIC || tok == token::TOK_VOID || tok == token::TOK_MAIN || tok == token::TOK_EXTENDS || tok == token::TOK_ELSE || tok == token::TOK_IF || tok == token::TOK_WHILE || tok == token::TOK_THIS || tok == token::TOK_LCURLPAREN || tok == token::TOK_RCURLPAREN || tok == token::TOK_SEMICOLON || tok == token::TOK_LENGTH || tok == token::TOK_PRINT || tok == token::TOK_ASSERT || tok == token::TOK_INT || tok == token::TOK_BOOLEAN || tok == token::TOK_LSQPAREN || tok == token::TOK_RSQPAREN || tok == token::TOK_COMMA || tok == token::TOK_ASSIGN || tok == token::TOK_EXCL || tok == token::TOK_AND || tok == token::TOK_OR || tok == token::TOK_LESS || tok == token::TOK_MORE || tok == token::TOK_EQUAL || tok == token::TOK_MINUS || tok == token::TOK_PLUS || tok == token::TOK_STAR || tok == token::TOK_SLASH || tok == token::TOK_PERC || tok == token::TOK_DOT || tok == token::TOK_LPAREN || tok == token::TOK_RPAREN || tok == token::TOK_TRUE || tok == token::TOK_FALSE);
       }
 #else
       symbol_type (int tok, const location_type& l)
         : super_type(token_type (tok), l)
       {
-        YY_ASSERT (tok == token::TOK_END || tok == token::TOK_NEW || tok == token::TOK_CLASS || tok == token::TOK_PUBLIC || tok == token::TOK_STATIC || tok == token::TOK_VOID || tok == token::TOK_MAIN || tok == token::TOK_EXTENDS || tok == token::TOK_ELSE || tok == token::TOK_IF || tok == token::TOK_WHILE || tok == token::TOK_THIS || tok == token::TOK_LCURLPAREN || tok == token::TOK_RCURLPAREN || tok == token::TOK_SEMICOLON || tok == token::TOK_LENGTH || tok == token::TOK_PRINT || tok == token::TOK_ASSERT || tok == token::TOK_INT || tok == token::TOK_BOOLEAN || tok == token::TOK_LSQPAREN || tok == token::TOK_RSQPAREN || tok == token::TOK_COMMA || tok == token::TOK_ASSIGN || tok == token::TOK_EXCL || tok == token::TOK_AND || tok == token::TOK_OR || tok == token::TOK_LESS || tok == token::TOK_MORE || tok == token::TOK_EQUAL || tok == token::TOK_MINUS || tok == token::TOK_PLUS || tok == token::TOK_STAR || tok == token::TOK_SLASH || tok == token::TOK_PERC || tok == token::TOK_DOT || tok == token::TOK_LPAREN || tok == token::TOK_RPAREN || tok == token::TOK_TRUE || tok == token::TOK_FALSE || tok == 299);
+        YY_ASSERT (tok == token::TOK_END || tok == token::TOK_NEW || tok == token::TOK_RETURN || tok == token::TOK_CLASS || tok == token::TOK_PUBLIC || tok == token::TOK_STATIC || tok == token::TOK_VOID || tok == token::TOK_MAIN || tok == token::TOK_EXTENDS || tok == token::TOK_ELSE || tok == token::TOK_IF || tok == token::TOK_WHILE || tok == token::TOK_THIS || tok == token::TOK_LCURLPAREN || tok == token::TOK_RCURLPAREN || tok == token::TOK_SEMICOLON || tok == token::TOK_LENGTH || tok == token::TOK_PRINT || tok == token::TOK_ASSERT || tok == token::TOK_INT || tok == token::TOK_BOOLEAN || tok == token::TOK_LSQPAREN || tok == token::TOK_RSQPAREN || tok == token::TOK_COMMA || tok == token::TOK_ASSIGN || tok == token::TOK_EXCL || tok == token::TOK_AND || tok == token::TOK_OR || tok == token::TOK_LESS || tok == token::TOK_MORE || tok == token::TOK_EQUAL || tok == token::TOK_MINUS || tok == token::TOK_PLUS || tok == token::TOK_STAR || tok == token::TOK_SLASH || tok == token::TOK_PERC || tok == token::TOK_DOT || tok == token::TOK_LPAREN || tok == token::TOK_RPAREN || tok == token::TOK_TRUE || tok == token::TOK_FALSE);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1105,6 +1106,21 @@ switch (yytype)
       make_NEW (const location_type& l)
       {
         return symbol_type (token::TOK_NEW, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_RETURN (location_type l)
+      {
+        return symbol_type (token::TOK_RETURN, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_RETURN (const location_type& l)
+      {
+        return symbol_type (token::TOK_RETURN, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -2013,7 +2029,7 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 352,     ///< Last index in yytable_.
+      yylast_ = 347,     ///< Last index in yytable_.
       yynnts_ = 22,  ///< Number of nonterminal symbols.
       yyfinal_ = 5, ///< Termination state number.
       yyntokens_ = 45  ///< Number of tokens.
@@ -2086,7 +2102,7 @@ switch (yytype)
   {
     switch (this->type_get ())
     {
-      case 43: // "number"
+      case 44: // "number"
         value.move< int > (std::move (that.value));
         break;
 
@@ -2127,27 +2143,27 @@ switch (yytype)
         value.move< ptr<Program> > (std::move (that.value));
         break;
 
-      case 58: // Scope
+      case 59: // Scope
         value.move< ptr<Scope> > (std::move (that.value));
         break;
 
-      case 59: // Statement
+      case 60: // Statement
         value.move< ptr<Statement> > (std::move (that.value));
         break;
 
-      case 53: // Type
-      case 54: // SimpleType
-      case 55: // ArrayType
+      case 54: // Type
+      case 55: // SimpleType
+      case 56: // ArrayType
         value.move< ptr<Type> > (std::move (that.value));
         break;
 
       case 51: // VarDeclaration
-      case 60: // LocalVarDeclaration
+      case 52: // VarDeclarationStmt
         value.move< ptr<VarDeclaration> > (std::move (that.value));
         break;
 
-      case 42: // "identifier"
-      case 56: // TypeId
+      case 43: // "identifier"
+      case 57: // TypeId
         value.move< string > (std::move (that.value));
         break;
 
@@ -2155,12 +2171,12 @@ switch (yytype)
         value.move< vector<ptr<Expression>> > (std::move (that.value));
         break;
 
-      case 52: // Formals
-        value.move< vector<ptr<Formal>> > (std::move (that.value));
+      case 58: // Statements
+        value.move< vector<ptr<Statement>> > (std::move (that.value));
         break;
 
-      case 57: // Statements
-        value.move< vector<ptr<Statement>> > (std::move (that.value));
+      case 53: // Formals
+        value.move< vector<ptr<VarDeclaration>> > (std::move (that.value));
         break;
 
       default:
@@ -2178,7 +2194,7 @@ switch (yytype)
   {
     switch (this->type_get ())
     {
-      case 43: // "number"
+      case 44: // "number"
         value.copy< int > (YY_MOVE (that.value));
         break;
 
@@ -2219,27 +2235,27 @@ switch (yytype)
         value.copy< ptr<Program> > (YY_MOVE (that.value));
         break;
 
-      case 58: // Scope
+      case 59: // Scope
         value.copy< ptr<Scope> > (YY_MOVE (that.value));
         break;
 
-      case 59: // Statement
+      case 60: // Statement
         value.copy< ptr<Statement> > (YY_MOVE (that.value));
         break;
 
-      case 53: // Type
-      case 54: // SimpleType
-      case 55: // ArrayType
+      case 54: // Type
+      case 55: // SimpleType
+      case 56: // ArrayType
         value.copy< ptr<Type> > (YY_MOVE (that.value));
         break;
 
       case 51: // VarDeclaration
-      case 60: // LocalVarDeclaration
+      case 52: // VarDeclarationStmt
         value.copy< ptr<VarDeclaration> > (YY_MOVE (that.value));
         break;
 
-      case 42: // "identifier"
-      case 56: // TypeId
+      case 43: // "identifier"
+      case 57: // TypeId
         value.copy< string > (YY_MOVE (that.value));
         break;
 
@@ -2247,12 +2263,12 @@ switch (yytype)
         value.copy< vector<ptr<Expression>> > (YY_MOVE (that.value));
         break;
 
-      case 52: // Formals
-        value.copy< vector<ptr<Formal>> > (YY_MOVE (that.value));
+      case 58: // Statements
+        value.copy< vector<ptr<Statement>> > (YY_MOVE (that.value));
         break;
 
-      case 57: // Statements
-        value.copy< vector<ptr<Statement>> > (YY_MOVE (that.value));
+      case 53: // Formals
+        value.copy< vector<ptr<VarDeclaration>> > (YY_MOVE (that.value));
         break;
 
       default:
@@ -2277,7 +2293,7 @@ switch (yytype)
     super_type::move (s);
     switch (this->type_get ())
     {
-      case 43: // "number"
+      case 44: // "number"
         value.move< int > (YY_MOVE (s.value));
         break;
 
@@ -2318,27 +2334,27 @@ switch (yytype)
         value.move< ptr<Program> > (YY_MOVE (s.value));
         break;
 
-      case 58: // Scope
+      case 59: // Scope
         value.move< ptr<Scope> > (YY_MOVE (s.value));
         break;
 
-      case 59: // Statement
+      case 60: // Statement
         value.move< ptr<Statement> > (YY_MOVE (s.value));
         break;
 
-      case 53: // Type
-      case 54: // SimpleType
-      case 55: // ArrayType
+      case 54: // Type
+      case 55: // SimpleType
+      case 56: // ArrayType
         value.move< ptr<Type> > (YY_MOVE (s.value));
         break;
 
       case 51: // VarDeclaration
-      case 60: // LocalVarDeclaration
+      case 52: // VarDeclarationStmt
         value.move< ptr<VarDeclaration> > (YY_MOVE (s.value));
         break;
 
-      case 42: // "identifier"
-      case 56: // TypeId
+      case 43: // "identifier"
+      case 57: // TypeId
         value.move< string > (YY_MOVE (s.value));
         break;
 
@@ -2346,12 +2362,12 @@ switch (yytype)
         value.move< vector<ptr<Expression>> > (YY_MOVE (s.value));
         break;
 
-      case 52: // Formals
-        value.move< vector<ptr<Formal>> > (YY_MOVE (s.value));
+      case 58: // Statements
+        value.move< vector<ptr<Statement>> > (YY_MOVE (s.value));
         break;
 
-      case 57: // Statements
-        value.move< vector<ptr<Statement>> > (YY_MOVE (s.value));
+      case 53: // Formals
+        value.move< vector<ptr<VarDeclaration>> > (YY_MOVE (s.value));
         break;
 
       default:
@@ -2409,10 +2425,10 @@ switch (yytype)
   }
 
 } // yy
-#line 2413 "/home/user/cxx-minijava-compiler/Parser/parser.hh"
+#line 2429 "/home/user/minijava-compiler/Parser/parser.hh"
 
 
 
 
 
-#endif // !YY_YY_HOME_USER_CXX_MINIJAVA_COMPILER_PARSER_PARSER_HH_INCLUDED
+#endif // !YY_YY_HOME_USER_MINIJAVA_COMPILER_PARSER_PARSER_HH_INCLUDED

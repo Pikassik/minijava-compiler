@@ -116,7 +116,7 @@ add_executable(
     Nodes/NodesImpl/Expressions/BooleanLiteral.cpp
     Visitors/Interpreter.h
     Visitors/AcceptRetType.h
-    Visitors/Impl/Interpreter.cpp)
+    Visitors/Impl/Interpreter.cpp Visitors/SymbolTables/SymbolTableBuilder.h Visitors/SymbolTables/ProgramTable.h Visitors/SymbolTables/ClassTable.h Visitors/SymbolTables/ScopeTable.h Visitors/SymbolTables/Impl/ClassTable.cpp Visitors/SymbolTables/Impl/ProgramTable.cpp Visitors/SymbolTables/Impl/ScopeTable.cpp Visitors/SymbolTables/Impl/SymbolTableBuilder.cpp Visitors/SymbolTables/Symbol.h Nodes/NodesImpl/Expressions/Expression.cpp Nodes/NodesImpl/Node.cpp Visitors/Typer.h Visitors/Impl/Typer.cpp)
 
 target_include_directories(MiniJavaCompiler PRIVATE ${MiniJavaCompiler_SOURCE_DIR})
 

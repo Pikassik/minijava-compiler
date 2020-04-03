@@ -41,7 +41,7 @@
 
 
 // Unqualified %code blocks.
-#line 25 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 25 "/home/user/minijava-compiler/Parser/parser.y"
 
     #include <Driver/driver.hh>
     #include "location.hh"
@@ -50,7 +50,7 @@
         return scanner.ScanToken();
     }
 
-#line 54 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 54 "/home/user/minijava-compiler/Parser/parser.cpp"
 
 
 #ifndef YY_
@@ -141,7 +141,7 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 145 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 145 "/home/user/minijava-compiler/Parser/parser.cpp"
 
 
   /* Return YYSTR after stripping away unnecessary quotes and
@@ -252,7 +252,7 @@ namespace yy {
   {
     switch (that.type_get ())
     {
-      case 43: // "number"
+      case 44: // "number"
         value.YY_MOVE_OR_COPY< int > (YY_MOVE (that.value));
         break;
 
@@ -293,27 +293,27 @@ namespace yy {
         value.YY_MOVE_OR_COPY< ptr<Program> > (YY_MOVE (that.value));
         break;
 
-      case 58: // Scope
+      case 59: // Scope
         value.YY_MOVE_OR_COPY< ptr<Scope> > (YY_MOVE (that.value));
         break;
 
-      case 59: // Statement
+      case 60: // Statement
         value.YY_MOVE_OR_COPY< ptr<Statement> > (YY_MOVE (that.value));
         break;
 
-      case 53: // Type
-      case 54: // SimpleType
-      case 55: // ArrayType
+      case 54: // Type
+      case 55: // SimpleType
+      case 56: // ArrayType
         value.YY_MOVE_OR_COPY< ptr<Type> > (YY_MOVE (that.value));
         break;
 
       case 51: // VarDeclaration
-      case 60: // LocalVarDeclaration
+      case 52: // VarDeclarationStmt
         value.YY_MOVE_OR_COPY< ptr<VarDeclaration> > (YY_MOVE (that.value));
         break;
 
-      case 42: // "identifier"
-      case 56: // TypeId
+      case 43: // "identifier"
+      case 57: // TypeId
         value.YY_MOVE_OR_COPY< string > (YY_MOVE (that.value));
         break;
 
@@ -321,12 +321,12 @@ namespace yy {
         value.YY_MOVE_OR_COPY< vector<ptr<Expression>> > (YY_MOVE (that.value));
         break;
 
-      case 52: // Formals
-        value.YY_MOVE_OR_COPY< vector<ptr<Formal>> > (YY_MOVE (that.value));
+      case 58: // Statements
+        value.YY_MOVE_OR_COPY< vector<ptr<Statement>> > (YY_MOVE (that.value));
         break;
 
-      case 57: // Statements
-        value.YY_MOVE_OR_COPY< vector<ptr<Statement>> > (YY_MOVE (that.value));
+      case 53: // Formals
+        value.YY_MOVE_OR_COPY< vector<ptr<VarDeclaration>> > (YY_MOVE (that.value));
         break;
 
       default:
@@ -344,7 +344,7 @@ namespace yy {
   {
     switch (that.type_get ())
     {
-      case 43: // "number"
+      case 44: // "number"
         value.move< int > (YY_MOVE (that.value));
         break;
 
@@ -385,27 +385,27 @@ namespace yy {
         value.move< ptr<Program> > (YY_MOVE (that.value));
         break;
 
-      case 58: // Scope
+      case 59: // Scope
         value.move< ptr<Scope> > (YY_MOVE (that.value));
         break;
 
-      case 59: // Statement
+      case 60: // Statement
         value.move< ptr<Statement> > (YY_MOVE (that.value));
         break;
 
-      case 53: // Type
-      case 54: // SimpleType
-      case 55: // ArrayType
+      case 54: // Type
+      case 55: // SimpleType
+      case 56: // ArrayType
         value.move< ptr<Type> > (YY_MOVE (that.value));
         break;
 
       case 51: // VarDeclaration
-      case 60: // LocalVarDeclaration
+      case 52: // VarDeclarationStmt
         value.move< ptr<VarDeclaration> > (YY_MOVE (that.value));
         break;
 
-      case 42: // "identifier"
-      case 56: // TypeId
+      case 43: // "identifier"
+      case 57: // TypeId
         value.move< string > (YY_MOVE (that.value));
         break;
 
@@ -413,12 +413,12 @@ namespace yy {
         value.move< vector<ptr<Expression>> > (YY_MOVE (that.value));
         break;
 
-      case 52: // Formals
-        value.move< vector<ptr<Formal>> > (YY_MOVE (that.value));
+      case 58: // Statements
+        value.move< vector<ptr<Statement>> > (YY_MOVE (that.value));
         break;
 
-      case 57: // Statements
-        value.move< vector<ptr<Statement>> > (YY_MOVE (that.value));
+      case 53: // Formals
+        value.move< vector<ptr<VarDeclaration>> > (YY_MOVE (that.value));
         break;
 
       default:
@@ -436,7 +436,7 @@ namespace yy {
     state = that.state;
     switch (that.type_get ())
     {
-      case 43: // "number"
+      case 44: // "number"
         value.copy< int > (that.value);
         break;
 
@@ -477,27 +477,27 @@ namespace yy {
         value.copy< ptr<Program> > (that.value);
         break;
 
-      case 58: // Scope
+      case 59: // Scope
         value.copy< ptr<Scope> > (that.value);
         break;
 
-      case 59: // Statement
+      case 60: // Statement
         value.copy< ptr<Statement> > (that.value);
         break;
 
-      case 53: // Type
-      case 54: // SimpleType
-      case 55: // ArrayType
+      case 54: // Type
+      case 55: // SimpleType
+      case 56: // ArrayType
         value.copy< ptr<Type> > (that.value);
         break;
 
       case 51: // VarDeclaration
-      case 60: // LocalVarDeclaration
+      case 52: // VarDeclarationStmt
         value.copy< ptr<VarDeclaration> > (that.value);
         break;
 
-      case 42: // "identifier"
-      case 56: // TypeId
+      case 43: // "identifier"
+      case 57: // TypeId
         value.copy< string > (that.value);
         break;
 
@@ -505,12 +505,12 @@ namespace yy {
         value.copy< vector<ptr<Expression>> > (that.value);
         break;
 
-      case 52: // Formals
-        value.copy< vector<ptr<Formal>> > (that.value);
+      case 58: // Statements
+        value.copy< vector<ptr<Statement>> > (that.value);
         break;
 
-      case 57: // Statements
-        value.copy< vector<ptr<Statement>> > (that.value);
+      case 53: // Formals
+        value.copy< vector<ptr<VarDeclaration>> > (that.value);
         break;
 
       default:
@@ -527,7 +527,7 @@ namespace yy {
     state = that.state;
     switch (that.type_get ())
     {
-      case 43: // "number"
+      case 44: // "number"
         value.move< int > (that.value);
         break;
 
@@ -568,27 +568,27 @@ namespace yy {
         value.move< ptr<Program> > (that.value);
         break;
 
-      case 58: // Scope
+      case 59: // Scope
         value.move< ptr<Scope> > (that.value);
         break;
 
-      case 59: // Statement
+      case 60: // Statement
         value.move< ptr<Statement> > (that.value);
         break;
 
-      case 53: // Type
-      case 54: // SimpleType
-      case 55: // ArrayType
+      case 54: // Type
+      case 55: // SimpleType
+      case 56: // ArrayType
         value.move< ptr<Type> > (that.value);
         break;
 
       case 51: // VarDeclaration
-      case 60: // LocalVarDeclaration
+      case 52: // VarDeclarationStmt
         value.move< ptr<VarDeclaration> > (that.value);
         break;
 
-      case 42: // "identifier"
-      case 56: // TypeId
+      case 43: // "identifier"
+      case 57: // TypeId
         value.move< string > (that.value);
         break;
 
@@ -596,12 +596,12 @@ namespace yy {
         value.move< vector<ptr<Expression>> > (that.value);
         break;
 
-      case 52: // Formals
-        value.move< vector<ptr<Formal>> > (that.value);
+      case 58: // Statements
+        value.move< vector<ptr<Statement>> > (that.value);
         break;
 
-      case 57: // Statements
-        value.move< vector<ptr<Statement>> > (that.value);
+      case 53: // Formals
+        value.move< vector<ptr<VarDeclaration>> > (that.value);
         break;
 
       default:
@@ -643,142 +643,142 @@ namespace yy {
         << yysym.location << ": ";
     switch (yytype)
     {
-      case 42: // "identifier"
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+      case 43: // "identifier"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 650 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 650 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
-      case 43: // "number"
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+      case 44: // "number"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 656 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 656 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 46: // Program
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 662 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 662 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 47: // MainClassDeclaration
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 668 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 668 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 48: // ClassDeclaration
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 674 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 674 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 49: // ClassMembers
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 680 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 680 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 50: // MethodDeclaration
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 686 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 686 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 51: // VarDeclaration
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 692 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 692 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
-      case 52: // Formals
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+      case 52: // VarDeclarationStmt
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 698 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 698 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
-      case 53: // Type
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+      case 53: // Formals
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 704 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 704 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
-      case 54: // SimpleType
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+      case 54: // Type
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 710 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 710 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
-      case 55: // ArrayType
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+      case 55: // SimpleType
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 716 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 716 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
-      case 56: // TypeId
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+      case 56: // ArrayType
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 722 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 722 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
-      case 57: // Statements
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+      case 57: // TypeId
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 728 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 728 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
-      case 58: // Scope
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+      case 58: // Statements
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 734 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 734 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
-      case 59: // Statement
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+      case 59: // Scope
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 740 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 740 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
-      case 60: // LocalVarDeclaration
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+      case 60: // Statement
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 746 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 746 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 61: // MethodInvocation
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 752 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 752 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 62: // MethodArgs
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 758 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 758 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 63: // Lvalue
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 764 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 764 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 64: // Expression
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 770 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 770 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 65: // BooleanLiteral
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 776 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 776 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       case 66: // SignedNumber
-#line 110 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 111 "/home/user/minijava-compiler/Parser/parser.y"
                  { /* yyo << $$; */ }
-#line 782 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 782 "/home/user/minijava-compiler/Parser/parser.cpp"
         break;
 
       default:
@@ -996,7 +996,7 @@ namespace yy {
          when using variants.  */
       switch (yyr1_[yyn])
     {
-      case 43: // "number"
+      case 44: // "number"
         yylhs.value.emplace< int > ();
         break;
 
@@ -1037,27 +1037,27 @@ namespace yy {
         yylhs.value.emplace< ptr<Program> > ();
         break;
 
-      case 58: // Scope
+      case 59: // Scope
         yylhs.value.emplace< ptr<Scope> > ();
         break;
 
-      case 59: // Statement
+      case 60: // Statement
         yylhs.value.emplace< ptr<Statement> > ();
         break;
 
-      case 53: // Type
-      case 54: // SimpleType
-      case 55: // ArrayType
+      case 54: // Type
+      case 55: // SimpleType
+      case 56: // ArrayType
         yylhs.value.emplace< ptr<Type> > ();
         break;
 
       case 51: // VarDeclaration
-      case 60: // LocalVarDeclaration
+      case 52: // VarDeclarationStmt
         yylhs.value.emplace< ptr<VarDeclaration> > ();
         break;
 
-      case 42: // "identifier"
-      case 56: // TypeId
+      case 43: // "identifier"
+      case 57: // TypeId
         yylhs.value.emplace< string > ();
         break;
 
@@ -1065,12 +1065,12 @@ namespace yy {
         yylhs.value.emplace< vector<ptr<Expression>> > ();
         break;
 
-      case 52: // Formals
-        yylhs.value.emplace< vector<ptr<Formal>> > ();
+      case 58: // Statements
+        yylhs.value.emplace< vector<ptr<Statement>> > ();
         break;
 
-      case 57: // Statements
-        yylhs.value.emplace< vector<ptr<Statement>> > ();
+      case 53: // Formals
+        yylhs.value.emplace< vector<ptr<VarDeclaration>> > ();
         break;
 
       default:
@@ -1094,441 +1094,441 @@ namespace yy {
           switch (yyn)
             {
   case 2:
-#line 124 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 125 "/home/user/minijava-compiler/Parser/parser.y"
                               {
   yylhs.value.as < ptr<Program> > () = make_shared<Program>(vector<ptr<Class>>{yystack_[0].value.as < ptr<Class> > ()});
   driver.program = yylhs.value.as < ptr<Program> > ();
 }
-#line 1103 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1103 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 3:
-#line 128 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 129 "/home/user/minijava-compiler/Parser/parser.y"
                                   {
   yystack_[1].value.as < ptr<Program> > ()->classes.push_back(yystack_[0].value.as < ptr<Class> > ());
   yylhs.value.as < ptr<Program> > () = move(yystack_[1].value.as < ptr<Program> > ());
 }
-#line 1112 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1112 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 4:
-#line 134 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 135 "/home/user/minijava-compiler/Parser/parser.y"
                                                                                                  {
   yylhs.value.as < ptr<Class> > () = make_shared<Class>(
     yystack_[9].value.as < string > (),
     vector<ptr<MethodDeclaration>>(
-      {make_shared<MethodDeclaration>(make_shared<Type>("void"), "main", vector<ptr<Formal>>(), yystack_[1].value.as < ptr<Scope> > ())}
+      {make_shared<MethodDeclaration>(make_shared<Type>("void"), "main", vector<ptr<VarDeclaration>>(), yystack_[1].value.as < ptr<Scope> > ())}
     ),
     vector<ptr<VarDeclaration>>()
   );
 }
-#line 1126 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1126 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 5:
-#line 145 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 146 "/home/user/minijava-compiler/Parser/parser.y"
                                                             {
   yylhs.value.as < ptr<Class> > () = make_shared<Class>(yystack_[3].value.as < string > (), move(yystack_[1].value.as < pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>> > ().first), move(yystack_[1].value.as < pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>> > ().second));
 }
-#line 1134 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1134 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 6:
-#line 148 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 149 "/home/user/minijava-compiler/Parser/parser.y"
                                                                                    {
   yylhs.value.as < ptr<Class> > () = make_shared<Class>(yystack_[5].value.as < string > (), yystack_[3].value.as < string > (), move(yystack_[1].value.as < pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>> > ().first), move(yystack_[1].value.as < pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>> > ().second));
 }
-#line 1142 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1142 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 7:
-#line 153 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 154 "/home/user/minijava-compiler/Parser/parser.y"
                      { yylhs.value.as < pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>> > () = pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>>(); }
-#line 1148 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1148 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 8:
-#line 154 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 155 "/home/user/minijava-compiler/Parser/parser.y"
                                              {
   yystack_[1].value.as < pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>> > ().first.push_back(yystack_[0].value.as < ptr<MethodDeclaration> > ());  // methods.push
   yylhs.value.as < pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>> > () = move(yystack_[1].value.as < pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>> > ());
 }
-#line 1157 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1157 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 9:
-#line 158 "/home/user/cxx-minijava-compiler/Parser/parser.y"
-                                          {
+#line 159 "/home/user/minijava-compiler/Parser/parser.y"
+                                              {
   yystack_[1].value.as < pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>> > ().second.push_back(yystack_[0].value.as < ptr<VarDeclaration> > ()); // fields.push
   yylhs.value.as < pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>> > () = move(yystack_[1].value.as < pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>> > ());
 }
-#line 1166 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1166 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 10:
-#line 164 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 165 "/home/user/minijava-compiler/Parser/parser.y"
                                                                     {
-  yylhs.value.as < ptr<MethodDeclaration> > () = make_shared<MethodDeclaration>(yystack_[5].value.as < ptr<Type> > (), yystack_[4].value.as < string > (), move(yystack_[2].value.as < vector<ptr<Formal>> > ()), yystack_[0].value.as < ptr<Scope> > ());
+  yylhs.value.as < ptr<MethodDeclaration> > () = make_shared<MethodDeclaration>(yystack_[5].value.as < ptr<Type> > (), yystack_[4].value.as < string > (), move(yystack_[2].value.as < vector<ptr<VarDeclaration>> > ()), yystack_[0].value.as < ptr<Scope> > ());
 }
-#line 1174 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1174 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 11:
-#line 169 "/home/user/cxx-minijava-compiler/Parser/parser.y"
-                                      { yylhs.value.as < ptr<VarDeclaration> > () = make_shared<VarDeclaration>(yystack_[2].value.as < ptr<Type> > (), yystack_[1].value.as < string > ()); }
-#line 1180 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 170 "/home/user/minijava-compiler/Parser/parser.y"
+                                  { yylhs.value.as < ptr<VarDeclaration> > () = make_shared<VarDeclaration>(yystack_[1].value.as < ptr<Type> > (), yystack_[0].value.as < string > ()); }
+#line 1180 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 12:
-#line 171 "/home/user/cxx-minijava-compiler/Parser/parser.y"
-                { yylhs.value.as < vector<ptr<Formal>> > () = vector<ptr<Formal>>(); }
-#line 1186 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 172 "/home/user/minijava-compiler/Parser/parser.y"
+                { yylhs.value.as < vector<ptr<VarDeclaration>> > () = vector<ptr<VarDeclaration>>(); }
+#line 1186 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 13:
-#line 172 "/home/user/cxx-minijava-compiler/Parser/parser.y"
-                           { yylhs.value.as < vector<ptr<Formal>> > ().push_back(make_shared<Formal>(yystack_[1].value.as < ptr<Type> > (), yystack_[0].value.as < string > ())); }
-#line 1192 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 173 "/home/user/minijava-compiler/Parser/parser.y"
+                        { yylhs.value.as < vector<ptr<VarDeclaration>> > () = vector<ptr<VarDeclaration>>{yystack_[0].value.as < ptr<VarDeclaration> > ()}; }
+#line 1192 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 14:
-#line 173 "/home/user/cxx-minijava-compiler/Parser/parser.y"
-                                       {
-  yystack_[3].value.as < vector<ptr<Formal>> > ().push_back(make_shared<Formal>(yystack_[1].value.as < ptr<Type> > (), yystack_[0].value.as < string > ()));
-  yylhs.value.as < vector<ptr<Formal>> > () = move(yystack_[3].value.as < vector<ptr<Formal>> > ());
+#line 174 "/home/user/minijava-compiler/Parser/parser.y"
+                                    {
+  yystack_[2].value.as < vector<ptr<VarDeclaration>> > ().push_back(yystack_[0].value.as < ptr<VarDeclaration> > ());
+  yylhs.value.as < vector<ptr<VarDeclaration>> > () = move(yystack_[2].value.as < vector<ptr<VarDeclaration>> > ());
 }
-#line 1201 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1201 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 15:
-#line 179 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 180 "/home/user/minijava-compiler/Parser/parser.y"
                  { yylhs.value.as < ptr<Type> > () = yystack_[0].value.as < ptr<Type> > (); }
-#line 1207 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1207 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 16:
-#line 180 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 181 "/home/user/minijava-compiler/Parser/parser.y"
                  { yylhs.value.as < ptr<Type> > () = yystack_[0].value.as < ptr<Type> > (); }
-#line 1213 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1213 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 17:
-#line 183 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 184 "/home/user/minijava-compiler/Parser/parser.y"
                   { yylhs.value.as < ptr<Type> > () = make_shared<Type>("int", false); }
-#line 1219 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1219 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 18:
-#line 184 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 185 "/home/user/minijava-compiler/Parser/parser.y"
                       { yylhs.value.as < ptr<Type> > () = make_shared<Type>("boolean", false); }
-#line 1225 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1225 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 19:
-#line 185 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 186 "/home/user/minijava-compiler/Parser/parser.y"
                    { yylhs.value.as < ptr<Type> > () = make_shared<Type>("void", false); }
-#line 1231 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1231 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 20:
-#line 186 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 187 "/home/user/minijava-compiler/Parser/parser.y"
                    { yylhs.value.as < ptr<Type> > () = make_shared<Type>(yystack_[0].value.as < string > (), false); }
-#line 1237 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1237 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 21:
-#line 189 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 190 "/home/user/minijava-compiler/Parser/parser.y"
                               {
   yystack_[2].value.as < ptr<Type> > ()->is_array = true;
   yylhs.value.as < ptr<Type> > () = yystack_[2].value.as < ptr<Type> > ();
 }
-#line 1246 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1246 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 22:
-#line 195 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 196 "/home/user/minijava-compiler/Parser/parser.y"
                      { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 1252 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1252 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 23:
-#line 198 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 199 "/home/user/minijava-compiler/Parser/parser.y"
                    { yylhs.value.as < vector<ptr<Statement>> > () = vector<ptr<Statement>>(); }
-#line 1258 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1258 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 24:
-#line 199 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 200 "/home/user/minijava-compiler/Parser/parser.y"
                                  {
   yystack_[1].value.as < vector<ptr<Statement>> > ().push_back(yystack_[0].value.as < ptr<Statement> > ());
   yylhs.value.as < vector<ptr<Statement>> > () = yystack_[1].value.as < vector<ptr<Statement>> > ();
 }
-#line 1267 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1267 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 25:
-#line 205 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 206 "/home/user/minijava-compiler/Parser/parser.y"
                           { yylhs.value.as < ptr<Scope> > () = make_shared<Scope>(yystack_[1].value.as < vector<ptr<Statement>> > ()); }
-#line 1273 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1273 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 26:
-#line 208 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 209 "/home/user/minijava-compiler/Parser/parser.y"
                                            { yylhs.value.as < ptr<Statement> > () = make_shared<Assert>(yystack_[2].value.as < ptr<Expression> > ()); }
-#line 1279 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1279 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 27:
-#line 209 "/home/user/cxx-minijava-compiler/Parser/parser.y"
-                               { yylhs.value.as < ptr<Statement> > () = yystack_[0].value.as < ptr<VarDeclaration> > (); }
-#line 1285 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 210 "/home/user/minijava-compiler/Parser/parser.y"
+                              { yylhs.value.as < ptr<Statement> > () = yystack_[0].value.as < ptr<VarDeclaration> > (); }
+#line 1285 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 28:
-#line 210 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 211 "/home/user/minijava-compiler/Parser/parser.y"
                  { yylhs.value.as < ptr<Statement> > () = yystack_[0].value.as < ptr<Scope> > (); }
-#line 1291 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1291 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 29:
-#line 211 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 212 "/home/user/minijava-compiler/Parser/parser.y"
                                              { yylhs.value.as < ptr<Statement> > () = make_shared<If>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Statement> > ()); }
-#line 1297 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1297 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 30:
-#line 212 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 213 "/home/user/minijava-compiler/Parser/parser.y"
                                                               { yylhs.value.as < ptr<Statement> > () = make_shared<If>(yystack_[4].value.as < ptr<Expression> > (), yystack_[2].value.as < ptr<Statement> > (), yystack_[0].value.as < ptr<Statement> > ()); }
-#line 1303 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1303 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 31:
-#line 213 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 214 "/home/user/minijava-compiler/Parser/parser.y"
                                                 { yylhs.value.as < ptr<Statement> > () = make_shared<While>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Statement> > ()); }
-#line 1309 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1309 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 32:
-#line 214 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 215 "/home/user/minijava-compiler/Parser/parser.y"
                                                        { yylhs.value.as < ptr<Statement> > () = make_shared<Print>(yystack_[2].value.as < ptr<Expression> > ()); }
-#line 1315 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1315 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 33:
-#line 215 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 216 "/home/user/minijava-compiler/Parser/parser.y"
                                      { yylhs.value.as < ptr<Statement> > () = make_shared<Assign>(yystack_[3].value.as < ptr<Lvalue> > (), yystack_[1].value.as < ptr<Expression> > ()); }
-#line 1321 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1321 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 34:
-#line 216 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 217 "/home/user/minijava-compiler/Parser/parser.y"
                                    { yylhs.value.as < ptr<Statement> > () = make_shared<Return>(yystack_[1].value.as < ptr<Expression> > ()); }
-#line 1327 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1327 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 35:
-#line 217 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 218 "/home/user/minijava-compiler/Parser/parser.y"
                                 { yylhs.value.as < ptr<Statement> > () = yystack_[1].value.as < ptr<MethodInvocation> > (); }
-#line 1333 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1333 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 36:
-#line 220 "/home/user/cxx-minijava-compiler/Parser/parser.y"
-                                    { yylhs.value.as < ptr<VarDeclaration> > () = yystack_[0].value.as < ptr<VarDeclaration> > (); }
-#line 1339 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 221 "/home/user/minijava-compiler/Parser/parser.y"
+                                       { yylhs.value.as < ptr<VarDeclaration> > () = yystack_[1].value.as < ptr<VarDeclaration> > (); }
+#line 1339 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 37:
-#line 223 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 224 "/home/user/minijava-compiler/Parser/parser.y"
                                                                  { yylhs.value.as < ptr<MethodInvocation> > () = make_shared<MethodInvocation>(yystack_[5].value.as < ptr<Expression> > (), yystack_[3].value.as < string > (), yystack_[1].value.as < vector<ptr<Expression>> > ()); }
-#line 1345 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1345 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 38:
-#line 226 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 227 "/home/user/minijava-compiler/Parser/parser.y"
                    { yylhs.value.as < vector<ptr<Expression>> > () = vector<ptr<Expression>>(); }
-#line 1351 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1351 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 39:
-#line 227 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 228 "/home/user/minijava-compiler/Parser/parser.y"
                        { yylhs.value.as < vector<ptr<Expression>> > ().push_back(yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1357 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1357 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 40:
-#line 228 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 229 "/home/user/minijava-compiler/Parser/parser.y"
                                       {
   yystack_[2].value.as < vector<ptr<Expression>> > ().push_back(yystack_[0].value.as < ptr<Expression> > ());
   yylhs.value.as < vector<ptr<Expression>> > () = move(yystack_[2].value.as < vector<ptr<Expression>> > ());
 }
-#line 1366 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1366 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 41:
-#line 234 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 235 "/home/user/minijava-compiler/Parser/parser.y"
                      { yylhs.value.as < ptr<Lvalue> > () = make_shared<Lvalue>(yystack_[0].value.as < string > ()); }
-#line 1372 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1372 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 42:
-#line 235 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 236 "/home/user/minijava-compiler/Parser/parser.y"
                                         { yylhs.value.as < ptr<Lvalue> > () = make_shared<Lvalue>(yystack_[3].value.as < string > (), yystack_[1].value.as < ptr<Expression> > ()); }
-#line 1378 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1378 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 43:
-#line 238 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 239 "/home/user/minijava-compiler/Parser/parser.y"
                    { yylhs.value.as < ptr<Expression> > () = make_shared<This>(); }
-#line 1384 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1384 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 44:
-#line 239 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 240 "/home/user/minijava-compiler/Parser/parser.y"
                              { yylhs.value.as < ptr<Expression> > () = yystack_[0].value.as < ptr<MethodInvocation> > (); }
-#line 1390 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1390 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 45:
-#line 240 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 241 "/home/user/minijava-compiler/Parser/parser.y"
                                        { yylhs.value.as < ptr<Expression> > () = make_shared<Mul>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1396 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1396 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 46:
-#line 241 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 242 "/home/user/minijava-compiler/Parser/parser.y"
                                        { yylhs.value.as < ptr<Expression> > () = make_shared<Add>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1402 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1402 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 47:
-#line 242 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 243 "/home/user/minijava-compiler/Parser/parser.y"
                                        { yylhs.value.as < ptr<Expression> > () = make_shared<Less>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1408 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1408 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 48:
-#line 243 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 244 "/home/user/minijava-compiler/Parser/parser.y"
                                        { yylhs.value.as < ptr<Expression> > () = make_shared<More>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1414 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1414 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 49:
-#line 244 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 245 "/home/user/minijava-compiler/Parser/parser.y"
                                        { yylhs.value.as < ptr<Expression> > () = make_shared<Equals>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1420 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1420 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 50:
-#line 245 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 246 "/home/user/minijava-compiler/Parser/parser.y"
                                        { yylhs.value.as < ptr<Expression> > () = make_shared<Add>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1426 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1426 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 51:
-#line 246 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 247 "/home/user/minijava-compiler/Parser/parser.y"
                                        { yylhs.value.as < ptr<Expression> > () = make_shared<Subtract>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1432 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1432 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 52:
-#line 247 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 248 "/home/user/minijava-compiler/Parser/parser.y"
                                        { yylhs.value.as < ptr<Expression> > () = make_shared<Mul>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1438 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1438 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 53:
-#line 248 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 249 "/home/user/minijava-compiler/Parser/parser.y"
                                        { yylhs.value.as < ptr<Expression> > () = make_shared<Div>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1444 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1444 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 54:
-#line 249 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 250 "/home/user/minijava-compiler/Parser/parser.y"
                                        { yylhs.value.as < ptr<Expression> > () = make_shared<Percent>(yystack_[2].value.as < ptr<Expression> > (), yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1450 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1450 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 55:
-#line 250 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 251 "/home/user/minijava-compiler/Parser/parser.y"
                                           { yylhs.value.as < ptr<Expression> > () = make_shared<At>(yystack_[3].value.as < ptr<Expression> > (), yystack_[1].value.as < ptr<Expression> > ()); }
-#line 1456 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1456 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 56:
-#line 251 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 252 "/home/user/minijava-compiler/Parser/parser.y"
                                     { yylhs.value.as < ptr<Expression> > () = make_shared<Length>(yystack_[2].value.as < ptr<Expression> > ()); }
-#line 1462 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1462 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 57:
-#line 252 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 253 "/home/user/minijava-compiler/Parser/parser.y"
                                                 { yylhs.value.as < ptr<Expression> > () = make_shared<NewArray>(yystack_[3].value.as < ptr<Type> > (), yystack_[1].value.as < ptr<Expression> > ()); }
-#line 1468 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1468 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 58:
-#line 253 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 254 "/home/user/minijava-compiler/Parser/parser.y"
                                  { yylhs.value.as < ptr<Expression> > () = make_shared<New>(yystack_[2].value.as < string > ()); }
-#line 1474 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1474 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 59:
-#line 254 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 255 "/home/user/minijava-compiler/Parser/parser.y"
                            { yylhs.value.as < ptr<Expression> > () = make_shared<Not>(yystack_[0].value.as < ptr<Expression> > ()); }
-#line 1480 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1480 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 60:
-#line 255 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 256 "/home/user/minijava-compiler/Parser/parser.y"
                                { yylhs.value.as < ptr<Expression> > () = yystack_[1].value.as < ptr<Expression> > (); }
-#line 1486 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1486 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 61:
-#line 256 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 257 "/home/user/minijava-compiler/Parser/parser.y"
                          { yylhs.value.as < ptr<Expression> > () = make_shared<Identifier>(yystack_[0].value.as < string > ()); }
-#line 1492 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1492 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 62:
-#line 257 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 258 "/home/user/minijava-compiler/Parser/parser.y"
                          { yylhs.value.as < ptr<Expression> > () = yystack_[0].value.as < ptr<Number> > (); }
-#line 1498 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1498 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 63:
-#line 258 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 259 "/home/user/minijava-compiler/Parser/parser.y"
                            { yylhs.value.as < ptr<Expression> > () = yystack_[0].value.as < ptr<BooleanLiteral> > (); }
-#line 1504 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1504 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 64:
-#line 261 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 262 "/home/user/minijava-compiler/Parser/parser.y"
                        { yylhs.value.as < ptr<BooleanLiteral> > () = make_shared<BooleanLiteral>(true); }
-#line 1510 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1510 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 65:
-#line 262 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 263 "/home/user/minijava-compiler/Parser/parser.y"
                         { yylhs.value.as < ptr<BooleanLiteral> > () = make_shared<BooleanLiteral>(false); }
-#line 1516 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1516 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 66:
-#line 265 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 266 "/home/user/minijava-compiler/Parser/parser.y"
                            { yylhs.value.as < ptr<Number> > () = make_shared<Number>(yystack_[0].value.as < int > ()); }
-#line 1522 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1522 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
   case 67:
-#line 266 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 267 "/home/user/minijava-compiler/Parser/parser.y"
                            { yylhs.value.as < ptr<Number> > () = make_shared<Number>(-yystack_[0].value.as < int > ()); }
-#line 1528 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1528 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 
 
-#line 1532 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 1532 "/home/user/minijava-compiler/Parser/parser.cpp"
 
             default:
               break;
@@ -1799,28 +1799,28 @@ namespace yy {
   }
 
 
-  const signed char parser::yypact_ninf_ = -80;
+  const signed char parser::yypact_ninf_ = -118;
 
   const signed char parser::yytable_ninf_ = -42;
 
   const short
   parser::yypact_[] =
   {
-       7,   -26,    10,   -80,     6,   -80,   -21,   -80,    41,    -2,
-      49,     5,   -80,    53,    42,    12,    59,   -80,     8,   -80,
-     -80,   -80,   -80,   -80,   -80,   -80,    33,    55,   -80,   -80,
-      40,   123,    39,    67,    63,    48,   -80,    57,   -80,   -80,
-      83,     8,   -80,    87,    34,    56,    50,   -80,     8,    83,
-     -80,     8,    65,    70,   -80,   -80,    71,    72,   113,    58,
-     113,   -80,   -80,   -16,   -80,   113,   -80,   -80,   -80,   -80,
-      99,    92,   309,   -80,   -80,    76,   -80,   102,    89,   113,
-     113,   113,   113,   -80,   -80,    95,   -80,   179,   113,   141,
-     -80,   113,   113,   113,   113,   113,   113,   113,   113,   113,
-     113,   113,   113,   -12,   -80,   113,    90,   195,   211,   227,
-     243,   -80,   261,   -80,   163,   277,   315,   315,   315,   315,
-     315,    86,    86,    95,    95,    95,   -80,   103,   293,   -80,
-      93,    93,   124,   126,   -80,   -80,   -80,   113,   -80,   136,
-     -80,   -80,   -80,    35,   309,    93,   113,   -80,   -80,   309
+      15,   -20,     9,  -118,    21,  -118,    11,  -118,    49,    47,
+      58,    20,  -118,    66,    64,    13,    71,  -118,    -5,  -118,
+    -118,  -118,  -118,  -118,  -118,    68,  -118,    43,    67,  -118,
+    -118,    48,    45,    51,  -118,  -118,    79,    52,  -118,    65,
+    -118,    76,    -5,  -118,    89,  -118,   -12,    56,  -118,    -5,
+      76,    -5,   118,    69,    70,  -118,  -118,    75,    77,   118,
+      63,   118,  -118,  -118,   -19,  -118,  -118,  -118,  -118,   105,
+      97,   303,  -118,  -118,  -118,  -118,    92,    85,  -118,  -118,
+     135,   118,   118,   118,   118,    95,  -118,   173,   118,  -118,
+     118,   118,   118,   118,   118,   118,   118,   118,   118,   118,
+     118,   118,   -16,   118,    90,  -118,   189,   205,   221,   237,
+    -118,   255,   157,   271,   309,   309,   309,   309,   309,    91,
+      91,    95,    95,    95,  -118,    96,   287,  -118,    98,    98,
+     117,   119,  -118,  -118,  -118,   118,  -118,   127,  -118,  -118,
+    -118,    33,   303,    98,   118,  -118,  -118,   303
   };
 
   const signed char
@@ -1828,146 +1828,144 @@ namespace yy {
   {
        0,     0,     0,     2,     0,     1,     0,     3,     0,     0,
        0,     0,     7,     0,     0,     0,     0,     7,     0,    19,
-       5,    17,    18,    22,     8,     9,     0,    15,    16,    20,
-       0,     0,     0,     0,     0,     0,     6,     0,    11,    21,
-       0,    12,    23,     0,     0,     0,     0,     4,     0,     0,
-      13,     0,     0,     0,    43,    25,     0,     0,     0,     0,
-       0,    64,    65,    61,    66,     0,    36,    28,    24,    27,
-      44,     0,     0,    63,    62,     0,    10,     0,    20,     0,
-       0,     0,     0,    61,    44,    59,    67,     0,     0,     0,
-      35,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    14,     0,     0,     0,     0,     0,
-       0,    60,     0,    34,     0,     0,    45,    46,    47,    48,
-      49,    51,    50,    52,    53,    54,    56,     0,     0,    58,
-       0,     0,     0,     0,    42,    33,    55,    38,    57,    29,
-      31,    32,    26,     0,    39,     0,     0,    37,    30,    40
+       5,    17,    18,    22,     8,     0,     9,     0,    15,    16,
+      20,     0,     0,     0,    36,    11,     0,     0,     6,     0,
+      21,     0,    12,    23,     0,    13,     0,     0,     4,     0,
+       0,     0,     0,     0,     0,    43,    25,     0,     0,     0,
+       0,     0,    64,    65,    61,    66,    27,    28,    24,    44,
+       0,     0,    63,    62,    14,    10,     0,    20,    61,    44,
+       0,     0,     0,     0,     0,    59,    67,     0,     0,    35,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    34,     0,     0,     0,     0,
+      60,     0,     0,     0,    45,    46,    47,    48,    49,    51,
+      50,    52,    53,    54,    56,     0,     0,    58,     0,     0,
+       0,     0,    42,    33,    55,    38,    57,    29,    31,    32,
+      26,     0,    39,     0,     0,    37,    30,    40
   };
 
   const short
   parser::yypgoto_[] =
   {
-     -80,   -80,   -80,   -80,   130,   -80,   -13,   -80,    31,    97,
-     -80,    98,   -80,   -36,   -79,   -80,   -46,   -80,   -80,   -57,
-     -80,   -80
+    -118,  -118,  -118,  -118,   126,  -118,   -24,   -10,  -118,   128,
+      93,  -118,    99,  -118,   -35,  -117,   -47,  -118,  -118,   -51,
+    -118,  -118
   };
 
   const short
   parser::yydefgoto_[] =
   {
-      -1,     2,     3,     7,    15,    24,    66,    44,    26,    27,
-      28,    29,    46,    67,    68,    69,    84,   143,    71,    72,
-      73,    74
+      -1,     2,     3,     7,    15,    24,    25,    66,    46,    27,
+      28,    29,    30,    47,    67,    68,    79,   141,    70,    71,
+      72,    73
   };
 
   const short
   parser::yytable_[] =
   {
-      70,    85,    25,    87,    43,   126,    88,    11,    89,   -41,
-       5,     1,    12,    76,     6,    19,     4,    18,    25,    19,
-       8,     9,   107,   108,   109,   110,   -22,    20,    21,    22,
-     127,   112,    21,    22,   114,   115,   116,   117,   118,   119,
-     120,   121,   122,   123,   124,   125,    10,    14,   128,    32,
-      23,   139,   140,    51,    23,    13,    17,    19,    48,   146,
-      16,    52,    53,    54,    42,    55,   148,    30,    56,    57,
-      21,    22,    45,    49,   147,    33,    58,    34,    35,    75,
-     144,    37,    59,    38,    70,    70,    39,    40,    60,   149,
-      61,    62,    63,    64,    65,    41,    51,    42,    50,    70,
-      19,    86,    47,    79,    52,    53,    54,    42,    80,    81,
-      82,    56,    57,    21,    22,    90,    51,    91,   104,    58,
-     100,   101,   102,   103,   105,    59,    54,   106,    18,   129,
-      19,    60,   103,    61,    62,    63,    64,    65,    36,    58,
-     141,   137,   142,    21,    22,    59,   145,    31,    77,    78,
-       0,    60,     0,    61,    62,    83,    64,   113,     0,     0,
-       0,     0,     0,    92,     0,    23,     0,     0,    93,    94,
-      95,    96,    97,    98,    99,   100,   101,   102,   103,   135,
-       0,     0,     0,     0,     0,    92,     0,     0,     0,     0,
+      69,    80,   124,    19,    88,    26,    44,   -41,    85,     5,
+      87,   137,   138,    49,     6,    75,    21,    22,    45,    18,
+       1,    19,    26,     4,   -22,    74,   146,   125,    50,    20,
+     106,   107,   108,   109,    21,    22,     8,   111,    23,   112,
+     113,   114,   115,   116,   117,   118,   119,   120,   121,   122,
+     123,    18,   126,    19,     9,    10,    23,    11,   144,    51,
+      52,    38,    12,    14,    19,    13,    21,    22,    53,    54,
+      55,    43,    56,   145,    16,    57,    58,    21,    22,    17,
+      31,    69,    69,    59,   142,    34,    35,    37,    23,    60,
+      36,    43,    41,   147,    39,    61,    69,    62,    63,    64,
+      65,    51,    52,    40,    42,    48,    19,    86,    81,    82,
+      53,    54,    55,    43,    83,   103,    84,    57,    58,    21,
+      22,    51,    89,    90,   104,    59,    99,   100,   101,   102,
+     127,    60,    55,   102,   139,   135,   140,    61,   143,    62,
+      63,    64,    65,    32,    76,    59,    33,     0,     0,     0,
+      77,    60,   105,     0,     0,     0,     0,    61,    91,    62,
+      63,    78,    65,    92,    93,    94,    95,    96,    97,    98,
+      99,   100,   101,   102,   133,     0,     0,     0,     0,     0,
+      91,     0,     0,     0,     0,    92,    93,    94,    95,    96,
+      97,    98,    99,   100,   101,   102,    91,     0,     0,     0,
+       0,    92,    93,    94,    95,    96,    97,    98,    99,   100,
+     101,   102,    91,   110,     0,     0,     0,    92,    93,    94,
+      95,    96,    97,    98,    99,   100,   101,   102,    91,   128,
+       0,     0,     0,    92,    93,    94,    95,    96,    97,    98,
+      99,   100,   101,   102,    91,   129,     0,     0,     0,    92,
       93,    94,    95,    96,    97,    98,    99,   100,   101,   102,
-     103,    92,     0,     0,     0,     0,    93,    94,    95,    96,
-      97,    98,    99,   100,   101,   102,   103,    92,   111,     0,
-       0,     0,    93,    94,    95,    96,    97,    98,    99,   100,
-     101,   102,   103,    92,   130,     0,     0,     0,    93,    94,
-      95,    96,    97,    98,    99,   100,   101,   102,   103,    92,
-     131,     0,     0,     0,    93,    94,    95,    96,    97,    98,
-      99,   100,   101,   102,   103,    92,   132,     0,     0,     0,
+      91,   130,     0,     0,     0,    92,    93,    94,    95,    96,
+      97,    98,    99,   100,   101,   102,     0,   131,    91,   132,
+       0,     0,     0,    92,    93,    94,    95,    96,    97,    98,
+      99,   100,   101,   102,    91,   134,     0,     0,     0,    92,
       93,    94,    95,    96,    97,    98,    99,   100,   101,   102,
-     103,     0,   133,    92,   134,     0,     0,     0,    93,    94,
-      95,    96,    97,    98,    99,   100,   101,   102,   103,    92,
-     136,     0,     0,     0,    93,    94,    95,    96,    97,    98,
-      99,   100,   101,   102,   103,    92,   138,     0,     0,     0,
-      93,    94,    95,    96,    97,    98,    99,   100,   101,   102,
-     103,    92,     0,     0,     0,     0,    93,    94,    95,    96,
-      97,    98,    99,   100,   101,   102,   103,    98,    99,   100,
-     101,   102,   103
+      91,   136,     0,     0,     0,    92,    93,    94,    95,    96,
+      97,    98,    99,   100,   101,   102,    91,     0,     0,     0,
+       0,    92,    93,    94,    95,    96,    97,    98,    99,   100,
+     101,   102,    97,    98,    99,   100,   101,   102
   };
 
   const short
   parser::yycheck_[] =
   {
-      46,    58,    15,    60,    40,    17,    22,     9,    65,    25,
-       0,     4,    14,    49,     4,     7,    42,     5,    31,     7,
-      14,    42,    79,    80,    81,    82,    42,    15,    20,    21,
-      42,    88,    20,    21,    91,    92,    93,    94,    95,    96,
-      97,    98,    99,   100,   101,   102,     5,    42,   105,    18,
-      42,   130,   131,     3,    42,     6,    14,     7,    24,    24,
-       7,    11,    12,    13,    14,    15,   145,     8,    18,    19,
-      20,    21,    41,    39,    39,    42,    26,    22,    38,    48,
-     137,    42,    32,    16,   130,   131,    23,    39,    38,   146,
-      40,    41,    42,    43,    44,    38,     3,    14,    42,   145,
-       7,    43,    15,    38,    11,    12,    13,    14,    38,    38,
-      38,    18,    19,    20,    21,    16,     3,    25,    42,    26,
-      34,    35,    36,    37,    22,    32,    13,    38,     5,    39,
-       7,    38,    37,    40,    41,    42,    43,    44,    15,    26,
-      16,    38,    16,    20,    21,    32,    10,    17,    51,    51,
-      -1,    38,    -1,    40,    41,    42,    43,    16,    -1,    -1,
-      -1,    -1,    -1,    22,    -1,    42,    -1,    -1,    27,    28,
-      29,    30,    31,    32,    33,    34,    35,    36,    37,    16,
-      -1,    -1,    -1,    -1,    -1,    22,    -1,    -1,    -1,    -1,
-      27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
-      37,    22,    -1,    -1,    -1,    -1,    27,    28,    29,    30,
-      31,    32,    33,    34,    35,    36,    37,    22,    39,    -1,
-      -1,    -1,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    22,    39,    -1,    -1,    -1,    27,    28,
-      29,    30,    31,    32,    33,    34,    35,    36,    37,    22,
-      39,    -1,    -1,    -1,    27,    28,    29,    30,    31,    32,
-      33,    34,    35,    36,    37,    22,    39,    -1,    -1,    -1,
-      27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
-      37,    -1,    39,    22,    23,    -1,    -1,    -1,    27,    28,
-      29,    30,    31,    32,    33,    34,    35,    36,    37,    22,
-      23,    -1,    -1,    -1,    27,    28,    29,    30,    31,    32,
-      33,    34,    35,    36,    37,    22,    23,    -1,    -1,    -1,
-      27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
-      37,    22,    -1,    -1,    -1,    -1,    27,    28,    29,    30,
-      31,    32,    33,    34,    35,    36,    37,    32,    33,    34,
-      35,    36,    37
+      47,    52,    18,     8,    23,    15,    41,    26,    59,     0,
+      61,   128,   129,    25,     5,    50,    21,    22,    42,     6,
+       5,     8,    32,    43,    43,    49,   143,    43,    40,    16,
+      81,    82,    83,    84,    21,    22,    15,    88,    43,    90,
+      91,    92,    93,    94,    95,    96,    97,    98,    99,   100,
+     101,     6,   103,     8,    43,     6,    43,    10,    25,     3,
+       4,    16,    15,    43,     8,     7,    21,    22,    12,    13,
+      14,    15,    16,    40,     8,    19,    20,    21,    22,    15,
+       9,   128,   129,    27,   135,    17,    43,    39,    43,    33,
+      23,    15,    40,   144,    43,    39,   143,    41,    42,    43,
+      44,     3,     4,    24,    39,    16,     8,    44,    39,    39,
+      12,    13,    14,    15,    39,    23,    39,    19,    20,    21,
+      22,     3,    17,    26,    39,    27,    35,    36,    37,    38,
+      40,    33,    14,    38,    17,    39,    17,    39,    11,    41,
+      42,    43,    44,    17,    51,    27,    18,    -1,    -1,    -1,
+      51,    33,    17,    -1,    -1,    -1,    -1,    39,    23,    41,
+      42,    43,    44,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    17,    -1,    -1,    -1,    -1,    -1,
+      23,    -1,    -1,    -1,    -1,    28,    29,    30,    31,    32,
+      33,    34,    35,    36,    37,    38,    23,    -1,    -1,    -1,
+      -1,    28,    29,    30,    31,    32,    33,    34,    35,    36,
+      37,    38,    23,    40,    -1,    -1,    -1,    28,    29,    30,
+      31,    32,    33,    34,    35,    36,    37,    38,    23,    40,
+      -1,    -1,    -1,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    23,    40,    -1,    -1,    -1,    28,
+      29,    30,    31,    32,    33,    34,    35,    36,    37,    38,
+      23,    40,    -1,    -1,    -1,    28,    29,    30,    31,    32,
+      33,    34,    35,    36,    37,    38,    -1,    40,    23,    24,
+      -1,    -1,    -1,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    23,    24,    -1,    -1,    -1,    28,
+      29,    30,    31,    32,    33,    34,    35,    36,    37,    38,
+      23,    24,    -1,    -1,    -1,    28,    29,    30,    31,    32,
+      33,    34,    35,    36,    37,    38,    23,    -1,    -1,    -1,
+      -1,    28,    29,    30,    31,    32,    33,    34,    35,    36,
+      37,    38,    33,    34,    35,    36,    37,    38
   };
 
   const signed char
   parser::yystos_[] =
   {
-       0,     4,    46,    47,    42,     0,     4,    48,    14,    42,
-       5,     9,    14,     6,    42,    49,     7,    14,     5,     7,
-      15,    20,    21,    42,    50,    51,    53,    54,    55,    56,
-       8,    49,    53,    42,    22,    38,    15,    42,    16,    23,
-      39,    38,    14,    58,    52,    53,    57,    15,    24,    39,
-      42,     3,    11,    12,    13,    15,    18,    19,    26,    32,
-      38,    40,    41,    42,    43,    44,    51,    58,    59,    60,
-      61,    63,    64,    65,    66,    53,    58,    54,    56,    38,
-      38,    38,    38,    42,    61,    64,    43,    64,    22,    64,
-      16,    25,    22,    27,    28,    29,    30,    31,    32,    33,
-      34,    35,    36,    37,    42,    22,    38,    64,    64,    64,
-      64,    39,    64,    16,    64,    64,    64,    64,    64,    64,
-      64,    64,    64,    64,    64,    64,    17,    42,    64,    39,
-      39,    39,    39,    39,    23,    16,    23,    38,    23,    59,
-      59,    16,    16,    62,    64,    10,    24,    39,    59,    64
+       0,     5,    46,    47,    43,     0,     5,    48,    15,    43,
+       6,    10,    15,     7,    43,    49,     8,    15,     6,     8,
+      16,    21,    22,    43,    50,    51,    52,    54,    55,    56,
+      57,     9,    49,    54,    17,    43,    23,    39,    16,    43,
+      24,    40,    39,    15,    59,    51,    53,    58,    16,    25,
+      40,     3,     4,    12,    13,    14,    16,    19,    20,    27,
+      33,    39,    41,    42,    43,    44,    52,    59,    60,    61,
+      63,    64,    65,    66,    51,    59,    55,    57,    43,    61,
+      64,    39,    39,    39,    39,    64,    44,    64,    23,    17,
+      26,    23,    28,    29,    30,    31,    32,    33,    34,    35,
+      36,    37,    38,    23,    39,    17,    64,    64,    64,    64,
+      40,    64,    64,    64,    64,    64,    64,    64,    64,    64,
+      64,    64,    64,    64,    18,    43,    64,    40,    40,    40,
+      40,    40,    24,    17,    24,    39,    24,    60,    60,    17,
+      17,    62,    64,    11,    25,    40,    60,    64
   };
 
   const signed char
   parser::yyr1_[] =
   {
        0,    45,    46,    46,    47,    48,    48,    49,    49,    49,
-      50,    51,    52,    52,    52,    53,    53,    54,    54,    54,
-      54,    55,    56,    57,    57,    58,    59,    59,    59,    59,
-      59,    59,    59,    59,    59,    59,    60,    61,    62,    62,
+      50,    51,    53,    53,    53,    54,    54,    55,    55,    55,
+      55,    56,    57,    58,    58,    59,    60,    60,    60,    60,
+      60,    60,    60,    60,    60,    60,    52,    61,    62,    62,
       62,    63,    63,    64,    64,    64,    64,    64,    64,    64,
       64,    64,    64,    64,    64,    64,    64,    64,    64,    64,
       64,    64,    64,    64,    65,    65,    66,    66
@@ -1977,9 +1975,9 @@ namespace yy {
   parser::yyr2_[] =
   {
        0,     2,     1,     2,    11,     5,     7,     0,     2,     2,
-       7,     3,     0,     2,     4,     1,     1,     1,     1,     1,
+       7,     2,     0,     1,     3,     1,     1,     1,     1,     1,
        1,     3,     1,     0,     2,     3,     5,     1,     1,     5,
-       7,     5,     5,     4,     3,     2,     1,     6,     0,     1,
+       7,     5,     5,     4,     3,     2,     2,     6,     0,     1,
        3,     1,     4,     1,     1,     3,     3,     3,     3,     3,
        3,     3,     3,     3,     3,     4,     3,     5,     4,     2,
        3,     1,     1,     1,     1,     1,     1,     2
@@ -1992,32 +1990,32 @@ namespace yy {
   const char*
   const parser::yytname_[] =
   {
-  "\"end of file\"", "error", "$undefined", "\"new\"", "\"class\"",
-  "\"public\"", "\"static\"", "\"void\"", "\"main\"", "\"extends\"",
-  "\"else\"", "\"if\"", "\"while\"", "\"this\"", "\"{\"", "\"}\"", "\";\"",
-  "\"length\"", "\"System.out.println\"", "\"assert\"", "\"int\"",
-  "\"boolean\"", "\"[\"", "\"]\"", "\",\"", "\"=\"", "\"!\"", "\"&&\"",
-  "\"||\"", "\"<\"", "\">\"", "\"==\"", "\"-\"", "\"+\"", "\"*\"", "\"/\"",
-  "\"%\"", "\".\"", "\"(\"", "\")\"", "\"true\"", "\"false\"",
-  "\"identifier\"", "\"number\"", "\"return\"", "$accept", "Program",
+  "\"end of file\"", "error", "$undefined", "\"new\"", "\"return\"",
+  "\"class\"", "\"public\"", "\"static\"", "\"void\"", "\"main\"",
+  "\"extends\"", "\"else\"", "\"if\"", "\"while\"", "\"this\"", "\"{\"",
+  "\"}\"", "\";\"", "\"length\"", "\"System.out.println\"", "\"assert\"",
+  "\"int\"", "\"boolean\"", "\"[\"", "\"]\"", "\",\"", "\"=\"", "\"!\"",
+  "\"&&\"", "\"||\"", "\"<\"", "\">\"", "\"==\"", "\"-\"", "\"+\"",
+  "\"*\"", "\"/\"", "\"%\"", "\".\"", "\"(\"", "\")\"", "\"true\"",
+  "\"false\"", "\"identifier\"", "\"number\"", "$accept", "Program",
   "MainClassDeclaration", "ClassDeclaration", "ClassMembers",
-  "MethodDeclaration", "VarDeclaration", "Formals", "Type", "SimpleType",
-  "ArrayType", "TypeId", "Statements", "Scope", "Statement",
-  "LocalVarDeclaration", "MethodInvocation", "MethodArgs", "Lvalue",
-  "Expression", "BooleanLiteral", "SignedNumber", YY_NULLPTR
+  "MethodDeclaration", "VarDeclaration", "VarDeclarationStmt", "Formals",
+  "Type", "SimpleType", "ArrayType", "TypeId", "Statements", "Scope",
+  "Statement", "MethodInvocation", "MethodArgs", "Lvalue", "Expression",
+  "BooleanLiteral", "SignedNumber", YY_NULLPTR
   };
 
 #if YYDEBUG
   const short
   parser::yyrline_[] =
   {
-       0,   124,   124,   128,   134,   145,   148,   153,   154,   158,
-     164,   169,   171,   172,   173,   179,   180,   183,   184,   185,
-     186,   189,   195,   198,   199,   205,   208,   209,   210,   211,
-     212,   213,   214,   215,   216,   217,   220,   223,   226,   227,
-     228,   234,   235,   238,   239,   240,   241,   242,   243,   244,
-     245,   246,   247,   248,   249,   250,   251,   252,   253,   254,
-     255,   256,   257,   258,   261,   262,   265,   266
+       0,   125,   125,   129,   135,   146,   149,   154,   155,   159,
+     165,   170,   172,   173,   174,   180,   181,   184,   185,   186,
+     187,   190,   196,   199,   200,   206,   209,   210,   211,   212,
+     213,   214,   215,   216,   217,   218,   221,   224,   227,   228,
+     229,   235,   236,   239,   240,   241,   242,   243,   244,   245,
+     246,   247,   248,   249,   250,   251,   252,   253,   254,   255,
+     256,   257,   258,   259,   262,   263,   266,   267
   };
 
   // Print the state stack on the debug stream.
@@ -2051,9 +2049,9 @@ namespace yy {
 
 
 } // yy
-#line 2055 "/home/user/cxx-minijava-compiler/Parser/parser.cpp"
+#line 2053 "/home/user/minijava-compiler/Parser/parser.cpp"
 
-#line 269 "/home/user/cxx-minijava-compiler/Parser/parser.y"
+#line 270 "/home/user/minijava-compiler/Parser/parser.y"
 
 
 void

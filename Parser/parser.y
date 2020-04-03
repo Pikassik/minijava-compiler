@@ -43,6 +43,7 @@
 %token
     END 0 "end of file"
     NEW "new"
+    RETURN "return"
     CLASS "class"
     PUBLIC "public"
     STATIC "static"
@@ -91,7 +92,8 @@
 %nterm <pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarDeclaration>>>> ClassMembers
 %nterm <ptr<MethodDeclaration>> MethodDeclaration
 %nterm <ptr<VarDeclaration>> VarDeclaration
-%nterm <vector<ptr<Formal>>> Formals
+%nterm <ptr<VarDeclaration>> VarDeclarationStmt
+%nterm <vector<ptr<VarDeclaration>>> Formals
 %nterm <ptr<Type>> Type
 %nterm <ptr<Type>> SimpleType
 %nterm <ptr<Type>> ArrayType
@@ -99,7 +101,6 @@
 %nterm <vector<ptr<Statement>>> Statements
 %nterm <ptr<Scope>> Scope
 %nterm <ptr<Statement>> Statement
-%nterm <ptr<VarDeclaration>> LocalVarDeclaration
 %nterm <ptr<MethodInvocation>> MethodInvocation
 %nterm <vector<ptr<Expression>>> MethodArgs
 %nterm <ptr<Lvalue>> Lvalue
@@ -135,7 +136,7 @@ MainClassDeclaration: "class" "identifier" "{" "public" "static" "void" "main" "
   $$ = make_shared<Class>(
     $2,
     vector<ptr<MethodDeclaration>>(
-      {make_shared<MethodDeclaration>(make_shared<Type>("void"), "main", vector<ptr<Formal>>(), $10)}
+      {make_shared<MethodDeclaration>(make_shared<Type>("void"), "main", vector<ptr<VarDeclaration>>(), $10)}
     ),
     vector<ptr<VarDeclaration>>()
   );
@@ -155,7 +156,7 @@ ClassMembers: %empty { $$ = pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarD
   $1.first.push_back($2);  // methods.push
   $$ = move($1);
 }
-            | ClassMembers VarDeclaration {
+            | ClassMembers VarDeclarationStmt {
   $1.second.push_back($2); // fields.push
   $$ = move($1);
 }
@@ -166,12 +167,12 @@ MethodDeclaration: "public" Type "identifier" "(" Formals ")" Scope {
 }
 ;
 
-VarDeclaration: Type "identifier" ";" { $$ = make_shared<VarDeclaration>($1, $2); }
+VarDeclaration: Type "identifier" { $$ = make_shared<VarDeclaration>($1, $2); }
 
-Formals: %empty { $$ = vector<ptr<Formal>>(); }
-       | Type "identifier" { $$.push_back(make_shared<Formal>($1, $2)); }
-       | Formals "," Type "identifier" {
-  $1.push_back(make_shared<Formal>($3, $4));
+Formals: %empty { $$ = vector<ptr<VarDeclaration>>(); }
+       | VarDeclaration { $$ = vector<ptr<VarDeclaration>>{$1}; }
+       | Formals "," VarDeclaration {
+  $1.push_back($3);
   $$ = move($1);
 }
 ;
@@ -206,7 +207,7 @@ Scope: "{" Statements "}" { $$ = make_shared<Scope>($2); }
 ;
 
 Statement: "assert" "(" Expression ")" ";" { $$ = make_shared<Assert>($3); }
-         | LocalVarDeclaration { $$ = $1; }
+         | VarDeclarationStmt { $$ = $1; }
          | Scope { $$ = $1; }
          | "if" "(" Expression ")" Statement { $$ = make_shared<If>($3, $5); }
          | "if" "(" Expression ")" Statement "else" Statement { $$ = make_shared<If>($3, $5, $7); }
@@ -217,7 +218,7 @@ Statement: "assert" "(" Expression ")" ";" { $$ = make_shared<Assert>($3); }
          | MethodInvocation ";" { $$ = $1; }
 ;
 
-LocalVarDeclaration: VarDeclaration { $$ = $1; }
+VarDeclarationStmt: VarDeclaration ";" { $$ = $1; }
 ;
 
 MethodInvocation: Expression "." "identifier" "(" MethodArgs ")" { $$ = make_shared<MethodInvocation>($1, $3, $5); }

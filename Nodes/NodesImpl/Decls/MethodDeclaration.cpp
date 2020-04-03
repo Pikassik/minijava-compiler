@@ -5,7 +5,7 @@ namespace node {
 MethodDeclaration::
 MethodDeclaration(std::shared_ptr<Type> type,
                   std::string identifier,
-                  std::vector<std::shared_ptr<Formal>> formals,
+                  std::vector<std::shared_ptr<VarDeclaration>> formals,
                   std::shared_ptr<Scope> scope)
 : type(std::move(type))
 , identifier(std::move(identifier))
