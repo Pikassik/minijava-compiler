@@ -2,7 +2,7 @@
 #include <Parser/parser.hh>
 #include <Visitors/Dumper.h>
 #include <Visitors/Interpreter.h>
-#include <Visitors/SymbolTables/SymbolTableBuilder.h>
+#include <SymbolTables/SymbolTableBuilder.h>
 #include <Visitors/Typer.h>
 
 #include <sys/types.h>

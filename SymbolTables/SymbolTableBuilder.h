@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Visitor.h"
+#include <Visitors/Visitor.h>
 #include "ProgramTable.h"
 #include "ScopeTable.h"
 #include "ClassTable.h"

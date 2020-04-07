@@ -1,4 +1,4 @@
-#include "../ClassTable.h"
+#include "SymbolTables/ClassTable.h"
 
 size_t ClassTable::GetFieldOffset(const std::string& symbol) const {
   return field_offsets_.at(symbol);

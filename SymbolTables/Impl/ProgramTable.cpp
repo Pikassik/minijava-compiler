@@ -1,4 +1,4 @@
-#include <Visitors/SymbolTables/ProgramTable.h>
+#include <SymbolTables/ProgramTable.h>
 
 std::shared_ptr<ClassTable>
 ProgramTable::GetClass(const std::string& symbol) const {

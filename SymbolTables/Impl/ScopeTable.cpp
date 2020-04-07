@@ -1,4 +1,4 @@
-#include "../ScopeTable.h"
+#include "SymbolTables/ScopeTable.h"
 
 #include <cassert>
 

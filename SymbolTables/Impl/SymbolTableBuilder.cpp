@@ -1,12 +1,84 @@
-#include <Visitors/SymbolTables/SymbolTableBuilder.h>
+#include <SymbolTables/SymbolTableBuilder.h>
 
 #include <cassert>
+#include <queue>
 
 #define pass throw std::runtime_error("impossible state")
 
+namespace {
+
+enum class Color {
+  White = 0,       // not visited
+  Grey,            // in call stack
+  Black            // visited
+};
+
+void RecDfs(size_t ind,
+            std::vector<size_t>& sorted,
+            std::vector<enum Color>& color,
+            const node::Program& program,
+            const std::unordered_map<std::string_view, size_t>& indexes) {
+  color[ind] = Color::Grey;
+
+  if (!program.classes[ind]->base.empty()) {
+    switch (size_t parent_ind = indexes.at(program.classes[ind]->base);
+            color[parent_ind]) {
+      case Color::White: {
+        RecDfs(parent_ind, sorted, color, program, indexes);
+        break;
+      }
+      case Color::Grey: {
+        throw std::runtime_error("cyclic inheritance found");
+      }
+      case Color::Black: {
+        break;
+      }
+      default: assert(false);
+    }
+  }
+
+  color[ind] = Color::Black;
+  sorted.push_back(ind);
+}
+
+void ClassInheritanceTopSort(node::Program& program) {
+  std::unordered_map<std::string_view, size_t> indexes;
+  for (size_t i = 0; i < program.classes.size(); ++i) {
+    if (indexes.find(program.classes[i]->identifier) !=
+        indexes.end()) {
+      throw std::runtime_error("redefiniton of class: " +
+                               program.classes[i]->identifier);
+    }
+
+    indexes[program.classes[i]->identifier] = i;
+  }
+
+  std::vector<size_t> sorted;
+  sorted.reserve(program.classes.size());
+  std::vector<enum Color> color(program.classes.size(), Color::White);
+  RecDfs(0, sorted, color, program, indexes);
+
+  assert(sorted.size() == program.classes.size());
+
+  std::vector<std::shared_ptr<node::Class>> sorted_classes;
+  sorted.resize(program.classes.size());
+
+
+  for (size_t i = 0; i < sorted.size(); ++i) {
+    sorted_classes[i] = std::move(program.classes[sorted[i]]);
+  }
+
+  program.classes = std::move(sorted_classes);
+}
+
+}
+
 std::shared_ptr<ProgramTable> MakeProgramTable(node::Program& node) {
+  ClassInheritanceTopSort(node);
+
   SymbolTableBuilder builder;
   node.Accept(builder);
+
   return builder.program_table_;
 }
 
@@ -20,7 +92,7 @@ void SymbolTableBuilder::Visit(node::Class& node) {
   for (size_t i = 0; i < node.fields.size(); ++i) {
     const auto& id = node.fields[i]->identifier;
     if (current_class_->HasField(id)) {
-      throw std::runtime_error("redefinition on field: " + id);
+      throw std::runtime_error("redefinition of field: " + id);
     }
     current_class_->PutField(id, node.fields[i], i);
   }
@@ -28,7 +100,7 @@ void SymbolTableBuilder::Visit(node::Class& node) {
   for (auto&& method: node.methods) {
     const auto& id = method->identifier;
     if (current_class_->HasMethod(id)) {
-      throw std::runtime_error("redefinition on method: " + id);
+      throw std::runtime_error("redefinition of method: " + id);
     }
 
     method->Accept(*this);
