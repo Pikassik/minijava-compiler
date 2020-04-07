@@ -11,24 +11,27 @@
 
 class Driver {
  public:
-    Driver();
-    std::map<std::string, int> variables;
-    std::shared_ptr<node::Program> program;
-    int parse(const std::string& f);
-    std::string file;
-    bool trace_parsing;
-    bool dump;
+  Driver();
+  std::map<std::string, int> variables;
+  std::shared_ptr<node::Program> program;
+  int Drive(const std::string& f);
+  std::string file;
+  bool trace_parsing;
+  bool dump;
 
-    void scan_begin();
-    void scan_end();
+  void SetTraceParsing(bool flag);
+  void SetDump(bool flag);
+  void scan_begin();
+  void scan_end();
 
-    bool trace_scanning;
-    yy::location location;
+  bool trace_scanning;
+  yy::location location;
 
-    friend class Scanner;
-    Scanner scanner;
-    yy::parser parser;
+  friend class Scanner;
+  Scanner scanner;
+  yy::parser parser;
  private:
-    std::ifstream stream;
+  void PrintDump();
 
+  std::ifstream stream;
 };

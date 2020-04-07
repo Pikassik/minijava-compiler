@@ -7,13 +7,13 @@ class Factorial {
 class Fac {
   public int ComputeFac (int num) {
     assert (num > -1);
-    num_aux = 5;
     int num_aux;
+    num_aux = 5;
 
     if (num == 0)
       num_aux = 1;
     else 
-      num_aux = num * this.ComputeFac (num-1);
+      num_aux = num * this.ComputeFac (this);
     return num_aux;
   }
 }

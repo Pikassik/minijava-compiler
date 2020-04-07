@@ -4,23 +4,24 @@
 #include <cassert>
 
 int main(int argc, char** argv) {
-  assert(1);
-
-  int result = 0;
   Driver driver;
 
   for (int i = 1; i < argc; ++i) {
     if (argv[i] == std::string_view("-t")) {
-      // trace
-      driver.trace_parsing = true;
-    } else if (argv[i] == std::string_view("-d")) {
-      // dump
-      driver.dump = true;
-    } else {
-      driver.parse(argv[i]);
-      break;
+      driver.SetTraceParsing(true);
+    }
+
+    if (argv[i] == std::string_view("-d")) {
+      driver.SetDump(true);
     }
   }
 
-  return result;
+  for (int i = 1; i < argc; ++i) {
+    if (!(std::string_view(argv[i]) == std::string_view("-t") ||
+          std::string_view(argv[i]) == std::string("-d"))) {
+      return driver.Drive(argv[i]);
+    }
+  }
+
+  return 1;
 }

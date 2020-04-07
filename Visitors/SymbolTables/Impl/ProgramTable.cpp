@@ -1,8 +1,8 @@
 #include <Visitors/SymbolTables/ProgramTable.h>
 
 std::shared_ptr<ClassTable>
-ProgramTable::GetClass(const std::string& symbol) {
-  return classes_[symbol];
+ProgramTable::GetClass(const std::string& symbol) const {
+  return classes_.at(symbol);
 }
 
 bool ProgramTable::HasClass(const std::string& symbol) const {

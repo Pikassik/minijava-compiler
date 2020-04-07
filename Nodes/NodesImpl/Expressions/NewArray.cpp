@@ -4,7 +4,7 @@ namespace node {
 
 NewArray::NewArray(std::shared_ptr<Type> type,
                    std::shared_ptr<Expression> size_expression)
-: type(std::move(type))
+: Expression(std::move(type))
 , size_expression(std::move(size_expression))
 {}
 

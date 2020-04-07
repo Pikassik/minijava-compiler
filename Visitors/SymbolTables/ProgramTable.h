@@ -5,7 +5,7 @@
 class ProgramTable {
  public:
 
-  std::shared_ptr<ClassTable> GetClass(const std::string& symbol);
+  std::shared_ptr<ClassTable> GetClass(const std::string& symbol) const;
 
   bool HasClass(const std::string& symbol) const;
 

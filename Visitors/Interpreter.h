@@ -4,7 +4,6 @@
 
 #include <unordered_map>
 
-
 void Interpret(node::Program& program);
 
 namespace interpreter {
@@ -56,8 +55,6 @@ class Interpreter : public AcceptRetType<int> {
   void Throw(const std::string& error);
 
   std::string last_identifier_;
-//  int* int_to_assign_ = nullptr;
-//  bool set_int_to_assign_ = false;
   bool new_array_expr = false;
 
   bool HasVariable(const std::string& identifier);
