@@ -38,6 +38,7 @@ void ClassTable::PutField(const std::string& symbol,
                           std::shared_ptr<node::VarDeclaration> field,
                           size_t offset) {
   fields_[symbol] = std::move(field);
+  field_offsets_[symbol] = offset;
 }
 
 void ClassTable::PutMethod(const std::string& symbol,

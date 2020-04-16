@@ -61,12 +61,15 @@ class Typer : Visitor {
   bool IsBoolean(const std::shared_ptr<node::Type>& type) const;
   bool IsDeclaredType(const std::shared_ptr<node::Type>& type) const;
 
-  void AssertIsEqualTypes(const std::shared_ptr<node::Type>& lhvalue,
+  static std::string DumpType(const std::shared_ptr<node::Type>& type);
+
+  void AssertIsEqualTypes(node::Node& node,
+                          const std::shared_ptr<node::Type>& lhvalue,
                           const std::shared_ptr<node::Type>& rhvalue) const;
-  void AssertIsArray(const std::shared_ptr<node::Type>& type) const;
-  void AssertIsInt(const std::shared_ptr<node::Type>& type) const;
-  void AssertIsBoolean(const std::shared_ptr<node::Type>& type) const;
-  void AssertIsDeclaredType(const std::shared_ptr<node::Type>& type) const;
+  void AssertIsArray(node::Node& node, const std::shared_ptr<node::Type>& type) const;
+  void AssertIsInt(node::Node& node, const std::shared_ptr<node::Type>& type) const;
+  void AssertIsBoolean(node::Node& node, const std::shared_ptr<node::Type>& type) const;
+  void AssertIsDeclaredType(node::Node& node, const std::shared_ptr<node::Type>& type) const;
 
   std::shared_ptr<ProgramTable> program_table_;
   std::shared_ptr<ClassTable> current_class_;

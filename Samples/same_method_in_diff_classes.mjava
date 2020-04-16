@@ -1,0 +1,13 @@
+class SameMethodInDiffClasses {
+  public static void main() {
+    System.out.println(200);
+  }
+}
+
+class Class0 {
+  public int Foo() {}
+}
+
+class Class1 {
+  public int Foo() {}
+}

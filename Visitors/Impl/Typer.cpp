@@ -1,7 +1,7 @@
 #include "../Typer.h"
 
+#include <Exception/LocalizedError.h>
 #include <Nodes/Nodes.h>
-#include <iostream>
 
 #define pass throw std::runtime_error("impossible state")
 
@@ -24,9 +24,11 @@ void Typer::Visit(node::Class& node) {
   current_class_node_ =
       std::dynamic_pointer_cast<node::Class>(node.shared_from_this());
 
+  scopes_sizes_.push_back(0);
   for (auto&& field: node.fields) {
     field->Accept(*this);
   }
+  scopes_sizes_.pop_back();
 
   for (auto&& method: node.methods) {
     method->Accept(*this);
@@ -39,7 +41,7 @@ void Typer::Visit(node::Formal&) {
 
 void Typer::Visit(node::MethodDeclaration& node) {
   if (node.type->identifier != "void") {
-    AssertIsDeclaredType(node.type);
+    AssertIsDeclaredType(node, node.type);
   }
 
   current_method_node =
@@ -65,7 +67,7 @@ void Typer::Visit(node::Type&) {
 }
 
 void Typer::Visit(node::VarDeclaration& node) {
-  AssertIsDeclaredType(node.type);
+  AssertIsDeclaredType(node, node.type);
 
   ++scopes_sizes_.back();
 }
@@ -84,8 +86,10 @@ void Typer::Visit(node::At& node) {
   node.array->Accept(*this);
   node.index->Accept(*this);
 
-  AssertIsArray(node.array->type);
-  AssertIsInt(node.index->type);
+  AssertIsArray(node, node.array->type);
+  AssertIsInt(node, node.index->type);
+
+  node.type = std::make_shared<node::Type>(node.array->type->identifier);
 }
 
 void Typer::Visit(node::BooleanLiteral& node) {
@@ -103,12 +107,17 @@ void Typer::Visit(node::Equals& node) {
 }
 
 void Typer::Visit(node::Identifier& node) {
-  node.type = scopes_.top()->GetNode(node.identifier, scopes_sizes_)->type;
+  auto type =
+      scopes_.top()->HasVariable(node.identifier, scopes_sizes_) ?
+      scopes_.top()->GetNode(node.identifier, scopes_sizes_)->type :
+      current_class_->GetFieldNode(node.identifier)->type;
+
+  node.type = type;
 }
 
 void Typer::Visit(node::Length& node) {
   node.array_expression->Accept(*this);
-  AssertIsArray(node.array_expression->type);
+  AssertIsArray(node, node.array_expression->type);
   node.type = int_type_;
 }
 
@@ -124,22 +133,24 @@ void Typer::Visit(node::MethodInvocation& node) {
       program_table_->GetClass(node.class_expression->type->identifier);
 
   if (!class_table_->HasMethod(node.method_identifier)) {
-    throw std::runtime_error("calling undefined method: " +
+    throw MakeLocalizedError(node,
+                             "calling undefined method: " +
                              node.method_identifier);
   }
 
   auto method = class_table_->GetMethodNode(node.method_identifier);
 
   if (method->formals.size() != node.arguments.size()) {
-    throw std::runtime_error("invalid argument count in calling " +
-                              method->identifier + " method, expected " +
-                              std::to_string(method->formals.size()) +
-                              ", got " + std::to_string(node.arguments.size()));
+    throw MakeLocalizedError(node,
+                             "invalid argument count in calling " +
+                             method->identifier + " method, expected " +
+                             std::to_string(method->formals.size()) +
+                             ", got " + std::to_string(node.arguments.size()));
   }
 
   for (size_t i = 0; i < method->formals.size(); ++i) {
     node.arguments[i]->Accept(*this);
-    AssertIsEqualTypes(node.arguments[i]->type, method->formals[i]->type);
+    AssertIsEqualTypes(node, node.arguments[i]->type, method->formals[i]->type);
   }
 
   node.type = method->type;
@@ -156,16 +167,16 @@ void Typer::Visit(node::Mul& node) {
 }
 
 void Typer::Visit(node::New& node) {
-  AssertIsDeclaredType(node.type);
+  AssertIsDeclaredType(node, node.type);
 }
 
 void Typer::Visit(node::NewArray& node) {
   node.size_expression->Accept(*this);
-  AssertIsDeclaredType(node.type);
+  AssertIsDeclaredType(node, node.type);
 }
 
 void Typer::Visit(node::Not& node) {
-  AssertIsBoolean(node.argument->type);
+  AssertIsBoolean(node, node.argument->type);
   node.type = boolean_type_;
 }
 
@@ -198,15 +209,29 @@ void Typer::Visit(node::Assert& node) {
 
 void Typer::Visit(node::Assign& node) {
   node.expression->Accept(*this);
-  AssertIsEqualTypes(
-      scopes_.top()->GetNode(node.lvalue->identifier, scopes_sizes_)->type,
-      node.expression->type
-  );
+  node.lvalue->Accept(*this);
+  auto lvalue_type =
+      scopes_.top()->HasVariable(node.lvalue->identifier, scopes_sizes_) ?
+      scopes_.top()->GetNode(node.lvalue->identifier, scopes_sizes_)->type :
+      current_class_->GetFieldNode(node.lvalue->identifier)->type;
+
+
+  if (node.lvalue->index_expression != nullptr) {
+    if (!lvalue_type->is_array) {
+      throw MakeLocalizedError(node, "assignment to the element of not array");
+    }
+    lvalue_type->is_array = false;
+    AssertIsEqualTypes(node, lvalue_type, node.expression->type);
+    lvalue_type->is_array = true;
+  } else {
+    AssertIsEqualTypes(node, lvalue_type, node.expression->type);
+  }
+
 }
 
 void Typer::Visit(node::If& node) {
   node.condition->Accept(*this);
-  AssertIsBoolean(node.condition->type);
+  AssertIsBoolean(node, node.condition->type);
   node.then_statement->Accept(*this);
   node.else_statement->Accept(*this);
 }
@@ -214,18 +239,18 @@ void Typer::Visit(node::If& node) {
 void Typer::Visit(node::Lvalue& node) {
   if (node.index_expression) {
     node.index_expression->Accept(*this);
-    AssertIsInt(node.index_expression->type);
+    AssertIsInt(node, node.index_expression->type);
   }
 }
 
 void Typer::Visit(node::Print& node) {
   node.print_expression->Accept(*this);
-  AssertIsInt(node.print_expression->type);
+  AssertIsInt(node, node.print_expression->type);
 }
 
 void Typer::Visit(node::Return& node) {
   node.return_expression->Accept(*this);
-  AssertIsEqualTypes(current_method_node->type, node.return_expression->type);
+  AssertIsEqualTypes(node, current_method_node->type, node.return_expression->type);
 }
 
 void Typer::Visit(node::Scope& node) {
@@ -249,7 +274,7 @@ void Typer::Visit(node::Scope& node) {
 
 void Typer::Visit(node::While& node) {
   node.condition->Accept(*this);
-  AssertIsBoolean(node.condition->type);
+  AssertIsBoolean(node, node.condition->type);
   node.then_statement->Accept(*this);
 }
 
@@ -263,16 +288,16 @@ void Typer::VisitInt(node::BinaryOp& node) {
   node.lhvalue->Accept(*this);
   node.rhvalue->Accept(*this);
 
-  AssertIsInt(node.lhvalue->type);
-  AssertIsInt(node.rhvalue->type);
+  AssertIsInt(node, node.lhvalue->type);
+  AssertIsInt(node, node.rhvalue->type);
 }
 
 void Typer::VisitBoolean(node::BinaryOp& node) {
   node.lhvalue->Accept(*this);
   node.rhvalue->Accept(*this);
 
-  AssertIsBoolean(node.lhvalue->type);
-  AssertIsBoolean(node.rhvalue->type);
+  AssertIsBoolean(node, node.lhvalue->type);
+  AssertIsBoolean(node, node.rhvalue->type);
 }
 
 bool Typer::IsEqualTypes(const std::shared_ptr<node::Type>& lhvalue,
@@ -297,38 +322,49 @@ bool Typer::IsDeclaredType(const std::shared_ptr<node::Type>& type) const {
   return IsPrimitive(type) || program_table_->HasClass(type->identifier);
 }
 
-void Typer::AssertIsEqualTypes(const std::shared_ptr<node::Type>& lhvalue,
+std::string Typer::DumpType(const std::shared_ptr<node::Type>& type) {
+  return type->identifier + (type->is_array ? "[]" : "");
+}
+
+void Typer::AssertIsEqualTypes(node::Node& node,
+                               const std::shared_ptr<node::Type>& lhvalue,
                                const std::shared_ptr<node::Type>& rhvalue) const {
   if (!IsEqualTypes(lhvalue, rhvalue)) {
-    throw std::runtime_error("inequal types: " +
-        lhvalue->identifier + " and " + rhvalue->identifier);
+    throw MakeLocalizedError(node,
+        "inequal types: " + DumpType(lhvalue) + " and " + DumpType(rhvalue));
   }
 }
 
-void Typer::AssertIsArray(const std::shared_ptr<node::Type>& type) const {
+void Typer::AssertIsArray(node::Node& node,
+                          const std::shared_ptr<node::Type>& type) const {
   if (!type->is_array) {
-    throw std::runtime_error("expected array type");
+    throw MakeLocalizedError(node, "expected array type");
   }
 }
 
-void Typer::AssertIsInt(const std::shared_ptr<node::Type>& type) const {
+void Typer::AssertIsInt(node::Node& node,
+                        const std::shared_ptr<node::Type>& type) const {
   if (!IsInt(type)) {
-    throw std::runtime_error("invalid type:" +
-                             type->identifier +
+    throw MakeLocalizedError(node,
+                             "invalid type:" +
+                             DumpType(type) +
                              ", expected int");
   }
 }
 
-void Typer::AssertIsBoolean(const std::shared_ptr<node::Type>& type) const {
+void Typer::AssertIsBoolean(node::Node& node,
+                            const std::shared_ptr<node::Type>& type) const {
   if (!IsBoolean(type)) {
-    throw std::runtime_error("invalid type:" +
-                             type->identifier +
+    throw MakeLocalizedError(node,
+                             "invalid type:" +
+                             DumpType(type) +
                              ", expected boolean");
   }
 }
 
-void Typer::AssertIsDeclaredType(const std::shared_ptr<node::Type>& type) const {
+void Typer::AssertIsDeclaredType(node::Node& node,
+                                 const std::shared_ptr<node::Type>& type) const {
   if (!IsDeclaredType(type)) {
-    throw std::runtime_error("undeclared type: " + type->identifier);
+    throw MakeLocalizedError(node, "undeclared type: " + DumpType(type));
   }
 }

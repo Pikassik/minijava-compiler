@@ -1463,7 +1463,7 @@ namespace yy {
 
   case 57:
 #line 253 "/home/user/minijava-compiler/Parser/parser.y"
-                                                { yylhs.value.as < ptr<Expression> > () = make_shared<NewArray>(yystack_[3].value.as < ptr<Type> > (), yystack_[1].value.as < ptr<Expression> > ()); }
+                                                { yylhs.value.as < ptr<Expression> > () = make_shared<NewArray>(yystack_[3].value.as < ptr<Type> > (), yystack_[1].value.as < ptr<Expression> > ()); yylhs.value.as < ptr<Expression> > ()->type->is_array = true; }
 #line 1468 "/home/user/minijava-compiler/Parser/parser.cpp"
     break;
 

@@ -29,7 +29,7 @@ int Driver::Drive(const std::string& f) {
   location.initialize(&file);
   scan_begin();
   parser.set_debug_level(trace_parsing);
-  int res = parser();
+  parser();
   scan_end();
 
   if (program) {
@@ -38,9 +38,11 @@ int Driver::Drive(const std::string& f) {
     }
 
     Interpret(*program);
+
+    return 0;
   }
 
-  return res;
+  return 1;
 }
 
 void Driver::scan_begin() {

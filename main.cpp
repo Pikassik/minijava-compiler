@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 
   for (int i = 1; i < argc; ++i) {
     if (!(std::string_view(argv[i]) == std::string_view("-t") ||
-          std::string_view(argv[i]) == std::string("-d"))) {
+          std::string_view(argv[i]) == std::string_view("-d"))) {
       return driver.Drive(argv[i]);
     }
   }

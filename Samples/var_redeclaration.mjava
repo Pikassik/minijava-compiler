@@ -1,0 +1,8 @@
+class VarRedecl {
+  public static void main() {
+    int x;
+    int x;
+    x = 5;
+    System.out.println(x);
+  }
+}

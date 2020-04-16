@@ -1,11 +1,16 @@
 class Factorial {
   public static void main () {
+    Util ut;
+    ut = new Util();
+    ut.Fac(10);
+  }
+}
+
+class Util {
+  public void Fac(int num) {
     /* simple */
     // factorial example
-    int num;
-    num = 10;
     assert (num > -1);
-    int res;
     res = 1;
     int i;
     i = 0;
@@ -15,4 +20,5 @@ class Factorial {
     }
     System.out.println(res);
   }
+  int res;
 }

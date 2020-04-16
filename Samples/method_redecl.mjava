@@ -1,0 +1,10 @@
+class Main {
+  public static void main() {
+    System.out.println(200);
+  }
+}
+
+class MethodRedecl {
+  public int Foo() {}
+  public int Foo() {}
+}

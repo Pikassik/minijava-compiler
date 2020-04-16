@@ -1,7 +1,5 @@
 class Array {
   public static void main() {
-    int[] array;
-    array = new int[2 * 6];
     int i;
     i = -1;
     while (i + 1 < array.length) {

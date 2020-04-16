@@ -1,0 +1,12 @@
+class Shadowing {
+  public static void main() {
+    int x;
+    x = 5;
+    {
+      int x;
+      x = 7;
+      System.out.println(x);
+    }
+    System.out.println(x);
+  }
+}

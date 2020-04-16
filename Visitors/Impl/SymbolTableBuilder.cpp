@@ -226,6 +226,9 @@ void SymbolTableBuilder::Visit(node::While& node) {
 void SymbolTableBuilder::Visit(node::Program& node) {
   program_table_ = std::make_shared<ProgramTable>();
   for (auto&& class_v: node.classes) {
+    if (program_table_->HasClass(class_v->identifier)) {
+      throw std::runtime_error("redefinition of class: " + class_v->identifier);
+    }
     class_v->Accept(*this);
   }
 

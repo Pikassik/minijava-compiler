@@ -54,14 +54,7 @@ void Dumper::Visit(node::Class& node) {
 }
 
 void Dumper::Visit(node::Formal& node) {
-  PrintNode(&node, "{formal} " + node.identifier);
-  PrintEdge(pointers_.top(), &node);
-
-  pointers_.push(&node);
-
-  node.type->Accept(*this);
-
-  pointers_.pop();
+  throw;
 }
 
 void Dumper::Visit(node::MethodDeclaration& node) {

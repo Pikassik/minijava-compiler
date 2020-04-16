@@ -1,0 +1,42 @@
+/* correct output:
+ * 1
+ * 2
+ */
+class Fields {
+  public static void main() {
+    FieldStorage fst;
+    fst = new FieldStorage();
+    fst.SetX(1);
+    fst.SetY(2);
+    fst.PrintFields();
+  }
+}
+
+class FieldStorage {
+  XStorage x0;
+  public void SetX(int x) {
+    x0 = new XStorage();
+    x0.SetX(x);
+  }
+
+  public void SetY(int y) {
+    y0 = y;
+  }
+
+  public void PrintFields() {
+    x0.PrintX();
+    System.out.println(y0);
+  }
+
+  int y0;
+}
+
+class XStorage {
+  int x00;
+  public void SetX(int x) {
+    x00 = x;
+  }
+  public void PrintX() {
+    System.out.println(x00);
+  }
+}

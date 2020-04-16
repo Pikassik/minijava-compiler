@@ -15,7 +15,7 @@ void Interpret(node::Program& program) {
 
 namespace interpreter {
 
-// for undefined situations
+// for undefined situationspush
 #define pass throw std::runtime_error("impossible state")
 
 void Interpreter::Visit(node::Node&) {
@@ -131,14 +131,15 @@ void Interpreter::Visit(node::Mul& node) {
 
 void Interpreter::Visit(node::New& node) {
   tos_value_ =
-      new char[program_table_->GetClass(node.type->identifier)->SizeOf()];
+      static_cast<Value*>(
+      std::calloc(program_table_->GetClass(node.type->identifier)->SizeOf(), 1));
 }
 
 void Interpreter::Visit(node::NewArray& node) {
   int64_t length = Accept(*node.size_expression).int_v;
-  auto array = new Value[1 + length];
+  auto* array = New((1 + length) * sizeof(Value));
   array = array + 1;
-  array[-1] = length;
+  array[-1].int_v = length;
   tos_value_ = array;
 }
 
@@ -181,7 +182,7 @@ void Interpreter::Visit(node::Assign& node) {
 
   if (auto rhvalue = Accept(*node.expression);
       node.lvalue->index_expression) {
-    lvalue[Accept(*node.lvalue->index_expression).int_v] = rhvalue;
+    lvalue->ptr_v[Accept(*node.lvalue->index_expression).int_v] = rhvalue;
   } else {
     *lvalue = rhvalue;
   }
@@ -190,7 +191,13 @@ void Interpreter::Visit(node::Assign& node) {
 void Interpreter::Visit(node::If& node) {
   if (Accept(*node.condition).bool_v) {
     Accept(*node.then_statement);
+    if (node.else_statement && IsNodeType<node::Scope>(*node.else_statement)) {
+      ++iters_.top();
+    }
   } else if (node.else_statement) {
+    if (IsNodeType<node::Scope>(*node.then_statement)) {
+      ++iters_.top();
+    }
     Accept(*node.else_statement);
   }
 }
@@ -233,6 +240,13 @@ void Interpreter::Visit(node::Scope& node) {
 void Interpreter::Visit(node::While& node) {
   while (Accept(*node.condition).bool_v) {
     Accept(*node.then_statement);
+    if (IsNodeType<node::Scope>(*node.then_statement)) {
+      --iters_.top();
+    }
+  }
+
+  if (IsNodeType<node::Scope>(*node.then_statement)) {
+    ++iters_.top();
   }
 }
 
@@ -246,8 +260,15 @@ void Interpreter::Visit(node::Program& node) {
           GetMethodNode("main"));
 }
 
-void* Interpreter::New(size_t size) {
-  return std::calloc(size, 1);
+template<class T>
+bool Interpreter::IsNodeType(node::Node& node) {
+  auto* ptr = dynamic_cast<T*>(&node);
+
+  return ptr != nullptr;
+}
+
+Value* Interpreter::New(size_t size) {
+  return reinterpret_cast<Value*>(std::calloc(size, 1));
 }
 
 void Interpreter::Push(int64_t int_v) {

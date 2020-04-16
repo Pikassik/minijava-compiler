@@ -62,7 +62,11 @@ class Interpreter : public AcceptRetType<Value> {
   void Visit(node::Program&) override;
 
  private:
-  static void* New(size_t size);
+
+  template <class T>
+  static bool IsNodeType(node::Node&);
+
+  static Value* New(size_t size);
 
   void Push(int64_t int_v);
   void Push(bool bool_v);

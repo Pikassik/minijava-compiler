@@ -12,7 +12,7 @@ class ScopeTable : public std::enable_shared_from_this<ScopeTable> {
 
   std::shared_ptr<const ScopeTable> GetParent() const;
 
-  const std::vector<std::shared_ptr<ScopeTable>> GetNext() const;
+  const std::vector<std::shared_ptr<ScopeTable>>& GetNext() const;
 
 
   size_t GetOffset(const std::string& symbol) const;

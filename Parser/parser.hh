@@ -1003,6 +1003,7 @@ switch (yytype)
 
       /// Constructor for valueless symbols, and symbols from each type.
 #if 201103L <= YY_CPLUSPLUS
+
       symbol_type (int tok, location_type l)
         : super_type(token_type (tok), std::move (l))
       {

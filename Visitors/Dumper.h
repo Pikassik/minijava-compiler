@@ -56,7 +56,7 @@ class Dumper : public Visitor {
   std::ofstream stream_;
   std::shared_ptr<node::Program> program;
 
-  std::stack<node::Node*> pointers_;
+  std::stack<void*> pointers_;
 
   void PrintNode(void* ptr, const std::string& label);
   void PrintEdge(void* from, void* to);

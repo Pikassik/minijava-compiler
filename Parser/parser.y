@@ -250,7 +250,7 @@ Expression: "this" { $$ = make_shared<This>(); }
           | Expression "%"  Expression { $$ = make_shared<Percent>($1, $3); }
           | Expression "[" Expression "]" { $$ = make_shared<At>($1, $3); }
           | Expression "." "length" { $$ = make_shared<Length>($1); }
-          | "new" SimpleType "[" Expression "]" { $$ = make_shared<NewArray>($2, $4); }
+          | "new" SimpleType "[" Expression "]" { $$ = make_shared<NewArray>($2, $4); $$->type->is_array = true; }
           | "new" TypeId "(" ")" { $$ = make_shared<New>($2); }
           | "!" Expression { $$ = make_shared<Not>($2); }
           | "(" Expression ")" { $$ = $2; }

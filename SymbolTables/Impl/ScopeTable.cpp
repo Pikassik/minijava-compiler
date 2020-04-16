@@ -9,7 +9,7 @@ std::shared_ptr<const ScopeTable> ScopeTable::GetParent() const {
   return parent_.lock();
 }
 
-const std::vector<std::shared_ptr<ScopeTable>> ScopeTable::GetNext() const {
+const std::vector<std::shared_ptr<ScopeTable>>& ScopeTable::GetNext() const {
   return children_;
 }
 
@@ -99,7 +99,7 @@ ScopeTable::GetLayerWithSymbol(const std::string& symbol,
     assert(index >= 0);
 
     if (current_layer->HasVariableOnActuallyThisLayer(symbol) &&
-        variable_num_.at(symbol) < scopes_sizes[index]) {
+        current_layer->variable_num_.at(symbol) < scopes_sizes[index]) {
       return current_layer;
     }
 

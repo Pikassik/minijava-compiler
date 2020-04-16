@@ -1,0 +1,33 @@
+class ComplicatedRec {
+  public static void main() {
+    new FooClass().Foo(13);
+  }
+}
+
+class FooClass {
+  public void Foo(int x) {
+    if (x > 0) {
+      System.out.println(333333);
+      System.out.println(x);
+      new BooClass().Boo(x - 1);
+    } else {
+      System.out.println(666666);
+      System.out.println(x);
+    }
+    System.out.println(999999);
+  }
+}
+
+class BooClass {
+  public void Boo(int x) {
+    if (x > 0) {
+      System.out.println(111111);
+      System.out.println(x);
+      new FooClass().Foo(x - 1);
+    } else {
+      System.out.println(222222);
+      System.out.println(x);
+    }
+    System.out.println(444444);
+  }
+}
