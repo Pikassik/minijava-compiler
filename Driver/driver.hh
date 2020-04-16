@@ -12,12 +12,11 @@
 class Driver {
  public:
   Driver();
-  std::map<std::string, int> variables;
   std::shared_ptr<node::Program> program;
   int Drive(const std::string& f);
   std::string file;
-  bool trace_parsing;
-  bool dump;
+  bool trace_parsing = false;
+  bool dump = false;
 
   void SetTraceParsing(bool flag);
   void SetDump(bool flag);

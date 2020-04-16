@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Visitors/Visitor.h>
-#include "ProgramTable.h"
-#include "ScopeTable.h"
-#include "ClassTable.h"
+#include "SymbolTables/ProgramTable.h"
+#include "SymbolTables/ScopeTable.h"
+#include "SymbolTables/ClassTable.h"
 
 #include <stack>
 

@@ -2,7 +2,7 @@
 #include <Parser/parser.hh>
 #include <Visitors/Dumper.h>
 #include <Visitors/Interpreter.h>
-#include <SymbolTables/SymbolTableBuilder.h>
+#include <Visitors/SymbolTableBuilder.h>
 #include <Visitors/Typer.h>
 
 #include <sys/types.h>
@@ -37,9 +37,7 @@ int Driver::Drive(const std::string& f) {
       PrintDump();
     }
 
-    auto table = MakeProgramTable(*program);
-    SetTypes(program, table);
-    //Interpret(*program);
+    Interpret(*program);
   }
 
   return res;

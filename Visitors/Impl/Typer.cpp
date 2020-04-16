@@ -5,10 +5,10 @@
 
 #define pass throw std::runtime_error("impossible state")
 
-void SetTypes(std::shared_ptr<node::Program>& program,
+void SetTypes(node::Program& program,
               std::shared_ptr<ProgramTable> program_table) {
   Typer typer(std::move(program_table));
-  typer.Visit(*program);
+  typer.Visit(program);
 }
 
 Typer::Typer(std::shared_ptr<ProgramTable> program_table)

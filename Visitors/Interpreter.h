@@ -1,14 +1,28 @@
 #pragma once
 
 #include "AcceptRetType.h"
+#include <SymbolTables/ProgramTable.h>
 
 #include <unordered_map>
+#include <stack>
 
 void Interpret(node::Program& program);
 
 namespace interpreter {
 
-class Interpreter : public AcceptRetType<int> {
+union Value {
+ public:
+  int64_t int_v;
+  bool    bool_v;
+  Value*   ptr_v;
+
+  Value();
+  Value(int64_t int_v);
+  Value(bool bool_v);
+  Value(Value* ptr_v);
+};
+
+class Interpreter : public AcceptRetType<Value> {
   friend void ::Interpret(node::Program& program);
  private:
   void Visit(node::Node&) override;
@@ -48,20 +62,30 @@ class Interpreter : public AcceptRetType<int> {
   void Visit(node::Program&) override;
 
  private:
+  static void* New(size_t size);
 
-  template <class T>
-  bool IsNodeType(node::Node&);
+  void Push(int64_t int_v);
+  void Push(bool bool_v);
+  void Push(Value* ptr_v);
+  void Push(Value value);
 
-  void Throw(const std::string& error);
+  void Pop(size_t size = 1);
 
-  std::string last_identifier_;
-  bool new_array_expr = false;
+  Value ret_value_;
 
-  bool HasVariable(const std::string& identifier);
-  std::unordered_map<std::string, int> variables_;
+  int64_t rsp_ = 0;
+  int64_t rbp_ = 0;
 
-  bool HasArray(const std::string& identifier);
-  std::unordered_map<std::string, std::vector<int>> arrays_;
+  static constexpr size_t kStackSize = 1024;
+  std::array<Value, kStackSize> stack_;
+
+  std::shared_ptr<ProgramTable> program_table_;
+  std::stack<std::shared_ptr<ClassTable>> classes_;
+  std::stack<std::shared_ptr<ScopeTable>> scopes_;
+  std::vector<size_t> scopes_sizes_;
+  std::stack<std::vector<std::shared_ptr<ScopeTable>>::const_iterator> iters_;
+  bool method_declared_ = false;
+  bool returned_ = false;
 };
 
 } // namespace interpreter

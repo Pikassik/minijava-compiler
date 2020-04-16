@@ -27,6 +27,13 @@ bool ClassTable::HasMethod(const std::string& symbol) const {
   return methods_.find(symbol) != methods_.end();
 }
 
+size_t ClassTable::Size() const {
+  return fields_.size();
+}
+size_t ClassTable::SizeOf() const {
+  return fields_.size() * sizeof(void*);
+}
+
 void ClassTable::PutField(const std::string& symbol,
                           std::shared_ptr<node::VarDeclaration> field,
                           size_t offset) {
@@ -39,3 +46,4 @@ void ClassTable::PutMethod(const std::string& symbol,
   methods_[symbol] = std::move(method);
   methods_tables_[symbol] = std::move(scope);
 }
+

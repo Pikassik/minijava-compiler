@@ -7,7 +7,7 @@
 #include <memory>
 #include <stack>
 
-void SetTypes(std::shared_ptr<node::Program>& program,
+void SetTypes(node::Program& program,
               std::shared_ptr<ProgramTable> program_table);
 
 class Typer : Visitor {

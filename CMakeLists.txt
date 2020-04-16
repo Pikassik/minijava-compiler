@@ -3,6 +3,8 @@ project(MiniJavaCompiler)
 
 set(CMAKE_CXX_STANDARD 17)
 
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+
 find_package(FLEX REQUIRED)
 find_package(BISON REQUIRED)
 
@@ -116,7 +118,7 @@ add_executable(
     Nodes/NodesImpl/Expressions/BooleanLiteral.cpp
     Visitors/Interpreter.h
     Visitors/AcceptRetType.h
-    Visitors/Impl/Interpreter.cpp SymbolTables/SymbolTableBuilder.h SymbolTables/ProgramTable.h SymbolTables/ClassTable.h SymbolTables/ScopeTable.h SymbolTables/Impl/ClassTable.cpp SymbolTables/Impl/ProgramTable.cpp SymbolTables/Impl/ScopeTable.cpp SymbolTables/Impl/SymbolTableBuilder.cpp SymbolTables/Symbol.h Nodes/NodesImpl/Expressions/Expression.cpp Nodes/NodesImpl/Node.cpp Visitors/Typer.h Visitors/Impl/Typer.cpp)
+    Visitors/Impl/Interpreter.cpp Visitors/SymbolTableBuilder.h SymbolTables/ProgramTable.h SymbolTables/ClassTable.h SymbolTables/ScopeTable.h SymbolTables/Impl/ClassTable.cpp SymbolTables/Impl/ProgramTable.cpp SymbolTables/Impl/ScopeTable.cpp Visitors/Impl/SymbolTableBuilder.cpp SymbolTables/Symbol.h Nodes/NodesImpl/Expressions/Expression.cpp Nodes/NodesImpl/Node.cpp Visitors/Typer.h Visitors/Impl/Typer.cpp)
 
 target_include_directories(MiniJavaCompiler PRIVATE ${MiniJavaCompiler_SOURCE_DIR})
 

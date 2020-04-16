@@ -19,6 +19,10 @@ class ClassTable {
 
   bool HasMethod(const std::string& symbol) const;
 
+  size_t Size() const;
+
+  size_t SizeOf() const;
+
  private:
   friend class SymbolTableBuilder;
   void PutField(const std::string& symbol,
