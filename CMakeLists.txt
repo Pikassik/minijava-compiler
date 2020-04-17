@@ -132,10 +132,6 @@ add_executable(
     Nodes/NodesImpl/Node.cpp
     Visitors/Typer.h
     Visitors/Impl/Typer.cpp Exception/LocalizedError.h
-    Exception/Impl/LocalizedError.cpp
-    Parser/loc.h)
+    Exception/Impl/LocalizedError.cpp)
 
 target_include_directories(mjava PRIVATE ${mjava_SOURCE_DIR})
-
-
-
