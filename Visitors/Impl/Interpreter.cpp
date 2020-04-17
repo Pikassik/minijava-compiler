@@ -3,6 +3,7 @@
 #include "../Typer.h"
 
 #include <Nodes/Nodes.h>
+#include <Exception/LocalizedError.h>
 
 #include <iostream>
 
@@ -169,7 +170,7 @@ void Interpreter::Visit(node::This& node) {
 
 void Interpreter::Visit(node::Assert& node) {
   if (!Accept(*node.condition).bool_v) {
-    throw std::runtime_error("assertion failed");
+    throw MakeLocalizedError(node, "assertion failed");
   }
 }
 

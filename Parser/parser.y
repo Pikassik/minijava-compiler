@@ -27,6 +27,9 @@
     #include "location.hh"
 
     static yy::parser::symbol_type yylex(Scanner &scanner, Driver& driver) {
+        /*auto token = scanner.ScanToken();
+        driver.symbol = token;
+        return token;*/
         return scanner.ScanToken();
     }
 }
@@ -129,6 +132,7 @@ Program: MainClassDeclaration {
        | Program ClassDeclaration {
   $1->classes.push_back($2);
   $$ = move($1);
+  $$->SetLocation(driver.location);
 }
 ;
 
@@ -140,14 +144,17 @@ MainClassDeclaration: "class" "identifier" "{" "public" "static" "void" "main" "
     ),
     vector<ptr<VarDeclaration>>()
   );
+  $$->SetLocation(driver.location);
 }
 ;
 
 ClassDeclaration: "class" "identifier" "{" ClassMembers "}" {
   $$ = make_shared<Class>($2, move($4.first), move($4.second));
+  $$->SetLocation(driver.location);
 }
                 | "class" "identifier" "extends" "identifier" "{" ClassMembers "}" {
   $$ = make_shared<Class>($2, $4, move($6.first), move($6.second));
+  $$->SetLocation(driver.location);
 }
 ;
 
@@ -164,10 +171,11 @@ ClassMembers: %empty { $$ = pair<vector<ptr<MethodDeclaration>>, vector<ptr<VarD
 
 MethodDeclaration: "public" Type "identifier" "(" Formals ")" Scope {
   $$ = make_shared<MethodDeclaration>($2, $3, move($5), $7);
+  $$->SetLocation(driver.location);
 }
 ;
 
-VarDeclaration: Type "identifier" { $$ = make_shared<VarDeclaration>($1, $2); }
+VarDeclaration: Type "identifier" { $$ = make_shared<VarDeclaration>($1, $2); $$->SetLocation(driver.location); }
 
 Formals: %empty { $$ = vector<ptr<VarDeclaration>>(); }
        | VarDeclaration { $$ = vector<ptr<VarDeclaration>>{$1}; }
@@ -181,10 +189,10 @@ Type: SimpleType { $$ = $1; }
     | ArrayType  { $$ = $1; }
 ;
 
-SimpleType: "int" { $$ = make_shared<Type>("int", false); }
-          | "boolean" { $$ = make_shared<Type>("boolean", false); }
-          | "void" { $$ = make_shared<Type>("void", false); }
-          | TypeId { $$ = make_shared<Type>($1, false); }
+SimpleType: "int" { $$ = make_shared<Type>("int", false); $$->SetLocation(driver.location); }
+          | "boolean" { $$ = make_shared<Type>("boolean", false); $$->SetLocation(driver.location); }
+          | "void" { $$ = make_shared<Type>("void", false); $$->SetLocation(driver.location); }
+          | TypeId { $$ = make_shared<Type>($1, false); $$->SetLocation(driver.location); }
 ;
 
 ArrayType: SimpleType "[" "]" {
@@ -203,25 +211,25 @@ Statements: %empty { $$ = vector<ptr<Statement>>(); }
 }
 ;
 
-Scope: "{" Statements "}" { $$ = make_shared<Scope>($2); }
+Scope: "{" Statements "}" { $$ = make_shared<Scope>($2); $$->SetLocation(driver.location); }
 ;
 
-Statement: "assert" "(" Expression ")" ";" { $$ = make_shared<Assert>($3); }
+Statement: "assert" "(" Expression ")" ";" { $$ = make_shared<Assert>($3); $$->SetLocation(driver.location); }
          | VarDeclarationStmt { $$ = $1; }
          | Scope { $$ = $1; }
-         | "if" "(" Expression ")" Statement { $$ = make_shared<If>($3, $5); }
-         | "if" "(" Expression ")" Statement "else" Statement { $$ = make_shared<If>($3, $5, $7); }
-         | "while" "(" Expression ")" Statement { $$ = make_shared<While>($3, $5); }
-         | "System.out.println" "(" Expression ")" ";" { $$ = make_shared<Print>($3); }
-         | Lvalue "=" Expression ";" { $$ = make_shared<Assign>($1, $3); }
-         | "return" Expression ";" { $$ = make_shared<Return>($2); }
+         | "if" "(" Expression ")" Statement { $$ = make_shared<If>($3, $5); $$->SetLocation(driver.location); }
+         | "if" "(" Expression ")" Statement "else" Statement { $$ = make_shared<If>($3, $5, $7); $$->SetLocation(driver.location); }
+         | "while" "(" Expression ")" Statement { $$ = make_shared<While>($3, $5); $$->SetLocation(driver.location); }
+         | "System.out.println" "(" Expression ")" ";" { $$ = make_shared<Print>($3); $$->SetLocation(driver.location); }
+         | Lvalue "=" Expression ";" { $$ = make_shared<Assign>($1, $3); $$->SetLocation(driver.location); }
+         | "return" Expression ";" { $$ = make_shared<Return>($2); $$->SetLocation(driver.location); }
          | MethodInvocation ";" { $$ = $1; }
 ;
 
 VarDeclarationStmt: VarDeclaration ";" { $$ = $1; }
 ;
 
-MethodInvocation: Expression "." "identifier" "(" MethodArgs ")" { $$ = make_shared<MethodInvocation>($1, $3, $5); }
+MethodInvocation: Expression "." "identifier" "(" MethodArgs ")" { $$ = make_shared<MethodInvocation>($1, $3, $5); $$->SetLocation(driver.location);  }
 ;
 
 MethodArgs: %empty { $$ = vector<ptr<Expression>>(); }
@@ -232,39 +240,39 @@ MethodArgs: %empty { $$ = vector<ptr<Expression>>(); }
 }
 ;
 
-Lvalue: "identifier" { $$ = make_shared<Lvalue>($1); }
-      | "identifier" "[" Expression "]" { $$ = make_shared<Lvalue>($1, $3); }
+Lvalue: "identifier" { $$ = make_shared<Lvalue>($1); $$->SetLocation(driver.location); }
+      | "identifier" "[" Expression "]" { $$ = make_shared<Lvalue>($1, $3); $$->SetLocation(driver.location); }
 ;
 
-Expression: "this" { $$ = make_shared<This>(); }
+Expression: "this" { $$ = make_shared<This>(); $$->SetLocation(driver.location); }
           | MethodInvocation { $$ = $1; }
-          | Expression "&&" Expression { $$ = make_shared<Mul>($1, $3); }
-          | Expression "||" Expression { $$ = make_shared<Add>($1, $3); }
-          | Expression "<"  Expression { $$ = make_shared<Less>($1, $3); }
-          | Expression ">"  Expression { $$ = make_shared<More>($1, $3); }
-          | Expression "==" Expression { $$ = make_shared<Equals>($1, $3); }
-          | Expression "+"  Expression { $$ = make_shared<Add>($1, $3); }
-          | Expression "-"  Expression { $$ = make_shared<Subtract>($1, $3); }
-          | Expression "*"  Expression { $$ = make_shared<Mul>($1, $3); }
-          | Expression "/"  Expression { $$ = make_shared<Div>($1, $3); }
-          | Expression "%"  Expression { $$ = make_shared<Percent>($1, $3); }
-          | Expression "[" Expression "]" { $$ = make_shared<At>($1, $3); }
-          | Expression "." "length" { $$ = make_shared<Length>($1); }
-          | "new" SimpleType "[" Expression "]" { $$ = make_shared<NewArray>($2, $4); $$->type->is_array = true; }
-          | "new" TypeId "(" ")" { $$ = make_shared<New>($2); }
-          | "!" Expression { $$ = make_shared<Not>($2); }
+          | Expression "&&" Expression { $$ = make_shared<Mul>($1, $3); $$->SetLocation(driver.location); }
+          | Expression "||" Expression { $$ = make_shared<Add>($1, $3); $$->SetLocation(driver.location); }
+          | Expression "<"  Expression { $$ = make_shared<Less>($1, $3); $$->SetLocation(driver.location); }
+          | Expression ">"  Expression { $$ = make_shared<More>($1, $3); $$->SetLocation(driver.location); }
+          | Expression "==" Expression { $$ = make_shared<Equals>($1, $3); $$->SetLocation(driver.location); }
+          | Expression "+"  Expression { $$ = make_shared<Add>($1, $3); $$->SetLocation(driver.location); }
+          | Expression "-"  Expression { $$ = make_shared<Subtract>($1, $3); $$->SetLocation(driver.location); }
+          | Expression "*"  Expression { $$ = make_shared<Mul>($1, $3); $$->SetLocation(driver.location); }
+          | Expression "/"  Expression { $$ = make_shared<Div>($1, $3); $$->SetLocation(driver.location); }
+          | Expression "%"  Expression { $$ = make_shared<Percent>($1, $3); $$->SetLocation(driver.location); }
+          | Expression "[" Expression "]" { $$ = make_shared<At>($1, $3); $$->SetLocation(driver.location); }
+          | Expression "." "length" { $$ = make_shared<Length>($1); $$->SetLocation(driver.location); }
+          | "new" SimpleType "[" Expression "]" { $$ = make_shared<NewArray>($2, $4); $$->type->is_array = true; $$->SetLocation(driver.location); }
+          | "new" TypeId "(" ")" { $$ = make_shared<New>($2); $$->SetLocation(driver.location); }
+          | "!" Expression { $$ = make_shared<Not>($2); $$->SetLocation(driver.location); }
           | "(" Expression ")" { $$ = $2; }
-          | "identifier" { $$ = make_shared<Identifier>($1); }
+          | "identifier" { $$ = make_shared<Identifier>($1); $$->SetLocation(driver.location); }
           | SignedNumber { $$ = $1; }
           | BooleanLiteral { $$ = $1; }
 ;
 
-BooleanLiteral: "true" { $$ = make_shared<BooleanLiteral>(true); }
-              | "false" { $$ = make_shared<BooleanLiteral>(false); }
+BooleanLiteral: "true" { $$ = make_shared<BooleanLiteral>(true); $$->SetLocation(driver.location); }
+              | "false" { $$ = make_shared<BooleanLiteral>(false); $$->SetLocation(driver.location); $$->SetLocation(driver.location); }
 ;
 
-SignedNumber: "number"     { $$ = make_shared<Number>($1); }
-            | "-" "number" { $$ = make_shared<Number>(-$2); }
+SignedNumber: "number"     { $$ = make_shared<Number>($1); $$->SetLocation(driver.location); }
+            | "-" "number" { $$ = make_shared<Number>(-$2); $$->SetLocation(driver.location); }
 ;
 
 %%

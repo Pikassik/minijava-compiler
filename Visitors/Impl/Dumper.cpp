@@ -10,7 +10,7 @@ Dumper::Dumper(std::shared_ptr<node::Program> program,
 , filename_(std::move(filename))
 , stream_(filename_) {
   if (!stream_.is_open()) {
-    throw std::invalid_argument("Unable to open file");
+    throw std::invalid_argument("Unable to open file " + filename_);
   }
 }
 

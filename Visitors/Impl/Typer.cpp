@@ -150,7 +150,7 @@ void Typer::Visit(node::MethodInvocation& node) {
 
   for (size_t i = 0; i < method->formals.size(); ++i) {
     node.arguments[i]->Accept(*this);
-    AssertIsEqualTypes(node, node.arguments[i]->type, method->formals[i]->type);
+    AssertIsEqualTypes(*node.arguments[i], node.arguments[i]->type, method->formals[i]->type);
   }
 
   node.type = method->type;

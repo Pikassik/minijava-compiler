@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(MiniJavaCompiler)
+project(mjava)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -10,30 +10,30 @@ find_package(BISON REQUIRED)
 
 set(
     HEADERS
-    ${MiniJavaCompiler_SOURCE_DIR}/driver.hh
-    ${MiniJavaCompiler_SOURCE_DIR}/parser.hh
+    ${mjava_SOURCE_DIR}/driver.hh
+    ${mjava_SOURCE_DIR}/parser.hh
     )
 
 BISON_TARGET(
     MyParser
-    ${MiniJavaCompiler_SOURCE_DIR}/Parser/parser.y
-    ${MiniJavaCompiler_SOURCE_DIR}/Parser/parser.cpp
-    COMPILE_FLAGS "-W -Wconflicts-sr -Wconflicts-rr -Wother -Wprecedence --warnings=all --report=all --verbose"
-    DEFINES_FILE ${MiniJavaCompiler_SOURCE_DIR}/Parser/parser.hh
+    ${mjava_SOURCE_DIR}/Parser/parser.y
+    ${mjava_SOURCE_DIR}/Parser/parser.cpp
+    # COMPILE_FLAGS "-W -Wconflicts-sr -Wconflicts-rr -Wother -Wprecedence --warnings=all --report=all --verbose"
+    DEFINES_FILE ${mjava_SOURCE_DIR}/Parser/parser.hh
 )
 
 FLEX_TARGET(
     MyScanner
-    ${MiniJavaCompiler_SOURCE_DIR}/Parser/scanner.l
-    ${MiniJavaCompiler_SOURCE_DIR}/Parser/scanner.cpp
+    ${mjava_SOURCE_DIR}/Parser/scanner.l
+    ${mjava_SOURCE_DIR}/Parser/scanner.cpp
 )
 
 ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 
 add_executable(
-    MiniJavaCompiler
+    mjava
     main.cpp
-        Driver/driver.cpp
+    Driver/driver.cpp
     ${BISON_MyParser_OUTPUTS}
     ${FLEX_MyScanner_OUTPUTS}
     Nodes/Nodes.h
@@ -131,9 +131,11 @@ add_executable(
     Nodes/NodesImpl/Expressions/Expression.cpp
     Nodes/NodesImpl/Node.cpp
     Visitors/Typer.h
-    Visitors/Impl/Typer.cpp Exception/LocalizedError.h Exception/Impl/LocalizedError.cpp)
+    Visitors/Impl/Typer.cpp Exception/LocalizedError.h
+    Exception/Impl/LocalizedError.cpp
+    Parser/loc.h)
 
-target_include_directories(MiniJavaCompiler PRIVATE ${MiniJavaCompiler_SOURCE_DIR})
+target_include_directories(mjava PRIVATE ${mjava_SOURCE_DIR})
 
 
 

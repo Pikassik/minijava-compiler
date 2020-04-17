@@ -1,5 +1,7 @@
 #include <Visitors/SymbolTableBuilder.h>
 
+#include <Exception/LocalizedError.h>
+
 #include <cassert>
 #include <queue>
 
@@ -22,7 +24,7 @@ void SymbolTableBuilder::Visit(node::Class& node) {
   for (size_t i = 0; i < node.fields.size(); ++i) {
     const auto& id = node.fields[i]->identifier;
     if (current_class_->HasField(id)) {
-      throw std::runtime_error("redefinition of field: " + id);
+      throw MakeLocalizedError(*node.fields[i], "redefinition of field: " + id);
     }
     current_class_->PutField(id, node.fields[i], i);
   }
@@ -30,7 +32,7 @@ void SymbolTableBuilder::Visit(node::Class& node) {
   for (auto&& method: node.methods) {
     const auto& id = method->identifier;
     if (current_class_->HasMethod(id)) {
-      throw std::runtime_error("redefinition of method: " + id);
+      throw MakeLocalizedError(*method, "redefinition of method: " + id);
     }
 
     method->Accept(*this);
@@ -65,7 +67,7 @@ void SymbolTableBuilder::Visit(node::Type& node) {
 
 void SymbolTableBuilder::Visit(node::VarDeclaration& node) {
   if (scopes_.top()->HasVariableOnActuallyThisLayer(node.identifier)) {
-    throw std::runtime_error("redefinition of variable: " + node.identifier);
+    throw MakeLocalizedError(node, "redefinition of variable: " + node.identifier);
   }
 
   scopes_.top()->PutVariable(
@@ -103,7 +105,7 @@ void SymbolTableBuilder::Visit(node::Equals& node) {
 void SymbolTableBuilder::Visit(node::Identifier& node) {
   if (!scopes_.top()->HasVariable(node.identifier) &&
       !current_class_->HasField(node.identifier)) {
-    throw std::runtime_error("undeclared identifier: " + node.identifier);
+    throw MakeLocalizedError(node, "undeclared identifier: " + node.identifier);
   }
 }
 
@@ -181,7 +183,7 @@ void SymbolTableBuilder::Visit(node::If& node) {
 void SymbolTableBuilder::Visit(node::Lvalue& node) {
   if (!scopes_.top()->HasVariable(node.identifier) &&
       !current_class_->HasField(node.identifier)) {
-    throw std::runtime_error("undeclared variable: " + node.identifier);
+    throw MakeLocalizedError(node, "undeclared variable: " + node.identifier);
   }
 
   if (node.index_expression) {
@@ -227,7 +229,7 @@ void SymbolTableBuilder::Visit(node::Program& node) {
   program_table_ = std::make_shared<ProgramTable>();
   for (auto&& class_v: node.classes) {
     if (program_table_->HasClass(class_v->identifier)) {
-      throw std::runtime_error("redefinition of class: " + class_v->identifier);
+      throw MakeLocalizedError(*class_v, "redefinition of class: " + class_v->identifier);
     }
     class_v->Accept(*this);
   }

@@ -25,6 +25,7 @@ class Driver {
 
   bool trace_scanning;
   yy::location location;
+  yy::parser::symbol_type symbol;
 
   friend class Scanner;
   Scanner scanner;

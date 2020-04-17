@@ -1,0 +1,13 @@
+class Factorial {
+  public static void main () {
+    Util ut;
+    ut = new Util();
+    // error is here
+    ut.Fac(false);
+  }
+}
+
+class Util {
+  public void Fac(int num) {
+  }
+}
