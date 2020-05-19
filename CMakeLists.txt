@@ -30,6 +30,10 @@ FLEX_TARGET(
 
 ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 
+set(IR_LIB "${PROJECT_NAME}IrLib")
+
+add_subdirectory(IR)
+
 add_executable(
     mjava
     main.cpp
@@ -127,11 +131,17 @@ add_executable(
     SymbolTables/Impl/ProgramTable.cpp
     SymbolTables/Impl/ScopeTable.cpp
     Visitors/Impl/SymbolTableBuilder.cpp
-    SymbolTables/Symbol.h
     Nodes/NodesImpl/Expressions/Expression.cpp
     Nodes/NodesImpl/Node.cpp
     Visitors/Typer.h
     Visitors/Impl/Typer.cpp Exception/LocalizedError.h
-    Exception/Impl/LocalizedError.cpp)
+    Exception/Impl/LocalizedError.cpp
+    Visitors/TrueSymbolTableBuilder.h
+    Visitors/Impl/TrueSymbolTableBuilder.cpp
+    Visitors/IRTBuilder.h
+    Visitors/Impl/IRTBuilder.cpp)
 
 target_include_directories(mjava PRIVATE ${mjava_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR})
+
+target_link_libraries(mjava ${IR_LIB})

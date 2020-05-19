@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Nodes/Nodes.h>
-
 #include <string>
 #include <memory>
 #include <unordered_map>
@@ -33,6 +32,7 @@ class ScopeTable : public std::enable_shared_from_this<ScopeTable> {
 
  public:
   friend class SymbolTableBuilder;
+  friend class TrueSymbolTableBuilder;
   bool HasVariableOnActuallyThisLayer(const std::string& symbol) const;
   std::shared_ptr<const ScopeTable>
   GetLayerWithSymbol(const std::string& symbol) const;

@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 
 #include "ScopeTable.h"
 
@@ -25,6 +26,7 @@ class ClassTable {
 
  private:
   friend class SymbolTableBuilder;
+  friend class TrueSymbolTableBuilder;
   void PutField(const std::string& symbol,
                 std::shared_ptr<node::VarDeclaration> field,
                 size_t offset);

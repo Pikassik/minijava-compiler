@@ -42,6 +42,8 @@ struct Program;
 
 class Visitor {
  public:
+  virtual ~Visitor() = default;
+
   virtual void Visit(node::Node&) = 0;
   virtual void Visit(node::Class&) = 0;
   virtual void Visit(node::Formal&) = 0;
