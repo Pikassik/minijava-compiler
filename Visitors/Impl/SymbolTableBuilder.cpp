@@ -177,7 +177,9 @@ void SymbolTableBuilder::Visit(node::Assign& node) {
 void SymbolTableBuilder::Visit(node::If& node) {
   node.condition->Accept(*this);
   node.then_statement->Accept(*this);
-  node.else_statement->Accept(*this);
+  if (node.else_statement) {
+    node.else_statement->Accept(*this);
+  }
 }
 
 void SymbolTableBuilder::Visit(node::Lvalue& node) {

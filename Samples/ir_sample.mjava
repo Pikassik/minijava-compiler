@@ -1,0 +1,10 @@
+class Factorial {
+  public static void main () {
+    int x;
+    x = 1;
+    // no implicit casts in my minijava
+    if (x == 1) {
+      x = 5;
+    }
+  }
+}

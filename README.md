@@ -4,7 +4,8 @@
 ```bash
 ./mjava -irt sample_name.mjava
 ```
-Дерево будет в `sample_name.ir.txt`
+Дерево будет в `sample_name.ir.txt`  
+Необходимый пример уже в `Samples/ir_sample.mjava` и `Samples/ir_sample.mjava.ir.txt` 
 #### Как запускать?
 ```bash
 ./mjava sample.mjava

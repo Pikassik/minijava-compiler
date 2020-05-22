@@ -264,7 +264,12 @@ void IRTBuilder::Visit(node::Assign& node) {
 void IRTBuilder::Visit(node::If& node) {
   auto if_cond_expression = Accept(*node.condition);
   auto true_stmt = Accept(*node.then_statement);
-  auto false_stmt = Accept(*node.else_statement);
+  decltype(Accept(*node.else_statement)) false_stmt;
+  if (node.else_statement) {
+    false_stmt = Accept(*node.else_statement);
+  } else {
+    false_stmt = nullptr;
+  }
 
   Label label_true;
   Label label_false;

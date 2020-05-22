@@ -1,0 +1,22 @@
+SeqStatement:
+	LabelStatement: Factorial.main
+	SeqStatement:
+		MoveStatement:
+			MemExpression: 
+				TempExpression: ::fp
+			ConstExpression 1
+		SeqStatement:
+			JumpConditionalStatement: EQ
+			TrueLabel: L0
+			FalseLabel: L2
+				MemExpression: 
+					TempExpression: ::fp
+				ConstExpression 1
+			SeqStatement:
+				LabelStatement: L0
+				SeqStatement:
+					MoveStatement:
+						MemExpression: 
+							TempExpression: ::fp
+						ConstExpression 5
+					LabelStatement: L2
