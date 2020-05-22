@@ -1,8 +1,3 @@
-//
-// Created by akhtyamovpavel on 4/7/20.
-//
-
-
 #pragma once
 
 #include "Expression.h"

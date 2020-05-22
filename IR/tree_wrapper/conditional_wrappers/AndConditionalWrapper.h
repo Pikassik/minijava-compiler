@@ -1,8 +1,3 @@
-//
-// Created by akhtyamovpavel on 4/8/20.
-//
-
-
 #pragma once
 
 #include "ConditionalWrapper.h"

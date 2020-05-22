@@ -1,7 +1,3 @@
-//
-// Created by akhtyamovpavel on 4/8/20.
-//
-
 #include "NegateConditionalWrapper.h"
 
 namespace IRT {
