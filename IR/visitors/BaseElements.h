@@ -1,7 +1,3 @@
-//
-// Created by akhtyamovpavel on 4/14/20.
-//
-
 #include "../nodes/expressions/NameExpression.h"
 #include "../nodes/expressions/CallExpression.h"
 #include "../nodes/expressions/BinopExpression.h"
