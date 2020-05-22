@@ -141,6 +141,8 @@ add_executable(
     Visitors/IRTBuilder.h
     Visitors/Impl/IRTBuilder.cpp)
 
+set(CMAKE_CXX_STANDARD 17)
+
 target_include_directories(mjava PRIVATE ${mjava_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR})
 

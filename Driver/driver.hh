@@ -15,11 +15,9 @@ class Driver {
   std::shared_ptr<node::Program> program;
   int Drive(const std::string& f);
   std::string file;
-  bool trace_parsing = false;
-  bool dump = false;
-
   void SetTraceParsing(bool flag);
   void SetDump(bool flag);
+  void SetBuildIRT(bool flag);
   void scan_begin();
   void scan_end();
 
@@ -32,6 +30,10 @@ class Driver {
   yy::parser parser;
  private:
   void PrintDump();
+  //todo switch to enum
+  bool trace_parsing = false;
+  bool dump = false;
+  bool build_irt = false;
 
   std::ifstream stream;
 };

@@ -9,6 +9,10 @@
 #include <memory>
 
 
+std::unordered_map<std::string, std::shared_ptr<IRT::Statement>>
+BuildIRT(std::shared_ptr<ProgramTable>  program_table_,
+         std::shared_ptr<node::Program> program);
+
 class IRTBuilder : public AcceptRetType<std::shared_ptr<IRT::SubtreeWrapper>> {
  public:
   IRTBuilder(std::shared_ptr<ProgramTable> program_table);
@@ -49,6 +53,11 @@ class IRTBuilder : public AcceptRetType<std::shared_ptr<IRT::SubtreeWrapper>> {
   void Visit(node::Program&) override;
 
  private:
+  friend
+  std::unordered_map<std::string, std::shared_ptr<IRT::Statement>>
+  BuildIRT(std::shared_ptr<ProgramTable> program_table_,
+           std::shared_ptr<node::Program> program);
+
   void Visit(node::BinaryOp& node, IRT::BinaryOperatorType type);
   void Visit(node::BinaryOp& node, IRT::LogicOperatorType type);
 

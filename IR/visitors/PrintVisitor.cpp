@@ -2,10 +2,12 @@
 
 #include "BaseElements.h"
 #include "../nodes/expressions/EseqExpression.h"
+
+#include <iostream>
+
 namespace IRT {
 
 PrintVisitor::PrintVisitor(const std::string &filename): stream_(filename) {
-
 }
 
 void PrintVisitor::Visit(ExpStatement& stmt) {

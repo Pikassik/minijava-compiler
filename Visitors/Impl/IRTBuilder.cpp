@@ -6,6 +6,18 @@ using std::shared_ptr;
 
 static constexpr int kWordSize = 4;
 
+std::unordered_map<std::string, std::shared_ptr<IRT::Statement>>
+BuildIRT(std::shared_ptr<ProgramTable>  program_table_,
+         std::shared_ptr<node::Program> program) {
+  IRTBuilder builder(std::move(program_table_));
+  builder.Accept(*program);
+  return std::move(builder.method_trees_);
+}
+
+IRTBuilder::IRTBuilder(std::shared_ptr<ProgramTable> program_table)
+    : program_table_(std::move(program_table)) {
+}
+
 void IRTBuilder::Visit(node::Node&) {
   // pass
 }
@@ -35,7 +47,7 @@ void IRTBuilder::Visit(node::MethodDeclaration& node) {
     make_shared<FrameTranslator>(current_class_, node.identifier);
 
   auto statements_ir = Accept(*node.scope);
-  // todo
+
   if (statements_ir) {
     tos_value_ = make_shared<IRT::StatementWrapper>(
       make_shared<IRT::SeqStatement>(
@@ -217,8 +229,12 @@ void IRTBuilder::Visit(node::This& node) {
 }
 
 void IRTBuilder::Visit(node::Assert& node) {
-  // pass
-  // not implemented
+  tos_value_ = make_shared<IRT::ExpressionWrapper>(
+    make_shared<IRT::CallExpression>(
+      make_shared<IRT::NameExpression>(IRT::Label("terminate")),
+      nullptr
+    )
+  );
 }
 
 void IRTBuilder::Visit(node::Assign& node) {
@@ -421,5 +437,3 @@ void IRTBuilder::Visit(node::BinaryOp& node, LogicOperatorType type) {
     rhs->ToExpression()
   );
 }
-
-

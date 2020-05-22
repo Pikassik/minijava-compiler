@@ -4,6 +4,8 @@
 #include <Visitors/Interpreter.h>
 #include <Visitors/SymbolTableBuilder.h>
 #include <Visitors/Typer.h>
+#include <Visitors/IRTBuilder.h>
+#include <IR/include.h>
 
 #include <sys/types.h>
 #include <wait.h>
@@ -24,6 +26,10 @@ void Driver::SetDump(bool flag) {
   dump = flag;
 }
 
+void Driver::SetBuildIRT(bool flag) {
+  build_irt = flag;
+}
+
 int Driver::Drive(const std::string& f) {
   file = f;
   location.initialize(&file);
@@ -35,9 +41,15 @@ int Driver::Drive(const std::string& f) {
   if (program) {
     if (dump) {
       PrintDump();
+    } else if (build_irt) {
+      IRT::PrintVisitor visitor(file + ".ir.txt");
+      auto table = MakeProgramTable(*program);
+      for (auto&& [funcname, func]: BuildIRT(table, program)) {
+        func->Accept(visitor);
+      }
+    } else {
+      Interpret(*program);
     }
-
-    Interpret(*program);
 
     return 0;
   }

@@ -1,6 +1,10 @@
 # minijava-compiler
 
-
+#### Вывод IR
+```bash
+./mjava -irt sample_name.mjava
+```
+Дерево будет в `sample_name.ir.txt`
 #### Как запускать?
 ```bash
 ./mjava sample.mjava

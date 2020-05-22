@@ -65,6 +65,6 @@ set(SOURCES generators/Label.cpp
     frame/FrameTranslator.h
     include.h)
 
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/..)
+include_directories(${CMAKE_SOURCE_DIR})
 
 add_library(${IR_LIB} ${SOURCES})

@@ -1,24 +1,31 @@
 #include <Driver/driver.hh>
 
 #include <iostream>
+#include <string_view>
 #include <cassert>
 
 int main(int argc, char** argv) {
+  using namespace std::string_view_literals;
   Driver driver;
 
   for (int i = 1; i < argc; ++i) {
-    if (argv[i] == std::string_view("-t")) {
+    if (argv[i] == "-t"sv) {
       driver.SetTraceParsing(true);
     }
 
-    if (argv[i] == std::string_view("-d")) {
+    if (argv[i] == "-d"sv) {
       driver.SetDump(true);
+    }
+
+    if (argv[i] == "-irt"sv) {
+      driver.SetBuildIRT(true);
     }
   }
 
   for (int i = 1; i < argc; ++i) {
-    if (!(std::string_view(argv[i]) == std::string_view("-t") ||
-          std::string_view(argv[i]) == std::string_view("-d"))) {
+    if (!(argv[i] == "-t"sv ||
+          argv[i] == "-d"sv ||
+          argv[i] == "-irt"sv)) {
       return driver.Drive(argv[i]);
     }
   }
