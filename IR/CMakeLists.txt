@@ -54,6 +54,11 @@ set(SOURCES generators/Label.cpp
     types/LogicOperatorType.cpp types/BinaryOperatorType.cpp
     visitors/PrintVisitor.cpp visitors/PrintVisitor.h
     visitors/BaseElements.h
+    visitors/DoubleCallEliminateVisitor.cpp
+    visitors/DoubleCallEliminateVisitor.h
+    visitors/TemplateVisitor.cpp
+    visitors/TemplateVisitor.h
+    visitors/VisitorStruct.h
     nodes/expressions/EseqExpression.cpp
     nodes/expressions/EseqExpression.h
     address/Address.h
@@ -63,7 +68,11 @@ set(SOURCES generators/Label.cpp
     address/AddressInRegister.h
     frame/FrameTranslator.cpp
     frame/FrameTranslator.h
-    include.h)
+    include.h
+    visitors/EseqEliminationVisitor.h
+    visitors/EseqEliminationVisitor.cpp
+    visitors/LinearizationVisitor.h
+    visitors/LinearizationVisitor.cpp)
 
 include_directories(${CMAKE_SOURCE_DIR})
 

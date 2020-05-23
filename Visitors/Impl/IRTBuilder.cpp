@@ -135,7 +135,7 @@ void IRTBuilder::Visit(node::Less& node) {
 void IRTBuilder::Visit(node::MethodInvocation& node) {
   auto irt_expressions = make_shared<IRT::ExpressionList>();
 
-  irt_expressions->Add(current_frame_->GetThis()->ToExpression());
+  irt_expressions->Add(Accept(*node.class_expression)->ToExpression());
   for (auto&& arg: node.arguments) {
     irt_expressions->Add(Accept(*arg)->ToExpression());
   }
@@ -232,7 +232,7 @@ void IRTBuilder::Visit(node::Assert& node) {
   tos_value_ = make_shared<IRT::ExpressionWrapper>(
     make_shared<IRT::CallExpression>(
       make_shared<IRT::NameExpression>(IRT::Label("terminate")),
-      nullptr
+      make_shared<ExpressionList>()
     )
   );
 }

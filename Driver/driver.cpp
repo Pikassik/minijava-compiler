@@ -42,8 +42,10 @@ int Driver::Drive(const std::string& f) {
     if (dump) {
       PrintDump();
     } else if (build_irt) {
+
       IRT::PrintVisitor visitor(file + ".ir.txt");
       auto table = MakeProgramTable(*program);
+      SetTypes(*program, table);
       for (auto&& [funcname, func]: BuildIRT(table, program)) {
         func->Accept(visitor);
       }

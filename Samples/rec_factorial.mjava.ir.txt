@@ -1,0 +1,66 @@
+SeqStatement:
+	LabelStatement: Fac.ComputeFac
+	SeqStatement:
+		ExpStatement:
+			CallExpression: 
+				NameExpression: terminate
+				ExpressionList: 
+		SeqStatement:
+			SeqStatement:
+				JumpConditionalStatement: EQ
+				TrueLabel: L0
+				FalseLabel: L1
+					MemExpression: 
+						TempExpression: ::fp
+					ConstExpression 0
+				SeqStatement:
+					LabelStatement: L0
+					SeqStatement:
+						MoveStatement:
+							MemExpression: 
+								BinopExpression: PLUS
+									TempExpression: ::fp
+									ConstExpression 4
+							ConstExpression 1
+						SeqStatement:
+							JumpStatement: L2
+							SeqStatement:
+								LabelStatement: L1
+								SeqStatement:
+									MoveStatement:
+										MemExpression: 
+											BinopExpression: PLUS
+												TempExpression: ::fp
+												ConstExpression 4
+										BinopExpression: MUL
+											MemExpression: 
+												TempExpression: ::fp
+											CallExpression: 
+												NameExpression: Fac.ComputeFac
+												ExpressionList: 
+													TempExpression: ::this
+													BinopExpression: MINUS
+														MemExpression: 
+															TempExpression: ::fp
+														ConstExpression 1
+									LabelStatement: L2
+			MoveStatement:
+				TempExpression: ::return_value
+				MemExpression: 
+					BinopExpression: PLUS
+						TempExpression: ::fp
+						ConstExpression 4
+SeqStatement:
+	LabelStatement: Factorial.main
+	ExpStatement:
+		CallExpression: 
+			NameExpression: print
+			ExpressionList: 
+				CallExpression: 
+					NameExpression: Fac.ComputeFac
+					ExpressionList: 
+						CallExpression: 
+							NameExpression: malloc
+							ExpressionList: 
+								ConstExpression 0
+						ConstExpression 10
