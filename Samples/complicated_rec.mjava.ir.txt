@@ -1,0 +1,133 @@
+SeqStatement:
+	LabelStatement: BooClass.Boo
+	SeqStatement:
+		SeqStatement:
+			JumpConditionalStatement: GT
+			TrueLabel: L3
+			FalseLabel: L4
+				MemExpression: 
+					TempExpression: ::fp
+				ConstExpression 0
+			SeqStatement:
+				LabelStatement: L3
+				SeqStatement:
+					SeqStatement:
+						ExpStatement:
+							CallExpression: 
+								NameExpression: print
+								ExpressionList: 
+									ConstExpression 111111
+						SeqStatement:
+							ExpStatement:
+								CallExpression: 
+									NameExpression: print
+									ExpressionList: 
+										MemExpression: 
+											TempExpression: ::fp
+							ExpStatement:
+								CallExpression: 
+									NameExpression: FooClass.Foo
+									ExpressionList: 
+										CallExpression: 
+											NameExpression: malloc
+											ExpressionList: 
+												ConstExpression 0
+										BinopExpression: MINUS
+											MemExpression: 
+												TempExpression: ::fp
+											ConstExpression 1
+					SeqStatement:
+						JumpStatement: L5
+						SeqStatement:
+							LabelStatement: L4
+							SeqStatement:
+								SeqStatement:
+									ExpStatement:
+										CallExpression: 
+											NameExpression: print
+											ExpressionList: 
+												ConstExpression 222222
+									ExpStatement:
+										CallExpression: 
+											NameExpression: print
+											ExpressionList: 
+												MemExpression: 
+													TempExpression: ::fp
+								LabelStatement: L5
+		ExpStatement:
+			CallExpression: 
+				NameExpression: print
+				ExpressionList: 
+					ConstExpression 444444
+SeqStatement:
+	LabelStatement: FooClass.Foo
+	SeqStatement:
+		SeqStatement:
+			JumpConditionalStatement: GT
+			TrueLabel: L0
+			FalseLabel: L1
+				MemExpression: 
+					TempExpression: ::fp
+				ConstExpression 0
+			SeqStatement:
+				LabelStatement: L0
+				SeqStatement:
+					SeqStatement:
+						ExpStatement:
+							CallExpression: 
+								NameExpression: print
+								ExpressionList: 
+									ConstExpression 333333
+						SeqStatement:
+							ExpStatement:
+								CallExpression: 
+									NameExpression: print
+									ExpressionList: 
+										MemExpression: 
+											TempExpression: ::fp
+							ExpStatement:
+								CallExpression: 
+									NameExpression: BooClass.Boo
+									ExpressionList: 
+										CallExpression: 
+											NameExpression: malloc
+											ExpressionList: 
+												ConstExpression 0
+										BinopExpression: MINUS
+											MemExpression: 
+												TempExpression: ::fp
+											ConstExpression 1
+					SeqStatement:
+						JumpStatement: L2
+						SeqStatement:
+							LabelStatement: L1
+							SeqStatement:
+								SeqStatement:
+									ExpStatement:
+										CallExpression: 
+											NameExpression: print
+											ExpressionList: 
+												ConstExpression 666666
+									ExpStatement:
+										CallExpression: 
+											NameExpression: print
+											ExpressionList: 
+												MemExpression: 
+													TempExpression: ::fp
+								LabelStatement: L2
+		ExpStatement:
+			CallExpression: 
+				NameExpression: print
+				ExpressionList: 
+					ConstExpression 999999
+SeqStatement:
+	LabelStatement: ComplicatedRec.main
+	ExpStatement:
+		CallExpression: 
+			NameExpression: FooClass.Foo
+			ExpressionList: 
+				CallExpression: 
+					NameExpression: malloc
+					ExpressionList: 
+						ConstExpression 0
+				ConstExpression 13

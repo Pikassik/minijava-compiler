@@ -233,7 +233,9 @@ void Typer::Visit(node::If& node) {
   node.condition->Accept(*this);
   AssertIsBoolean(node, node.condition->type);
   node.then_statement->Accept(*this);
-  node.else_statement->Accept(*this);
+  if (node.else_statement) {
+    node.else_statement->Accept(*this);
+  }
 }
 
 void Typer::Visit(node::Lvalue& node) {

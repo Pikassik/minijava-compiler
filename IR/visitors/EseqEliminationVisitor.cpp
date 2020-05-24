@@ -3,6 +3,7 @@
 
 #include <unordered_set>
 #include <algorithm>
+#include <iostream>
 
 namespace IRT {
 
@@ -21,7 +22,7 @@ bool IsName(BaseElement& elem) {
   return dynamic_cast<NameExpression*>(&elem) != nullptr;
 }
 
-bool IsSeqStatement(Statement& stmt) {
+static bool IsSeqStatement(Statement& stmt) {
   return dynamic_cast<SeqStatement*>(&stmt) != nullptr;
 }
 
@@ -53,22 +54,143 @@ void EseqEliminationVisitor::Visit(ConstExpression& const_expression) {
 }
 
 void EseqEliminationVisitor::Visit(JumpConditionalStatement& jump_conditional_statement) {
+  auto op = jump_conditional_statement.operator_type_;
   auto lhs = Accept(*jump_conditional_statement.left_operand_).expression_;
   auto rhs = Accept(*jump_conditional_statement.right_operand_).expression_;
-
-  tos_value_.statement_ = make_shared<JumpConditionalStatement>(
-      jump_conditional_statement.operator_type_,
-      lhs,
-      rhs,
-      jump_conditional_statement.label_true_,
-      jump_conditional_statement.label_false_
-  );
+  auto l1 = jump_conditional_statement.label_true_;
+  auto l2 = jump_conditional_statement.label_false_;
+  if (IsEseqExpression(*lhs) && IsEseqExpression(*rhs)) {
+    auto eseq1 = std::dynamic_pointer_cast<EseqExpression>(lhs);
+    auto eseq2 = std::dynamic_pointer_cast<EseqExpression>(rhs);
+    if (AreCommute(*eseq2->statement_, *lhs)) {
+      tos_value_.statement_ = make_shared<SeqStatement>(
+        eseq1->statement_,
+        make_shared<SeqStatement>(
+          eseq2->statement_,
+          make_shared<JumpConditionalStatement>(
+            op,
+            eseq1->expression_,
+            eseq2->expression_,
+            l1,
+            l2
+          )
+        )
+      );
+    } else {
+      Temporary tmp;
+      tos_value_.statement_ =
+        make_shared<SeqStatement>(
+          eseq1->statement_,
+          make_shared<SeqStatement>(
+            make_shared<MoveStatement>(
+              make_shared<TempExpression>(tmp),
+              eseq1->expression_
+            ),
+            make_shared<SeqStatement>(
+              eseq2->statement_,
+              make_shared<JumpConditionalStatement>(
+                op,
+                make_shared<TempExpression>(tmp),
+                eseq2->expression_,
+                l1,
+                l2
+              )
+            )
+          )
+        );
+    }
+  } else if (IsEseqExpression(*lhs)) {
+    auto eseq = std::dynamic_pointer_cast<EseqExpression>(lhs);
+    tos_value_.statement_ =
+      make_shared<SeqStatement>(
+        eseq->statement_,
+        make_shared<JumpConditionalStatement>(op, eseq->expression_, rhs, l1, l2
+      )
+    );
+  } else if (IsEseqExpression(*rhs)) {
+    auto eseq = std::dynamic_pointer_cast<EseqExpression>(rhs);
+    if (AreCommute(*eseq->statement_, *lhs)) {
+      tos_value_.statement_ =
+        make_shared<SeqStatement>(
+          eseq->statement_,
+          make_shared<JumpConditionalStatement>(
+            op,
+            lhs,
+            eseq->expression_,
+            l1,
+            l2
+          )
+        );
+    } else {
+      Temporary tmp;
+      tos_value_.statement_ =
+        make_shared<SeqStatement>(
+          make_shared<MoveStatement>(
+            make_shared<TempExpression>(tmp),
+            lhs
+          ),
+          make_shared<SeqStatement>(
+            eseq->statement_,
+            make_shared<JumpConditionalStatement>(
+              op,
+              make_shared<TempExpression>(tmp),
+              eseq->expression_,
+              l1,
+              l2
+            )
+          )
+        );
+    }
+  } else {
+    tos_value_.statement_ =
+      make_shared<JumpConditionalStatement>(
+        op,
+        lhs,
+        rhs,
+        l1,
+        l2
+    );
+  }
 }
+
 void EseqEliminationVisitor::Visit(MoveStatement& move_statement) {
   auto source = Accept(*move_statement.source_).expression_;
   auto target = Accept(*move_statement.target_).expression_;
 
-  tos_value_.statement_ = make_shared<MoveStatement>(source, target);
+  if (IsEseqExpression(*source) && IsEseqExpression(*target)) {
+    auto source_eseq = std::dynamic_pointer_cast<EseqExpression>(source);
+    auto target_eseq = std::dynamic_pointer_cast<EseqExpression>(target);
+    tos_value_.statement_ =
+      make_shared<SeqStatement>(
+        source_eseq->statement_,
+        make_shared<SeqStatement>(
+          target_eseq->statement_,
+          make_shared<MoveStatement>(
+            source_eseq->expression_,
+            target_eseq->expression_
+          )
+        )
+      );
+  } else if (IsEseqExpression(*source)) {
+    auto source_eseq = std::dynamic_pointer_cast<EseqExpression>(source);
+    tos_value_.statement_ =
+      make_shared<SeqStatement>(
+        source_eseq->statement_,
+        make_shared<MoveStatement>(source_eseq->expression_, target)
+      );
+  } else if (IsEseqExpression(*target)) {
+    auto target_eseq = std::dynamic_pointer_cast<EseqExpression>(target);
+    tos_value_.statement_ =
+      make_shared<SeqStatement>(
+        target_eseq->statement_,
+        make_shared<MoveStatement>(
+          source,
+          target_eseq->expression_
+        )
+      );
+  } else {
+    tos_value_.statement_ = make_shared<MoveStatement>(source, target);
+  }
 }
 
 void EseqEliminationVisitor::Visit(SeqStatement& seq_statement) {
@@ -91,36 +213,42 @@ void EseqEliminationVisitor::Visit(BinopExpression& binop_statement) {
     auto right_eseq = std::dynamic_pointer_cast<EseqExpression>(rhs);
     if (AreCommute(*right_eseq->statement_, *lhs)) {
       tos_value_.expression_ =
-        make_shared<EseqExpression>(
-          left_eseq->statement_,
-          make_shared<EseqExpression>(
-            right_eseq->statement_,
-            make_shared<BinopExpression>(
-              op,
-              left_eseq->expression_,
-              right_eseq->expression_)
-          )
-        );
-    } else {
-      Temporary t;
-      tos_value_.expression_ =
-        make_shared<EseqExpression>(
-          left_eseq->statement_,
-          make_shared<EseqExpression>(
-            make_shared<MoveStatement>(
-              make_shared<TempExpression>(t),
-              left_eseq->expression_
-            ),
+        Accept(
+          *make_shared<EseqExpression>(
+            left_eseq->statement_,
             make_shared<EseqExpression>(
               right_eseq->statement_,
               make_shared<BinopExpression>(
                 op,
-                make_shared<TempExpression>(t),
-                right_eseq->expression_
-              )
+                left_eseq->expression_,
+                right_eseq->expression_)
             )
           )
-        );
+        ).expression_;
+    } else {
+      Temporary tmp;
+      tos_value_.expression_ =
+        Accept(
+          *make_shared<EseqExpression>(
+            left_eseq->statement_,
+            Accept(
+              *make_shared<EseqExpression>(
+                make_shared<MoveStatement>(
+                  make_shared<TempExpression>(tmp),
+                  left_eseq->expression_
+                ),
+                make_shared<EseqExpression>(
+                  right_eseq->statement_,
+                  make_shared<BinopExpression>(
+                    op,
+                    make_shared<TempExpression>(tmp),
+                    right_eseq->expression_
+                  )
+                )
+              )
+            ).expression_
+          )
+        ).expression_;
     }
   } else if (IsEseqExpression(*lhs)) {
     auto eseq = std::dynamic_pointer_cast<EseqExpression>(lhs);
@@ -142,22 +270,24 @@ void EseqEliminationVisitor::Visit(BinopExpression& binop_statement) {
           make_shared<BinopExpression>(op, lhs, eseq->expression_)
         );
     } else {
-      Temporary t;
+      Temporary tmp;
       tos_value_.expression_ =
-        make_shared<EseqExpression>(
-          make_shared<MoveStatement>(
-            make_shared<TempExpression>(t),
-            lhs
-          ),
-          make_shared<EseqExpression>(
-            eseq->statement_,
-            make_shared<BinopExpression>(
-              op,
-              make_shared<TempExpression>(t),
-              eseq->expression_
+        Accept(
+          *make_shared<EseqExpression>(
+            make_shared<MoveStatement>(
+              make_shared<TempExpression>(tmp),
+              lhs
+            ),
+            make_shared<EseqExpression>(
+              eseq->statement_,
+              make_shared<BinopExpression>(
+                op,
+                make_shared<TempExpression>(tmp),
+                eseq->expression_
+              )
             )
           )
-        );
+        ).expression_;
     }
   } else {
     tos_value_.expression_ = make_shared<BinopExpression>(op, lhs, rhs);

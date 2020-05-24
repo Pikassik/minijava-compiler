@@ -4,6 +4,7 @@
 #include "address/AddressInRegister.h"
 #include "address/AddressInFrame.h"
 #include "frame/FrameTranslator.h"
+#include "visitors/LinearizationVisitor.h"
 #include "visitors/Visitor.h"
 #include "visitors/PrintVisitor.h"
 #include "visitors/BaseElements.h"

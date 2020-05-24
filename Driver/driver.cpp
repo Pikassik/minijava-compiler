@@ -10,6 +10,8 @@
 #include <sys/types.h>
 #include <wait.h>
 #include <unistd.h>
+#include <IR/visitors/DoubleCallEliminateVisitor.h>
+#include <IR/visitors/EseqEliminationVisitor.h>
 
 Driver::Driver()
     : trace_parsing(false)
@@ -43,12 +45,38 @@ int Driver::Drive(const std::string& f) {
       PrintDump();
     } else if (build_irt) {
 
-      IRT::PrintVisitor visitor(file + ".ir.txt");
+
       auto table = MakeProgramTable(*program);
       SetTypes(*program, table);
-      for (auto&& [funcname, func]: BuildIRT(table, program)) {
-        func->Accept(visitor);
+
+      auto irt_tree = BuildIRT(table, program);
+
+      if (call_elim) {
+        IRT::DoubleCallEliminateVisitor dce_visitor;
+        for (auto& [funcname, func]: irt_tree) {
+          func = dce_visitor.GetTree(func);
+        }
       }
+
+      if (eseq_elim) {
+        IRT::EseqEliminationVisitor ee_visitor;
+        for (auto& [funcname, func]: irt_tree) {
+          func = ee_visitor.GetTree(func);
+        }
+      }
+
+      if (linear) {
+        IRT::LinearizationVisitor l_visitor;
+        for (auto& [funcname, func]: irt_tree) {
+          func = l_visitor.GetTree(func);
+        }
+      }
+
+      IRT::PrintVisitor print_visitor(file + ".ir.txt");
+      for (auto&& [funcname, func]: irt_tree) {
+        func->Accept(print_visitor);
+      }
+
     } else {
       Interpret(*program);
     }
@@ -85,4 +113,16 @@ void Driver::PrintDump() {
            (file + ".gv").c_str(), "-o", (file + ".png").c_str(), nullptr);
   }
   wait(NULL);
+}
+
+void Driver::SetCallElim(bool flag) {
+  call_elim = flag;
+}
+
+void Driver::SetEseqElim(bool flag) {
+  eseq_elim = flag;
+}
+
+void Driver::SetLinear(bool flag) {
+  linear = flag;
 }

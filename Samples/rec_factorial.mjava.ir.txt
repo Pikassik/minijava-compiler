@@ -1,31 +1,41 @@
 SeqStatement:
 	LabelStatement: Fac.ComputeFac
 	SeqStatement:
-		ExpStatement:
-			CallExpression: 
-				NameExpression: terminate
-				ExpressionList: 
+		JumpConditionalStatement: EQ
+		TrueLabel: L0
+		FalseLabel: L1
+			MemExpression: 
+				TempExpression: ::fp
+			ConstExpression 0
 		SeqStatement:
+			LabelStatement: L0
 			SeqStatement:
-				JumpConditionalStatement: EQ
-				TrueLabel: L0
-				FalseLabel: L1
+				MoveStatement:
 					MemExpression: 
-						TempExpression: ::fp
-					ConstExpression 0
+						BinopExpression: PLUS
+							TempExpression: ::fp
+							ConstExpression 4
+					ConstExpression 1
 				SeqStatement:
-					LabelStatement: L0
+					JumpStatement: L2
 					SeqStatement:
-						MoveStatement:
-							MemExpression: 
-								BinopExpression: PLUS
-									TempExpression: ::fp
-									ConstExpression 4
-							ConstExpression 1
+						LabelStatement: L1
 						SeqStatement:
-							JumpStatement: L2
+							MoveStatement:
+								TempExpression: %3
+								MemExpression: 
+									TempExpression: ::fp
 							SeqStatement:
-								LabelStatement: L1
+								MoveStatement:
+									TempExpression: %0
+									CallExpression: 
+										NameExpression: Fac.ComputeFac
+										ExpressionList: 
+											TempExpression: ::this
+											BinopExpression: MINUS
+												MemExpression: 
+													TempExpression: ::fp
+												ConstExpression 1
 								SeqStatement:
 									MoveStatement:
 										MemExpression: 
@@ -33,34 +43,29 @@ SeqStatement:
 												TempExpression: ::fp
 												ConstExpression 4
 										BinopExpression: MUL
+											TempExpression: %3
+											TempExpression: %0
+									SeqStatement:
+										LabelStatement: L2
+										MoveStatement:
+											TempExpression: ::return_value
 											MemExpression: 
-												TempExpression: ::fp
-											CallExpression: 
-												NameExpression: Fac.ComputeFac
-												ExpressionList: 
-													TempExpression: ::this
-													BinopExpression: MINUS
-														MemExpression: 
-															TempExpression: ::fp
-														ConstExpression 1
-									LabelStatement: L2
-			MoveStatement:
-				TempExpression: ::return_value
-				MemExpression: 
-					BinopExpression: PLUS
-						TempExpression: ::fp
-						ConstExpression 4
+												BinopExpression: PLUS
+													TempExpression: ::fp
+													ConstExpression 4
 SeqStatement:
 	LabelStatement: Factorial.main
-	ExpStatement:
-		CallExpression: 
-			NameExpression: print
-			ExpressionList: 
-				CallExpression: 
-					NameExpression: Fac.ComputeFac
-					ExpressionList: 
-						CallExpression: 
-							NameExpression: malloc
-							ExpressionList: 
-								ConstExpression 0
-						ConstExpression 10
+	SeqStatement:
+		MoveStatement:
+			TempExpression: %1
+			CallExpression: 
+				NameExpression: Fac.ComputeFac
+				ExpressionList: 
+					TempExpression: ::this
+					ConstExpression 10
+		MoveStatement:
+			TempExpression: %2
+			CallExpression: 
+				NameExpression: print
+				ExpressionList: 
+					TempExpression: %1

@@ -1,0 +1,85 @@
+SeqStatement:
+	LabelStatement: Util.Fac
+	SeqStatement:
+		ExpStatement:
+			CallExpression: 
+				NameExpression: terminate
+				ExpressionList: 
+		SeqStatement:
+			MoveStatement:
+				MemExpression: 
+					TempExpression: ::this
+				ConstExpression 1
+			SeqStatement:
+				MoveStatement:
+					MemExpression: 
+						BinopExpression: PLUS
+							TempExpression: ::fp
+							ConstExpression 4
+					ConstExpression 0
+				SeqStatement:
+					SeqStatement:
+						LabelStatement: L0
+						SeqStatement:
+							JumpConditionalStatement: LT
+							TrueLabel: L1
+							FalseLabel: L2
+								MemExpression: 
+									BinopExpression: PLUS
+										TempExpression: ::fp
+										ConstExpression 4
+								MemExpression: 
+									TempExpression: ::fp
+							SeqStatement:
+								LabelStatement: L1
+								SeqStatement:
+									SeqStatement:
+										MoveStatement:
+											MemExpression: 
+												TempExpression: ::this
+											BinopExpression: MUL
+												MemExpression: 
+													TempExpression: ::this
+												BinopExpression: PLUS
+													MemExpression: 
+														BinopExpression: PLUS
+															TempExpression: ::fp
+															ConstExpression 4
+													ConstExpression 1
+										MoveStatement:
+											MemExpression: 
+												BinopExpression: PLUS
+													TempExpression: ::fp
+													ConstExpression 4
+											BinopExpression: PLUS
+												MemExpression: 
+													BinopExpression: PLUS
+														TempExpression: ::fp
+														ConstExpression 4
+												ConstExpression 1
+									SeqStatement:
+										JumpStatement: L0
+										LabelStatement: L2
+					ExpStatement:
+						CallExpression: 
+							NameExpression: print
+							ExpressionList: 
+								MemExpression: 
+									TempExpression: ::this
+SeqStatement:
+	LabelStatement: Factorial.main
+	SeqStatement:
+		MoveStatement:
+			MemExpression: 
+				TempExpression: ::fp
+			CallExpression: 
+				NameExpression: malloc
+				ExpressionList: 
+					ConstExpression 8
+		ExpStatement:
+			CallExpression: 
+				NameExpression: Util.Fac
+				ExpressionList: 
+					MemExpression: 
+						TempExpression: ::fp
+					ConstExpression 10

@@ -18,6 +18,9 @@ class Driver {
   void SetTraceParsing(bool flag);
   void SetDump(bool flag);
   void SetBuildIRT(bool flag);
+  void SetCallElim(bool flag);
+  void SetEseqElim(bool flag);
+  void SetLinear(bool flag);
   void scan_begin();
   void scan_end();
 
@@ -34,6 +37,9 @@ class Driver {
   bool trace_parsing = false;
   bool dump = false;
   bool build_irt = false;
+  bool call_elim = false;
+  bool eseq_elim = false;
+  bool linear = false;
 
   std::ifstream stream;
 };

@@ -6,7 +6,7 @@ namespace IRT {
 using std::shared_ptr;
 using std::make_shared;
 
-bool IsSeqStatement(Statement& stmt) {
+static bool IsSeqStatement(Statement& stmt) {
   return dynamic_cast<SeqStatement*>(&stmt) != nullptr;
 }
 
@@ -45,15 +45,9 @@ void LinearizationVisitor::Visit(SeqStatement& seq_statement) {
 
   if (IsSeqStatement(*first)) {
     auto left_seq = std::dynamic_pointer_cast<SeqStatement>(first);
-    auto this_seq =
-      std::dynamic_pointer_cast<SeqStatement>(seq_statement.shared_from_this());
-    auto a = left_seq->first_statement_;
     auto b = left_seq->second_statement_;
-    auto c = seq_statement.second_statement_;
-
-    left_seq->second_statement_ = this_seq;
-    this_seq->first_statement_ = b;
-    this_seq->second_statement_ = Accept(*c).statement_;
+    seq_statement.first_statement_ = b;
+    left_seq->second_statement_ = Accept(seq_statement).statement_;
     tos_value_.statement_ = left_seq;
   } else {
     auto second = Accept(*seq_statement.second_statement_).statement_;

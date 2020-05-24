@@ -1,5 +1,13 @@
 # minijava-compiler
 
+#### Вывод оптимизаций
+```bash
+./mjava -call -eseq -lin sample_name.mjava
+```
+
+Можно вывести только `-call`, тогда увидите eseq'и, при `-call -eseq`
+будут удалены eseq'и, при `-call -eseq -lin` дерево будет линеаризовано.   
+
 #### Вывод IR
 ```bash
 ./mjava -irt sample_name.mjava
